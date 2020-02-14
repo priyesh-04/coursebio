@@ -1,0 +1,103 @@
+{% load static %}
+<!--DOCTYPE html -->
+<html>
+<head>
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block head_title %}AtoZ{% endblock head_title %}</title>
+
+    {% include 'base/css.html' %}
+
+    {% block head_extra %} 
+    {% endblock head_extra %}
+</head>
+<style>
+      
+      html,
+      body {
+          background-color: #f2f3f5;
+          font-family: 'Lato', sans-serif, Arial, Helvetica;
+          /*font-weight: 300;*/
+          font-size: 20px;
+          text-rendering: optimizeLegibility;
+      }
+
+      body {
+        overflow-y: hidden;
+      }
+
+      .clearfix {
+          zoom: 1;
+      }
+
+      .clearfix:after {
+          content: '.';
+          clear: both;
+          display: block;
+          height: 0;
+          visibility: hidden;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        }
+    </style>
+
+<body>
+  {% include 'base/blog_navbar/blog_navbar.html' %}
+
+  {% block content %}
+  {% endblock content %}
+
+  {% include 'base/footer/blog_footer.html' %}
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script>
+
+    $( document ).ready(function() {
+
+        var titleInput = $("#id_title");
+  
+        function previewTitle(value) {
+            $("#preview-title").text(value)
+        }
+        previewTitle(titleInput.val())
+
+        titleInput.keyup(function(){
+            var newContent = $(this).val()
+            previewTitle(newContent)
+            })
+
+
+        function readURL(input) {
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+              $('#main_img').attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+          }
+        }
+
+        $("#id_image").change(function() {
+          readURL(this);
+        });
+    });
+
+</script>
+    <!-- JavaScript -->
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js'></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.8.0/marked.min.js"></script> -->
+    {% include 'base/js.html' %}
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,16 @@
+<div class="nav-scroller bg-white shadow-sm">
+  <nav class="nav nav-underline">
+  	{% for category in product_category_list %}
+    	<a class="nav-link active" href="{{ category.get_absolute_url }}">
+    		{{ category }}
+    	</a>
+    {% endfor %}
+  </nav>
+</div>
+
+<style>
+	.nav-scroller {
+		border-top: 3px solid #D10024;
+	}
+</style>
+                

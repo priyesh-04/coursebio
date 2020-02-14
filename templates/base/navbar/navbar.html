@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler mr-2" type="button" data-toggle="offcanvas">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand mr-auto" href="/">AtoZ</a>
+    {% include 'search.html' %}
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault"> 
+      <div class="offcanvas-head-div">
+        <div>
+          <button class="navbar-toggler mr-2" type="button" data-toggle="offcanvas">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+        <div>
+          <h6 class="text-white">Happy Shopping</h6>
+        </div>
+      </div>
+      <hr>
+      <ul class="navbar-nav mr-auto">
+        {% for category in product_category_list %}
+          <li class="nav-item active">
+            <a class="nav-link" href="{{ category.get_absolute_url }}">
+                {{ category.title }}
+            </a>
+          </li>
+        {% endfor %}
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Mobiles <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Computers</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Tvs & Appliances</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Fashion</a>
+        </li>
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+{% include 'base/navbar/nav-css.html' %}
+
+{% include 'base/navbar/nav-js.html' %}

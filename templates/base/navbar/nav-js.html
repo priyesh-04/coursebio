@@ -1,0 +1,58 @@
+<!-- JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+
+<script>
+  window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')
+</script>
+
+
+
+<script>
+	jQuery('body').bind('click', function(e) {
+		var clickover = $(event.target);
+	    var _opened = $('.navbar-collapse').hasClass('open');
+	    if ( _opened === true && clickover.hasClass("navbar")) {
+	        jQuery('.navbar-collapse').removeClass("open");
+	    }
+	    if(jQuery(e.target).closest('.navbar').length == 0) {
+	        // click happened outside of .navbar, so hide
+	        // var _opened = jQuery('.navbar-collapse').hasClass('open');
+	        if ( _opened === true ) {
+	            jQuery('.navbar-collapse').removeClass("open");
+	        }
+	    }
+	    if (jQuery(e.target).closest('.search-form').length == 1) {
+	    	if ( _opened === true) {
+		        jQuery('.navbar-collapse').removeClass("open");
+		    }
+	    }
+});
+
+	// $(document).ready(function () {
+	//     $(document).click(function (event) {
+	//         var clickover = $(event.target);
+	        
+	//         var _opened = $(".navbar-collapse").hasClass("open");
+	//         console.log(!clickover.hasClass("navbar-toggler"),'hhh',_opened,'open')
+	//         if (_opened === true && !clickover.hasClass("navbar-toggler")) {
+
+	//         	console.log('heheh')
+	//         	console.log($("button.navbar-toggler"), 'ee')
+	//             $("button.navbar-toggler").click();
+	//             // $(".navbar-collapse").removeClass("open")
+	//         } else if (!_opened && clickover.hasClass("navbar-toggler")){
+	//         	$("button.navbar-toggler").click();
+	//         }
+	//     });
+	// });
+
+  $(function () {
+      'use strict'
+
+      $('[data-toggle="offcanvas"]').on('click', function () {
+      $('.offcanvas-collapse').toggleClass('open')
+    })
+  })
+
+</script>

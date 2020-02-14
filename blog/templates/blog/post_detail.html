@@ -1,0 +1,340 @@
+{% extends "blog_base.html" %}
+
+{% load crispy_forms_tags %}
+
+
+{% block head_title %}
+{{ object.title }} | {{ block.super }}
+{% endblock head_title %}
+
+
+<!-- {% block post_detail_link %}
+  <li><a href='{{ object.get_absolute_url }}'>{{ object.title }}</a></li>
+{% endblock %} -->
+
+
+
+{% block content %}
+
+<style>
+	.post-container {
+        background: #fff;
+    }
+
+    .post-container:not(:last-child) {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="main-div">
+    <div class="post-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-8 col-lg-8 mt-4 post-detail-col">
+                    <h2 class="post-header">{{ object.title }} <br>
+                        <!-- <p> Read time: 
+                            {% if object.read_time <= 1 %} < 1 Minute 
+                            {% else %}
+                                {{ object.read_time }} minutes 
+                            {% endif %}
+                        </p> -->
+                        <small>
+                            {% if object.draft %}
+                                <span style='color:red;'>Draft</span> 
+                            {% endif %}
+                            <div class="mt-2" style="font-size: 0.7rem;">
+                                <span style="font-weight: bold;color: #000;"><span style="color: grey;font-weight: normal;">By</span> Team AtoZ</span>
+                                <span style="color: grey;"> - Published On: {{ post.publish }} | Last Updated: {{ post.updated }}</span>
+                            </div>
+                        </small>
+                    </h2>
+
+                    {% if object.image %}
+                        <img src='{{ object.image.url }}'/>
+                    {% endif %}
+
+                    {% if object.user.get_full_name %}
+                        <p>Author: {{ object.user.get_full_name }}</p>
+                    {% endif %}
+
+
+                    <div class='post-detail-item'>{{ object.get_markdown }}</div>
+
+                    <hr />
+
+                    <div class="text-center">
+                        <button class="btn btn-outline-success mt-5 mb-5">Buy the Product at Best Price</button>
+                    </div>
+
+                    <div class="block-title-div">
+                        <h4 class="block-title">
+                            <span>Related Articles</span>
+                        </h4>
+                    </div>
+
+                    <div class="row">
+                        {% for post in related_articles|slice:":6" %}
+                        <div class="col-sm-12 col-md-4 col-lg-4 pos-list-col mb-3">
+                            <a href='{{ post.get_absolute_url }}'>   
+                                {% if post.image %}
+                                     <img src='{{ post.image.url }}' alt="post image" />
+                                {% endif %}
+                                <div class="post-detail-div">
+                                    {% if post.draft %}
+                                        <h3>Staff only: Draft</h3>
+                                    {% endif %} 
+                                    {% if post.publish > today %}
+                                        <h3>Staff Only: Post will publish on {{ post.publish }}</h3>
+                                    {% endif %}
+                                    <h3 class="post-title">{{post.title}}</h3>
+                                    <div style="font-size: 0.7rem;">
+                                        <span style="font-weight: bold;color: #000;">Team AtoZ</span>
+                                        <span style="color: grey;"> - {{ post.publish }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+        <style>
+            .post-title {
+                font-size: 1rem;
+                /* line-height: 20px; */
+                font-weight: bold;
+                /* overflow-wrap: break-word; */
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+                white-space: normal;
+            }
+
+            a {
+                color: #000;
+            }
+            a:hover {
+                text-decoration: none;
+                color: var(--danger);
+            }
+
+            .block-title-div {
+                position: relative;
+            }
+            .block-title {
+                font-size: 14px;
+                line-height: 1;
+                margin-top: 0;
+                margin-bottom: 26px;
+                border-bottom: 2px solid #222;
+                /*background-color: #4db2ec;*/
+            }
+            .block-title span {
+                line-height: 17px;
+                display: inline-block;
+                padding: 7px 12px 4px;
+                background-color: #222;
+                color: #fff;
+            }
+
+            .sidebar-product-list {
+                list-style: none;
+            }
+            .sidebar-product {
+                line-height: 20px;
+                margin: 0 0 1px 0;
+                padding: 0.75em 0;
+                font-size: 90%;
+                border-bottom: 1px solid #c6c5c5;
+                display: block;
+                overflow: hidden;
+            }
+            .sidebar-product:last-child {
+                border: none;
+            }
+            .product-img-div {
+                width: 80px;
+                height: 80px;
+                float: left;
+                position: relative;
+            }
+            .product-img-div .product-img {
+                max-width: 100%;
+                max-height: 100%;
+                position: absolute;
+                margin: auto;
+                padding-right: 5px;
+                left: 0;
+                right: 0;
+            }
+
+            .product-details-div .product-title{
+                font-size: 0.7rem;
+                font-weight: bold;
+            }
+            .product-details-div .product-price {
+                font-size: 0.7rem;
+            }
+        </style>
+                <div class="col-sm-12 col-md-4 col-lg-4 mt-4">
+
+                    <div class="block-title-div">
+                        <h4 class="block-title">
+                            <span>Popular Mobiles</span>
+                        </h4>
+                    </div>
+
+                    <ul class="sidebar-product-list">
+                        {% for product in product_list %}
+                            <li class="sidebar-product">
+                                <a href="{{ product.get_absolute_url }}">
+                                    {% for image in image_list %}
+                                        {% if product == image.product %}
+                                          <div class="product-img-div">
+                                              <img class="product-img" src="{{image.get_image_url}}" alt="{{product}} image">
+                                          </div>
+                                        {% endif %}
+                                    {% endfor %} 
+                                    <div class="product-details-div">
+                                        <h6 class="product-title">{{product.title}}</h6>
+                                        <span class="product-price text-dark">Rs. {{product.price}}</span>
+                                    </div>                       
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="block-title-div">
+                        <h4 class="block-title">
+                            <span>Popular Gadgets</span>
+                        </h4>
+                    </div>
+
+                    <ul class="sidebar-product-list">
+                        {% for product in product_list %}
+                            <li class="sidebar-product">
+                                <a href="{{ product.get_absolute_url }}">
+                                    {% for image in image_list %}
+                                        {% if product == image.product %}
+                                          <div class="product-img-div">
+                                              <img class="product-img" src="{{image.get_image_url}}" alt="{{product}} image">
+                                          </div>
+                                        {% endif %}
+                                    {% endfor %} 
+                                    <div class="product-details-div">
+                                        <h6 class="product-title">{{product.title}}</h6>
+                                        <span class="product-price text-dark">Rs. {{product.price}}</span>
+                                    </div>                       
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="block-title-div">
+                        <h4 class="block-title">
+                            <span>Latest Reviews</span>
+                        </h4>
+                    </div>
+
+                    <ul class="sidebar-product-list">
+                        {% for post in related_articles %}
+                            <li class="sidebar-product">
+                                <a href="{{ post.get_absolute_url }}">
+                                    <div class="product-img-div">
+                                      <img class="product-img" src="{{post.image.url}}" alt="{{product}} image">
+                                    </div>
+                                    
+                                    <div class="product-details-div">
+                                        <h6 class="product-title">{{post.title}}</h6>
+                                        <span class="product-price" style="color: grey;"> {{post.publish}}</span>
+                                    </div>                       
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <div class="block-title-div">
+                        <h4 class="block-title">
+                            <span>Best Mobiles List</span>
+                        </h4>
+                    </div>
+
+                    <style>
+                        .best-mobiles-list {
+                            list-style: none;
+                            font-size: 16px;
+                            padding:0;
+                            margin-left: 10px;
+                            font-weight: bold;
+                        }
+                        .best-mobiles-list li {
+                            margin-bottom: 10px;
+                        }
+                    </style>
+
+                    <ul class="best-mobiles-list">
+                        <li>
+                            <a href="#">
+                                Best Phones Under 10000
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Best Phones Under 15000
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Best Phones Under 20000
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Best Camera Phones
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Latest Mobiles
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Top 10 Mobiles
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Best Camera Phones Under 15000
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="block-title-div">
+                        <h4 class="block-title">
+                            <span>Subscribe to our newsletter</span>
+                        </h4>
+                    </div>
+                    
+                    <form method='GET' action='' class="search-form">
+                      <div class="input-group">
+                          <input class="form-control py-2" placeholder="Your Email" type="text" name='' value='' style="height: 40px;border-radius: 0;">
+                          <span class="input-group-append">
+                              <button type="submit" class="btn btn-primary">
+                                  Search
+                              </button>
+                          </span>
+                      </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- {% if object.read_time|time:"i" <= "01" %} < 1 minute {% else %}{{ object.read_time|time:"i" }} minutes {% endif %} -->
+
+
+{% endblock content %}

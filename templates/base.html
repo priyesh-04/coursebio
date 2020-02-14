@@ -1,0 +1,54 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% include 'base/css.html' %}
+
+    <title>Hello, world!</title>
+
+    <style>
+      
+      html,
+      body {
+          background-color: #ffffff;
+          font-family: 'Lato', sans-serif, Arial, Helvetica;
+          /*font-weight: 300;*/
+          font-size: 20px;
+          text-rendering: optimizeLegibility;
+      }
+      
+      body {
+        overflow-y: hidden;
+      }
+
+      .clearfix {
+          zoom: 1;
+      }
+
+      .clearfix:after {
+          content: '.';
+          clear: both;
+          display: block;
+          height: 0;
+          visibility: hidden;
+      }
+    </style>
+
+  </head>
+  <body>
+    {% include 'base/navbar/navbar.html' %}
+
+	  {% block content %}
+    {% endblock %}
+
+    {% include 'base/footer/footer.html' %}
+	<!-- JavaScript -->
+    {% include 'base/js.html' %}
+    
+
+  </body>
+</html>
