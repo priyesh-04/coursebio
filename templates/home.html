@@ -17,6 +17,9 @@
         color: #fff;
     }
 
+    .category-section {
+        min-height: 400px;
+    }
 </style>
 
 <section class="header-section">
@@ -41,9 +44,51 @@
     </div>
 </section>
 
+<style>
+    .category-section .category-wrapper {
+        min-height: 65px;
+        background: #fff;
+        border: 1px solid #dee2e6;
+        padding: 12px;
+        cursor: pointer;
+    }
+
+    .category-section .category-wrapper:hover,
+    .category-section .category-wrapper:active,
+    .category-section .category-wrapper:focus {
+        border: none;
+        box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+    }
+
+    h2::after {
+        display: block;
+        height: 2px;
+        background-color: #ffd700;
+        content: " ";
+        width: 100px;
+        margin: 20px auto;
+    }
+
+    .category-wrapper a {
+        text-decoration: none;
+        color: #343a40;
+    }
+</style>
+
 <section class="category-section">
     <div class="container">
-        
+        <div class="mt-3">
+            <h2 class="text-center" style="color: #343a40">Categories</h2>
+        </div>
+        <div class="row mt-4">
+            {% for category in category_list %}
+                <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
+                    <div class="category-wrapper">
+                        <a href="">{{category}}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </section>
 
