@@ -8,6 +8,7 @@ from .utils import unique_slug_generator
 
 class Category(models.Model):
 	title				= models.CharField(max_length=100, unique=True)
+	image_url 			= models.URLField(null=True, blank=True)
 	slug       			= models.SlugField(null=True, unique=True, blank=True)
 	updated     		= models.DateTimeField(auto_now=True)
 	timestamp   		= models.DateTimeField(auto_now_add=True)
@@ -17,7 +18,7 @@ class Category(models.Model):
 		return str(self.title)
 
 	def get_absolute_url(self):
-		return reverse("course:category-list", kwargs={"slug":self.slug})
+		return reverse("course:subcategory-list", kwargs={"slug":self.slug})
 
 
 def category_pre_save_receiver(sender, instance, *args, **kwargs):
@@ -30,6 +31,7 @@ pre_save.connect(category_pre_save_receiver, sender=Category)
 class SubCategory(models.Model):
 	category			= models.ForeignKey(Category, on_delete=models.CASCADE,)
 	title				= models.CharField(max_length=100, unique=True)
+	start_letter		= models.CharField(max_length=1, null=True, blank=True)
 	slug       			= models.SlugField(null=True, unique=True, blank=True)
 	updated     		= models.DateTimeField(auto_now=True)
 	timestamp   		= models.DateTimeField(auto_now_add=True)

@@ -5,8 +5,8 @@
 
 <style>
     .header-section {
-        height: 350px;
-        background-image: url('https://images.pexels.com/photos/187107/pexels-photo-187107.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+        height: 400px;
+        background-image: url('{{category_image}}');
         background-size: cover;
         background-position: center;
     }
@@ -39,12 +39,13 @@
                         </span>
                 </div>
             </form>
-            
         </div>
     </div>
 </section>
 
+
 <style>
+
     .category-section .row .category-wrapper {
         min-height: 65px;
         background: #fff;
@@ -77,15 +78,14 @@
 
 <section class="category-section">
     <div class="container">
-        <div class="mt-3">
-            <h2 class="text-center" style="color: #343a40">Categories</h2>
-        </div>
         <div class="row mt-4">
-            {% for category in category_list %}
+            {% for subcategory in subcategory_list %}
+            	<h3>{{subcategory.start_letter}}</h3> <br>
                 <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
-                    <a href="{{category.get_absolute_url}}">
+                    <a href="">
                         <div class="category-wrapper">
-                            {{category}}
+                            {{subcategory}}
+
                         </div>
                     </a>
                 </div>
@@ -95,3 +95,37 @@
 </section>
 
 {% endblock content %}
+
+
+<div class="alphabets-div">
+	<div class="container">
+		{% for item in alphabets %}
+			<div class="alphabets-wrapper">
+				<a>{{item}}</a>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+<style>
+	.alphabets-div {
+		height: 60px;
+		border-top: 1px solid grey;
+		background: #fff; 
+	}
+
+	.alphabets-div .container {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		vertical-align: middle;
+	}
+
+	.alphabets-wrapper {
+		font-size: 1rem;
+		color: #333;
+		margin-right: 20px;
+		cursor: pointer;
+	}
+</style>
