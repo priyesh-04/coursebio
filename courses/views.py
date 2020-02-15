@@ -57,5 +57,18 @@ class SubcategoryListView(ListView):
 		context['category_image'] = category.image_url
 		context['subcategory_list'] = SubCategory.objects.filter(category=category).order_by('title')
 		# context['image_list'] = Images.objects.filter(is_main_image=True)
+		# print(context,'con')
+		return context
+
+
+class CourseListView(ListView):
+	model = Course
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(CourseListView, self).get_context_data(*args, **kwargs)
+		slug2 = self.kwargs.get('slug2')
+		subcategory = get_object_or_404(SubCategory, slug=slug2)
+		context['subcategory'] = subcategory
+		context['course_list'] = Course.objects.filter(subcategory=subcategory)
 		print(context,'con')
 		return context

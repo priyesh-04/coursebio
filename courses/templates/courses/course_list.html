@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+	.subcategory-detail-section {
+		height: 250px;
+		background: #fff;
+		border-bottom: 1px solid #6c757d;
+	}
+	.logo-image-wrapper {
+		margin-top: 15%;
+	}
+	.logo-image-wrapper img {
+		height: 100px;
+		width: 100px;
+		vertical-align: middle;
+		margin-top: -5px;
+	}
+</style>
+
+<section class="subcategory-detail-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-8">
+				<div class="header-text pt-4">
+					<h2>Why {{subcategory}}?</h2>
+					<p>{{subcategory.description}}</p>
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="logo-image-wrapper pt-4 text-center">
+					<img src="{{subcategory.image_url}}" alt="">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+{% endblock content %}
+
+
+

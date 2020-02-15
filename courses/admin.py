@@ -24,10 +24,10 @@ class SubCategoryAdmin(admin.ModelAdmin):
 
 
 class ProviderAdmin(admin.ModelAdmin):
-	list_display = ('id', 'title', 'category', 'slug', 'updated',)
-	list_display_links = ('title', 'category', 'id')
-	list_filter = ('category', 'timestamp', 'updated')
-	search_fields = ('category__title', 'title',)
+	list_display = ('id', 'title', 'slug', 'updated',)
+	list_display_links = ('title', 'id')
+	list_filter = ('timestamp', 'updated')
+	search_fields = ('title',)
 	ordering = ('-timestamp',)
 
 
