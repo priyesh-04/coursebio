@@ -53,10 +53,9 @@ class SubcategoryListView(ListView):
 		context = super(SubcategoryListView, self).get_context_data(*args, **kwargs)
 		slug = self.kwargs.get("slug")
 		category = get_object_or_404(Category, slug=slug)
+		context['category'] = category
 		context['category_image'] = category.image_url
 		context['subcategory_list'] = SubCategory.objects.filter(category=category).order_by('title')
-
-		context['alphabets'] = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 		# context['image_list'] = Images.objects.filter(is_main_image=True)
 		print(context,'con')
 		return context
