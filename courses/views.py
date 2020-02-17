@@ -70,5 +70,17 @@ class CourseListView(ListView):
 		subcategory = get_object_or_404(SubCategory, slug=slug2)
 		context['subcategory'] = subcategory
 		context['course_list'] = Course.objects.filter(subcategory=subcategory)
-		print(context,'con')
+		# print(context,'con')
+		return context
+
+
+class CourseDetailView(TemplateView):
+	model = Course
+	template_name = 'courses/course_detail.html'
+
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(CourseDetailView, self).get_context_data(*args, **kwargs)
+		slug2 = self.kwargs.get('slug2')
+		context['course'] = get_object_or_404(Course, slug=slug2)
 		return context

@@ -99,7 +99,7 @@ class Course(models.Model):
 
 	def get_absolute_url(self):
 		return reverse("courses:course-detail", 
-						kwargs={"slug":self.category.slug, "slug2":self.provider.slug,"slug3":self.slug}
+						kwargs={"slug":self.provider.slug, "slug2":self.slug}
 						)
 
 

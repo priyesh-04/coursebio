@@ -4,6 +4,7 @@ from .views import (
 		HomePageView,
 		SubcategoryListView,
 		CourseListView,
+		CourseDetailView,
 		)
 
 urlpatterns = [
@@ -12,6 +13,6 @@ urlpatterns = [
 	# url(r'^create/$', post, name='create-product'),
 	url(r'^(?P<slug>[\w-]+)/(?P<slug2>[\w-]+)/$', CourseListView.as_view(), name='course-list'),
 	url(r'^(?P<slug>[\w-]+)/$', SubcategoryListView.as_view(), name='subcategory-list'),
+	url(r'^(?P<slug>[\w-]+)/courses/(?P<slug2>[\w-]+)/$', CourseDetailView.as_view(), name='course-detail'),
 	# url(r'^(?P<slug>[\w-]+)/list$', ProductListView.as_view(), name='product-list'),
-	# url(r'^(?P<slug>[\w-]+)/(?P<slug2>[\w-]+)/(?P<slug3>[\w-]+)/$', ProductDetailView.as_view(), name='product-detail'),
 ]
