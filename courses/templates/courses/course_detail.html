@@ -40,6 +40,11 @@
 }
 </style>
 <style>
+
+	.top-col {
+		box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0 7px 0 rgba(0,0,0,.10);
+		border-radius: 6px;
+	}
 	
 	.embed-responsive {
 		max-width: 500px;
@@ -63,30 +68,25 @@
 	    text-transform: uppercase;
 	}
 
-
-	.btn1{
-	    background-color: white; 
-	    color: black; 
-	    border: 2px solid #f44336;
-	}
-
 	.btn1 {
 		width: 75%;
 	    padding: 10px 32px;
+	    background-color: #f44336;
+	    border: 2px solid #f44336;
 	    border-radius: 6px;
 	    text-align: center;
 	    text-decoration: none !important;
 	    display: inline-block;
-	    font-size: 14px;
+	    font-size: 1rem;
+	    font-weight: 700;
 	    margin: 4px 2px;
-	    transition-duration: 0.4s;
 	    cursor: pointer;
-	    color: #000;
+	    color: #fff;
+	    text-decoration: none;
 	}
 
 	.btn1:hover {
-  		background-color: #f44336;
-  		color: white;
+		color: #fff;
 	}
 
 	.course-detail .bottom-detail-div {
@@ -120,17 +120,17 @@
 
 <div class="container mt-4">
 	<div class="row">
-		<div class="col-sm-12 col-md-12 col-lg-12">
-			<div class="p-2">
+		<div class="col-sm-12 col-md-12 col-lg-12 bg-white top-col p-2">
+			<div>
 				<div class="video-wrapper embed-responsive embed-responsive-16by9">
 					<iframe class="embed-responsive-item" 
 					src="{{course.video_url}}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 					</iframe>
 				</div>
-			</div>
-		</div>
-		<div class="col-sm-12 col-md-12 col-lg-12">
-			<div class="course-detail mt-3 bg-white p-2 text-center">
+			</div> <hr>
+		<!-- </div>
+		<div class="col-sm-12 col-md-12 col-lg-12"> -->
+			<div class="course-detail mt-3 text-center">
 				<div class="provider-img-wrapper mb-2">
 					<img src="{{course.provider.image_url}}" alt="">
 					<span style="font-size: 0.7rem;">{{course.provider}}</span> |
@@ -153,7 +153,7 @@
 						{{course.duration}}
 					</span>
 				</div>
-				<div class="price-details mb-2">
+				<div class="price-details mb-2" style="font-weight: 700;">
 					<div>
 						$ {{course.price}} <span>/month</span>
 					</div>
@@ -168,26 +168,276 @@
 		</div>
 
 		<div class="col-sm-12 col-md-12 col-lg-12 mt-4">
-			<div class="course-description">
-				<h2>Course Description</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis ratione inventore voluptatibus, voluptatum cumque perferendis vel laboriosam quis repellendus culpa, repudiandae magni officia facere. Veniam nulla illum labore, facilis quis.</p>
+			<div class="container">
+				<div class="course-description">
+					<h2>Course Description</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis ratione inventore voluptatibus, voluptatum cumque perferendis vel laboriosam quis repellendus culpa, repudiandae magni officia facere. Veniam nulla illum labore, facilis quis.</p>
+				</div>
 			</div>
-		</div>
 
-		<div class="col-sm-12 col-md-12 col-lg-12 mt-4">
-			<div class="related-tags">
-				<h2>Related Tags</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis ratione inventore voluptatibus, voluptatum cumque perferendis vel laboriosam quis repellendus culpa, repudiandae magni officia facere. Veniam nulla illum labore, facilis quis.</p>
+			<div class="container">
+				<div class="related-tags">
+					<h2>Related Tags</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis ratione inventore voluptatibus, voluptatum cumque perferendis vel laboriosam quis repellendus culpa, repudiandae magni officia facere. Veniam nulla illum labore, facilis quis.</p>
+				</div>
 			</div>
 		</div>
 
 		<div class="col-sm-12 col-md-12 col-lg-12 mt-4 mb-5">
-			<div class="related-courses">
+			<div class="container">
 				<h2>Related Courses</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis ratione inventore voluptatibus, voluptatum cumque perferendis vel laboriosam quis repellendus culpa, repudiandae magni officia facere. Veniam nulla illum labore, facilis quis.</p>
+			</div>
+			<div class="container related-courses course-container mb-3">
+		        <div class="swiper-container">
+		            <div class="swiper-wrapper" >
+		                {% for course in related_courses %}
+		                <div class="swiper-slide course-item">
+		                    <a class="course-anchor" href="{{ course.get_absolute_url }}">
+		                            
+	                            <div class="course-img-wrapper">
+	                            	<img class="img-thumbnail course-image" src="{{course.image_url}}" alt="{{course}} image">
+	                            </div>
+	                                
+	                            <div class="course-detail mt-3 text-center">
+				<div class="provider-img-wrapper mb-2">
+					<img src="{{course.provider.image_url}}" alt="">
+					<span style="font-size: 0.7rem;">{{course.provider}}</span> |
+					
+					<div class="tool-tip course-trial">
+						{{course.trial}}
+						<span class="tool-tip-text">{{course.provider.plan_details}}</span>
+					</div>
+					
+				</div>
+				<h2 class="course-title" style="font-size: 0.7rem; font-weight: 700;color: #000;">
+					{{course.title}}
+				</h2>
+				<div>
+					<div class="bottom-detail-div">
+						<p style="margin: 0;font-size: 0.5rem;">
+							{{course.author}}
+						</p> 
+						<p style="margin: 0;font-size: 0.5rem;">
+							<i class="material-icons">access_time</i>
+							{{course.duration}}
+						</p>
+					</div>
+					<div class="price-details mb-2" style="font-size: 0.7rem;font-weight: 700;">
+						<p style="margin: 0;">
+							$ {{course.price}}
+						</p>
+					</div>
+				</div>
+					
+				
+				<div class="btn-div">
+					<div>
+						<a href="{{course.get_absolute_url}}" class="btn1">Go to Course</a>
+					</div> 
+				</div>
+				
+			</div>
+	                            
+	                        </a>
+		                </div>
+		                {% endfor %}
+		            </div>
+		            <div class="swiper-pagination"></div>
+		            <div class="swiper-button-prev"></div>
+		            <div class="swiper-button-next"></div>
+		        </div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<!-- Swiper JS -->
+<script src="{% static 'swiper/swiper.js' %}"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        // centeredSlides: true,
+        // init: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            350: {
+                slidesPerView: 1.1,
+                spaceBetween: 10,
+            },
+            600: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+            },
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+            },
+        },
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
+
+
+<style>
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-wrapper {
+	height: 400px;
+}
+
+.swiper-slide {
+	background: #ffffff;
+    /*text-align: center;*/
+    
+    /* Center slide text vertically */
+    /*display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;*/
+}
+
+.course-container {
+	height: 100%;
+	/*background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0 7px 0 rgba(0,0,0,.10);*/
+    margin: -8px 0;
+    padding: 12px 10px 8px 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.course-container h4 {
+	font-size: 1.125rem;
+    padding: 12px 0 8px;
+    text-align: center;
+}
+
+.course-item {
+    text-align: center;
+  	height: calc(100% - 10px);
+    border-radius: 2px;
+    box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
+    margin: 4px;
+    padding: 8px;
+    position: relative;
+    vertical-align: top;
+    white-space: normal;
+}
+
+.img-thumbnail.course-image {
+	padding: 0;
+    height: 130px;
+    border: 0;
+	border-radius: 0;
+}
+
+.base {
+    text-align: left;
+}
+
+.course-price {
+	color: #212121;
+    font-size: 16px;
+    margin-top: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#course-title {
+	color: #757575;
+    font-size: 13px;
+    height: 34px;
+    line-height: 18px;
+    margin-top: 6px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.course-anchor {
+	/*text-align: center;*/
+	text-decoration: none !important;
+}
+
+.view-all:not(:last-child) {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.btn-view-all {
+	background-color: #fff;
+	border-radius: 50%;
+	border: none;
+	width: 56px;
+	height: 56px;
+	cursor: pointer;
+    display: block;
+    position: relative;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 
+				0 0 0 1px rgba(0,0,0,0.08), 
+				inset 0 0 0 0 rgba(0,0,0,0.10), 
+				inset 0 0 0 0 rgba(255,255,255,0.50);    
+	z-index: 0;
+}
+
+.view-all-text {
+	font-size: 1rem;
+	font-weight: 400;
+	color: #000;
+	text-decoration: none;
+	margin-top: 5px
+}
+
+button:focus {
+	outline: none;
+}
+
+.noSelect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: none;
+    }
+}
+
+</style>
 
 {% endblock content %}

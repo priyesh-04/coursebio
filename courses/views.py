@@ -82,5 +82,8 @@ class CourseDetailView(TemplateView):
 	def get_context_data(self, *args, **kwargs):
 		context = super(CourseDetailView, self).get_context_data(*args, **kwargs)
 		slug2 = self.kwargs.get('slug2')
-		context['course'] = get_object_or_404(Course, slug=slug2)
+		course = get_object_or_404(Course, slug=slug2)
+		context['course'] = course
+		context['related_courses'] = Course.objects.filter(category=course.category)
+		print(context,'con')
 		return context
