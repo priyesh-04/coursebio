@@ -46,7 +46,7 @@
             </li>
       </ul>
       <div class="search-form-div hide">
-        <form method='GET' action='' class="form search-form">
+        <form method='GET' action='{% url "course:search" %}' class="form search-form">
           <div class="input-group">
               <input class="form-control py-2" type="text" name='q' aria-label="Search" value='{{ request.GET.q }}'>
               <span class="input-group-append">
@@ -71,7 +71,7 @@
 <div id="myOverlay" class="overlay">
   <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
   <div class="overlay-content container">
-    <form class="mob-search-form">
+    <form method='GET' action='{% url "course:search" %}' class="mob-search-form">
       <span>search</span>
       <input class="form-control mob-search-form-input" type="search" aria-label="Search"> <br />
       <input class="input_submit-btn"  type="submit" style="" hidefocus="true" tabindex="-1"/>

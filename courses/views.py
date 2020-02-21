@@ -20,18 +20,18 @@ from courses.models import (
 							)
 # Create your views here.
 
-def product_category_list(request):
+def course_category_list(request):
     # Category loops on index page.
     category_list = Category.objects.filter()
     context = {
-        "product_category_list": category_list,
+        "course_category_list": category_list,
     }
     return context
 
 
 class HomePageView(ListView):
 	model = Course
-	# context_object_name = 'product_list'
+	# context_object_name = 'course_list'
 	template_name = 'home.html'
 
 	# def get_queryset(self, *args, **kwargs):
@@ -86,4 +86,28 @@ class CourseDetailView(TemplateView):
 		context['course'] = course
 		context['related_courses'] = Course.objects.filter(category=course.category)
 		print(context,'con')
+		return context
+
+
+class SearchListView(TemplateView):
+	template_name = 'courses/search_list.html'
+	queryset = Course.objects.all()
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(SearchListView, self).get_context_data(*args, **kwargs)
+		qs1 = self.queryset
+		query = self.request.GET.get("q", None)
+		if query is not None:
+			qs2 = qs1.filter(
+						Q(title__icontains=query)
+						|Q(description__icontains=query)
+						|Q(author__icontains=query)
+						| Q(price__icontains=query) 
+						| Q(provider__title__icontains=query)
+						| Q(category__title__icontains=query) 
+						| Q(subcategory__title__icontains=query)
+						| Q(tag__title__icontains=query)
+						)
+			context['course_list'] = qs2
+			context['query'] = query
 		return context
