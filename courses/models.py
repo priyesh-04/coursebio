@@ -9,6 +9,7 @@ from .utils import unique_slug_generator
 class Category(models.Model):
 	title				= models.CharField(max_length=100, unique=True)
 	image_url 			= models.URLField(null=True, blank=True)
+	icon_name			= models.CharField(max_length=100, null=True, blank=True)
 	slug       			= models.SlugField(null=True, unique=True, blank=True)
 	updated     		= models.DateTimeField(auto_now=True)
 	timestamp   		= models.DateTimeField(auto_now_add=True)

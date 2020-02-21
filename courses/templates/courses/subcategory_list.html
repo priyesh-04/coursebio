@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% load static %}
 
@@ -6,52 +7,80 @@
 <style>
     .header-section {
         height: 400px;
-        background-image: url('{{category_image}}');
+        background-image: url('{{category.image_url}}');
         background-size: cover;
         background-position: center;
         border-bottom: 1px solid #6c757d;
-    }
-    .header-info {
-        position: absolute;
-        top: 20%;
-        right: 35%;
-        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
-    .category-section {
+    .header-container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header-info {
+        background: #fff;
+        height: 270px;
+        width: 440px;
+        color: #343a40;
+        padding: 25px;
+    }
+
+    .header-info h1 {
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -.02rem;
+        font-size: 2rem;
+    }
+
+    .subcategory-container {
         min-height: 400px;
+        /*padding-top: 25px;*/
+        /*background: #fff;*/
     }
 </style>
 
 <section class="header-section">
-    <div class="container">
+    <div class="container header-container">
         <div class="header-info">
-            <h1>Coursebio</h1>
-            <h3 style="font-size: 1rem;font-weight: 400;">Find and compare <strong>online courses</strong> and MOOCs <br>
+            <h1>A world of opportunity</h1>
+            <h3 style="font-size: 1rem;font-weight: 400;">Find and compare <strong>online courses</strong> and MOOCs
                         from multiple e-learning platforms
                         </h3>
             {% include 'search_forms/search-form2.html' %}
-
+            
         </div>
     </div>
 </section>
 
-
 <style>
 
-    .category-section .row .category-wrapper {
+    .subcategory-container .row .subcategory-wrapper {
         min-height: 65px;
         background: #fff;
         border: 1px solid #dee2e6;
         padding: 12px;
         cursor: pointer;
+        display: flex;
     }
 
-    .category-section .category-wrapper:hover,
-    .category-section .category-wrapper:active,
-    .category-section .category-wrapper:focus {
+    .subcategory-container .subcategory-wrapper:hover,
+    .subcategory-container .subcategory-wrapper:active,
+    .subcategory-container .subcategory-wrapper:focus {
         border: none;
         box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+    }
+
+    .subcategory-header-div {
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 25px;
     }
 
     h2::after {
@@ -63,38 +92,42 @@
         margin: 20px auto;
     }
 
-    .category-section a {
+    .subcategory-container a {
         text-decoration: none;
         color: #343a40;
     }
 
-    .subcategory-img {
-    	width: 35px;
-    	height: 35px;
+    .subcategory-img-wrapper {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+    .subcategory-img-wrapper img {
+        width: 100%;
+        height: 100%;
     }
 </style>
 
-<section class="category-section">
-    <div class="container">
-    	<div class="mt-3">
-            <h2 class="text-center" style="color: #343a40">{{category}}</h2>
-        </div>
-        <div class="row mt-4">
-            {% for subcategory in subcategory_list %}
-                <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
-                    <a href="{{ subcategory.get_absolute_url }}">
-                        <div class="category-wrapper">
-                        	<img class="subcategory-img" src="{{subcategory.image_url}}" alt="">
-                            {{subcategory}}
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+<div class="container subcategory-container">
+    <div class="subcategory-header-div">
+        <h2>{{category}}</h2>
     </div>
-</section>
+    <div class="row mt-4">
+        {% for subcategory in subcategory_list %}
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                <a href="{{subcategory.get_absolute_url}}">
+                    <div class="subcategory-wrapper">
+                        <div class="subcategory-img-wrapper">
+                            <img class="subcategory-img" src="{{subcategory.image_url}}" alt="">
+                        </div>
+                        <div>
+                            <p>{{subcategory}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock content %}
-
-
-

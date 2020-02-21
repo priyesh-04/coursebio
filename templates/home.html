@@ -5,29 +5,50 @@
 
 <style>
     .header-section {
-        height: 350px;
+        height: 400px;
         background-image: url('https://images.pexels.com/photos/187107/pexels-photo-187107.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
         background-size: cover;
         background-position: center;
         border-bottom: 1px solid #6c757d;
-    }
-    .header-info {
-        position: absolute;
-        top: 20%;
-        right: 35%;
-        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
-    .category-section {
+    .header-container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header-info {
+        background: #fff;
+        height: 270px;
+        width: 440px;
+        color: #343a40;
+        padding: 25px;
+    }
+
+    .header-info h1 {
+        font-weight: 700;
+        line-height: 1.2;
+        letter-spacing: -.02rem;
+        font-size: 2rem;
+    }
+
+    .category-container {
         min-height: 400px;
+        /*padding-top: 25px;*/
+        /*background: #fff;*/
     }
 </style>
 
 <section class="header-section">
-    <div class="container">
+    <div class="container header-container">
         <div class="header-info">
-            <h1>Coursebio</h1>
-            <h3 style="font-size: 1rem;font-weight: 400;">Find and compare <strong>online courses</strong> and MOOCs <br>
+            <h1>A world of opportunity</h1>
+            <h3 style="font-size: 1rem;font-weight: 400;">Find and compare <strong>online courses</strong> and MOOCs
                         from multiple e-learning platforms
                         </h3>
             {% include 'search_forms/search-form2.html' %}
@@ -37,7 +58,8 @@
 </section>
 
 <style>
-    .category-section .row .category-wrapper {
+
+    .category-container .row .category-wrapper {
         min-height: 65px;
         background: #fff;
         border: 1px solid #dee2e6;
@@ -45,11 +67,18 @@
         cursor: pointer;
     }
 
-    .category-section .category-wrapper:hover,
-    .category-section .category-wrapper:active,
-    .category-section .category-wrapper:focus {
+    .category-container .category-wrapper:hover,
+    .category-container .category-wrapper:active,
+    .category-container .category-wrapper:focus {
         border: none;
         box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+    }
+
+    .category-header-div {
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-align: center;
+        margin-top: 25px;
     }
 
     h2::after {
@@ -61,29 +90,34 @@
         margin: 20px auto;
     }
 
-    .category-section a {
+    .category-container a {
         text-decoration: none;
         color: #343a40;
     }
+    .category-wrapper .material-icons {
+        vertical-align: middle;
+        margin-top: -4px;
+    }
 </style>
 
-<section class="category-section">
-    <div class="container">
-        <div class="mt-3">
-            <h2 class="text-center" style="color: #343a40">Categories</h2>
-        </div>
-        <div class="row mt-4">
-            {% for category in category_list %}
-                <div class="col-sm-12 col-md-6 col-lg-3 mb-3">
-                    <a href="{{category.get_absolute_url}}">
-                        <div class="category-wrapper">
-                            {{category}}
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+<div class="container category-container">
+    <div class="category-header-div">
+        <h2>Categories</h2>
     </div>
-</section>
+    <div class="row mt-4">
+        {% for category in category_list %}
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+                <a href="{{category.get_absolute_url}}">
+                    <div class="category-wrapper">
+                        <p>
+                            <i class="material-icons">{{category.icon_name}}</i>
+                            {{category}}
+                        </p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock content %}
