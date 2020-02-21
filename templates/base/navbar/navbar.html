@@ -19,11 +19,23 @@
         </div>
       </div>
       <!-- <hr> -->
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
           <a class="nav-link" href="">
-              Categories
+              Home
           </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for category in course_category_list %}
+              <a class="dropdown-item" href="{{category.get_absolute_url}}">{{category}}</a>
+            {% endfor %}
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">All Courses</a>
+          </div>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="">
@@ -35,8 +47,7 @@
               Contact
           </a>
         </li>  
-      </ul>  
-      {% include 'search_forms/search-form2.html' %}
+      </ul>
     </div>
   </div>
 </nav>

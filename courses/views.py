@@ -22,9 +22,16 @@ from courses.models import (
 
 def course_category_list(request):
     # Category loops on index page.
-    category_list = Category.objects.filter()
+    category_list = Category.objects.all()
     context = {
         "course_category_list": category_list,
+    }
+    return context
+
+def provider_list(request):
+    provider_list = Provider.objects.all()
+    context = {
+        "provider_list": provider_list,
     }
     return context
 
