@@ -1,6 +1,6 @@
 <form class="header-search-form" method='GET' action='{% url "course:search" %}'>
     <div class="input-group">
-        <input class="form-control rounded-0 py-2" type="text" placeholder="Find any course..." name='q' aria-label="Search" value='{{ request.GET.q }}'>
+        <input class="form-control shadow-none rounded-0 py-2" type="text" placeholder="Find any course..." name='q' aria-label="Search" value='{{ request.GET.q }}'>
             <span class="input-group-append">
                 <button type="submit" class="btn btn-primary" style="border-radius: 0;">
                    Search
@@ -8,3 +8,5 @@
             </span>
     </div>
 </form>
+
+ 

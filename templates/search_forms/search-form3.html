@@ -1,0 +1,25 @@
+<form class="header-search-form" method='GET' action='{% url "course:search" %}'>
+  <div class="form-group m-0">
+    <i class="material-icons form-control-icon">search</i>
+      <input class="form-control shadow-none rounded-0 py-2" type="text" placeholder="Find any course..." name='q' aria-label="Search" value='{{ request.GET.q }}'>
+  </div>
+</form>
+
+<style>
+
+.form-group .form-control {
+    padding-left: 2.375rem;
+}
+
+.form-group .form-control-icon {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+</style>
