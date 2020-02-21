@@ -79,7 +79,7 @@
 		position: relative;
 		background: #fff;
 		display: flex;
-		height: 140px;
+		height: 160px;
 		max-width: 870px;
 	}
 
@@ -106,6 +106,7 @@
 
 
 	.course-title {
+		height: 54px;
 		max-width: 500px;
 		font-size: 0.9rem;
     	font-weight: 700;
@@ -181,6 +182,23 @@
   		color: white;
 	}
 
+	.bottom-detail-div p {
+		margin: 0;
+	}
+
+	@media only screen and (max-width: 1000px) {
+	  .btn-div {
+	    display: none;
+	  }
+	}
+
+	@media only screen and (max-width: 600px) {
+	  .course-img-wrapper img {
+	  	width: 50px;
+	  	height: 50px;
+	  }
+	}
+
 </style>
 
 <div class="container course-list mt-3 mb-5">
@@ -205,13 +223,14 @@
 					{{course.title}}
 				</span>
 				<div class="bottom-detail-div">
-					<span>
+					<p class="author-name">
+						<i class="material-icons">person</i>
 						{{course.author}}
-					</span> |
-					<span>
+					</p>
+					<p>
 						<i class="material-icons">access_time</i>
 						{{course.duration}}
-					</span>
+					</p>
 				</div>
 				<div class="price-details">
 					<div>
