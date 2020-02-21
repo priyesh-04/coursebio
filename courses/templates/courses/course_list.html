@@ -67,7 +67,7 @@
 			</div>
 			<div class="col-4">
 				<div class="subcategory-img-wrapper pt-4 text-center">
-					<img src="{{subcategory.image_url}}" alt="">
+					<img class="img-thumbnail" src="{{subcategory.image_url}}" alt="">
 				</div>
 			</div>
 		</div>
@@ -99,11 +99,14 @@
 	    border-radius: 50%;
 	}
 
+	.course-img-wrapper {
+		border: 1px solid #eee;
+	}
+
 	.course-img-wrapper img {
 		width: 200px;
 		height: 112px;
 	}
-
 
 	.course-title {
 		height: 54px;
@@ -169,8 +172,6 @@
 	    color: #000;
 	}
 
-
-
 	.btn2 {
 		background-color: #f44336;
 		color: white;
@@ -193,17 +194,31 @@
 	}
 
 	@media only screen and (max-width: 600px) {
-	  .course-img-wrapper img {
-	  	width: 50px;
-	  	height: 50px;
-	  }
+		.subcategory-detail-section {
+			display: none;
+		}
+
+		.course-img-wrapper img {
+			width: 50px;
+			height: 50px;
+		}
+
+		.course-img-wrapper {
+			justify-content: flex-start;
+			margin-top: 12px;
+			width: 50px;
+			height: 50px;
+		}
 	}
 
 </style>
 
 <div class="container course-list mt-3 mb-5">
 	<h3>All {{subcategory}} courses</h3>
-	{% for course in course_list %} <hr style="width: 870px;margin-left: 0;" />
+	{% for course in course_list %} 
+		<div class="col-sm-12 col-md-12 col-lg-11">
+			<hr>
+		</div>
 		<div class="course-wrapper">
 			<div class="course-img-wrapper">
 				<img src="{{course.image_url}}" alt="">
@@ -249,7 +264,10 @@
 				</div>
 			</div>
 		</div>
-	{% endfor %}
+	{% endfor %} 
+	<div class="col-sm-12 col-md-12 col-lg-11">
+		<hr>
+	</div>
 </div>
 
 
