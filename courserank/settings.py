@@ -45,10 +45,13 @@ INSTALLED_APPS = [
     'pagedown',
 
     #local apps
+    'accounts',
     'courses',
     'blog',
     'tags',
 ]
+
+AUTH_USER_MODEL = 'accounts.MyUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
