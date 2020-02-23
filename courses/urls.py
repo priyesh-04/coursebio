@@ -9,7 +9,7 @@ from .views import (
 		)
 
 urlpatterns = [
-	url(r'^search$', SearchListView.as_view(), name='search'),
+	url(r'^search/$', SearchListView.as_view(), name='search'),
 	url(r'^$', HomePageView.as_view(), name='home'),
 	url(r'^(?P<slug>[\w-]+)/(?P<slug2>[\w-]+)/$', CourseListView.as_view(), name='course-list'),
 	url(r'^(?P<slug>[\w-]+)/$', SubcategoryListView.as_view(), name='subcategory-list'),

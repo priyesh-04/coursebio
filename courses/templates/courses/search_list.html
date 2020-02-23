@@ -171,23 +171,33 @@
 
 <div class="container course-list mt-3 mb-5">
 	<div class='row  mb-3'>
-        {% if query %}
-	        <div class='col-12' >
-	            Results for <b>{{ query }}</b>
-	            <hr/>
-	        </div>
-	        {% else %}
+        
+        <div class='col-sm-12 col-md-6 col-lg-6 mx-auto p-3'>
+           {% include 'search_forms/search-form.html' %}
 
-	        <div class='col-sm-12 col-md-6 col-lg-6 mx-auto py-5'>
-	           {% include 'search_forms/search-form.html' %}
-
-	        </div>
-	        <div class='col-12'>
-	            <hr>
+        </div>
+        <div class="col-12">
+        	<hr/>
+        </div>
+        {% if course_list and query %}
+            <div class='col-12' >
+	        	
+	            <div class="bg-light p-3">
+	            	Results for <b>{{ query }}</b>
+	            </div>
 	        </div>
         {% endif %}
+        {% if not query %}
+            <div class='col-12' >
+	        	
+	            <div class="bg-light p-3">
+	            	<strong>Showing all courses</strong>
+	            </div>
+	        </div>
+        {% endif %}
+        
 	</div>
-	{% if query and course_list %}
+	{% if course_list %}
 	    
 	{% for course in course_list %}
 		<br>

@@ -47,9 +47,15 @@ class HomePageView(ListView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(HomePageView, self).get_context_data(*args, **kwargs)
-		context['category_list'] = Category.objects.all()
-		# context['image_list'] = Images.objects.filter(is_main_image=True)
-		# print(context,'con')
+		qs = Category.objects.all()
+		context['category_list'] = qs
+		categories = []
+		for category in qs:
+			cat_name = category.title.replace(" ", "_")
+			categories.append(cat_name)
+			context[cat_name] = Course.objects.filter(category=category)
+		context['categories'] = categories
+		print(context,'con')
 		return context
 
 
@@ -92,7 +98,7 @@ class CourseDetailView(TemplateView):
 		course = get_object_or_404(Course, slug=slug2)
 		context['course'] = course
 		context['related_courses'] = Course.objects.filter(category=course.category)
-		print(context,'con')
+		# print(context,'con')
 		return context
 
 
@@ -117,4 +123,5 @@ class SearchListView(TemplateView):
 						)
 			context['course_list'] = qs2
 			context['query'] = query
+			# print(context['query'],'query')
 		return context
