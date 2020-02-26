@@ -20,7 +20,7 @@ from django.conf.urls import include
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include(('accounts.urls', 'accounts'), namespace='auth')),
     url(r'^blog/', include(('blog.urls', 'blog'), namespace='posts')),
     url(r'^', include(('courses.urls', 'courses'), namespace='course')),
-    # url(r'^', include(('accounts.urls', 'accounts'), namespace='auth')),
 ]

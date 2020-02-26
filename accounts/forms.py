@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.models import Group
@@ -5,6 +6,29 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from accounts.models import MyUser
+
+
+class UserLoginForm(forms.Form):
+    query = forms.CharField(label='Username / Email')
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+
+    def clean(self, *args, **kwargs):
+        query = self.cleaned_data.get("query")
+        password = self.cleaned_data.get("password")
+        user_qs_final = MyUser.objects.filter(
+                Q(username__iexact=query)|
+                Q(email__iexact=query)
+            ).distinct()
+        if not user_qs_final.exists() and user_qs_final.count() != 1:
+            raise forms.ValidationError("Invalid credentials -- user does not exists")
+        user_obj = user_qs_final.first()
+        if not user_obj.check_password(password):
+                # log auth tries
+                raise forms.ValidationError("Invalid credentials")
+        if not user_obj.is_active:
+                    raise forms.ValidationError("Inactive user. Please verify your email address.")
+        self.cleaned_data["user_obj"] = user_obj
+        return super(UserLoginForm, self).clean(*args, **kwargs)
 
 
 class UserCreationForm(forms.ModelForm):

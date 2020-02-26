@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+    {% if form.errors %}
+    <div class="alert alert-block alert-danger">
+        <ul class="m-0">
+            <li>
+                {{form.errors}}
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+</div>
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>You are already logged in. To create new account,
+    please logout first.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<div class="container">
+    <form method="post" action="{% url 'accounts:register' %}">
+        {% csrf_token %}
+
+        {{ form|crispy }}
+
+        <input type="submit" value="register">
+    </form>
+</div>
+
+
+{% endblock %}
+
