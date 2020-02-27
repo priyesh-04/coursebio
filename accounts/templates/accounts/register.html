@@ -1,40 +1,26 @@
 {% extends "base.html" %}
-
 {% load crispy_forms_tags %}
-
 {% block content %}
-
-<div class="container">
-    {% if form.errors %}
-    <div class="alert alert-block alert-danger">
-        <ul class="m-0">
-            <li>
-                {{form.errors}}
-            </li>
-        </ul>
+    <div class="row mt-4">
+        <div class="col-6 ml-3">
+            <div class="content-section">
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Join Today</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                    </div>
+                </form>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+        <div class="col-6"></div>
     </div>
-    {% endif %}
-</div>
-
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>You are already logged in. To create new account,
-    please logout first.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
-
-<div class="container">
-    <form method="post" action="{% url 'accounts:register' %}">
-        {% csrf_token %}
-
-        {{ form|crispy }}
-
-        <input type="submit" value="register">
-    </form>
-</div>
-
-
-{% endblock %}
-
+{% endblock content %}

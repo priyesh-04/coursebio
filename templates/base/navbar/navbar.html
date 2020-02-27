@@ -1,17 +1,17 @@
 
-{% url 'home' as home_url %}
-{% url 'course:search' as course_list_url %}
-{% url 'accounts:login' as login_url %}
-{% url 'accounts:logout' as logout_url %}
-{% url 'accounts:register' as register_url %}
-
+{% url 'course:home' as home_url %}
+{% url 'search' as course_list_url %}
+{% url 'login' as login_url %}
+{% url 'logout' as logout_url %}
+{% url 'register' as register_url %}
+{% url 'password_change' as password_change_url %}
 
 <nav class="blog-navbar navbar navbar-expand-md fixed-top navbar-light bg-light">
   <div class="container-fluid">
     <button class="navbar-toggler mr-2" type="button" data-toggle="offcanvas">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand mr-auto" href="{{home}}">
+    <a class="navbar-brand mr-auto" href="{{home_url}}">
       <strong>Coursebio</strong>
     </a>
 
@@ -62,8 +62,9 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item {% if request.path == account_url %}active{% endif %}" href="">Home</a>
-          
           <a class='dropdown-item' href=''>Profile</a>
+          <a class='dropdown-item' href=''>Edit Profile</a>
+          <a class='dropdown-item' href='{{password_change_url}}'>Change Password</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{{ logout_url }}">Logout</a>
         </div>
