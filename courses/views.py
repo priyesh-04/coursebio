@@ -18,7 +18,6 @@ from courses.models import (
 							 	Course, 
 							 	Provider
 							)
-# Create your views here.
 
 def course_category_list(request):
     # Category loops on index page.
@@ -28,12 +27,20 @@ def course_category_list(request):
     }
     return context
 
-def provider_list(request):
-    provider_list = Provider.objects.all()
+def course_provider_list(request):
+    course_provider_list = Provider.objects.all()
     context = {
-        "provider_list": provider_list,
+        "course_provider_list": course_provider_list,
     }
     return context
+
+
+def all_courses_list(request):
+	all_courses_list = Course.objects.all()
+	context = {
+		"all_courses_list": all_courses_list,
+	}
+	return context
 
 
 class HomePageView(ListView):
@@ -47,16 +54,17 @@ class HomePageView(ListView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(HomePageView, self).get_context_data(*args, **kwargs)
-		qs = Category.objects.all()
-		context['category_list'] = qs
-		categories = []
-		for category in qs:
-			cat_name = category.title.replace(" ", "_")
-			categories.append(cat_name)
-			context[cat_name] = Course.objects.filter(category=category)
-		context['categories'] = categories
-		print(context,'con')
+		context['category_list'] = Category.objects.all()
+		context['popular_course_list'] = Course.objects.filter(popular=True)
+		# print(context,'con')
 		return context
+
+
+
+class AllCourseListView(ListView):
+	model = Course
+	template_name = 'courses/course_list.html'
+		
 
 
 class SubcategoryListView(ListView):

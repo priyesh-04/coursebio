@@ -101,10 +101,14 @@
 </style>
 
 <div class="container category-container">
-    <div class="category-header-div">
-        <h2>Categories</h2>
+    <div class="tab-div mt-3">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link border-bottom active" data-toggle="tab">Popular Categories</a>
+          </li>
+        </ul>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-3">
         {% for category in category_list %}
             <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                 <a href="{{category.get_absolute_url}}">
@@ -118,8 +122,386 @@
             </div>
         {% endfor %}
     </div>
+
+    <div class="bg-dark text-white p-5 font-weight-bold mt-5 mb-5">
+        hello
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="tab-div">
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link border-bottom active" data-toggle="tab">Popular Courses</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12 mt-2 mb-5">
+            
+            <div class="container related-courses course-container">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper" >
+                        {% for course in popular_course_list %}
+                        <div class="swiper-slide course-item">
+                            <a class="course-anchor" href="{{ course.get_absolute_url }}">
+                                    
+                                <div class="course-img-wrapper text-center">
+                                    <img class="img-thumbnail course-image" src="{{course.image_url}}" alt="{{course}} image">
+                                </div>
+                                    
+                                <div class="card-course-detail">
+                                    <div class="provider-img-wrapper">
+                                        <img src="{{course.provider.image_url}}" alt="">
+                                        <span class="provider-name">{{course.provider}}</span> |
+                                        
+                                        <div class="tool-tip course-trial">
+                                            {{course.trial}}
+                                            <span class="tool-tip-text">{{course.provider.plan_details}}</span>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="card-course-title-div">
+                                        <h3>
+                                            {{course.title}}
+                                        </h3>
+                                    </div>
+                                    <div class="detail-wrapper">
+                                        <div class="bottom-detail-div card-bottom-detail">
+                                            <p class="author-name">
+                                                <i class="material-icons">person</i>
+                                                {{course.author}}
+                                            </p> 
+                                            <p>
+                                                <i class="material-icons">access_time</i>
+                                                {{course.duration}}
+                                            </p>
+                                        </div>
+                                        <div class="course-price card-course-price">
+                                            <p>
+                                                $ {{course.price}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                        
+                                    
+                                    <div class="card-btn-div">
+                                        <a href="{{course.get_absolute_url}}" class="card-btn">See Details</a>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
+
+<style>
+    
+    .provider-img-wrapper img {
+        width: 15px;
+        height: 15px;
+        vertical-align: middle;
+        border-style: none;
+        border: 1px solid #ddd;
+        border-radius: 50%;
+    }
+
+    .provider-img-wrapper .course-trial {
+        font-size: 0.5rem;
+        background: #17a2b8;
+        color: #fff;
+        padding: 3px;
+        text-transform: uppercase;
+    }
+
+    .btn1 {
+        width: 75%;
+        padding: 10px 32px;
+        background-color: #f44336;
+        border: 2px solid #f44336;
+        border-radius: 6px;
+        text-align: center;
+        text-decoration: none !important;
+        display: inline-block;
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 4px 2px;
+        cursor: pointer;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .btn1:hover {
+        color: #fff;
+    }
+
+    .course-detail .bottom-detail-div {
+        font-size: 0.6rem;
+        color: #757575;
+    }
+
+    .bottom-detail-div i {
+        font-size: 0.6rem;
+        vertical-align: middle;
+        margin-top: -3px;
+    }
+
+    .provider-name {
+        font-size: 0.7rem;
+    }
+
+    .course-title-div h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+</style>
+<style>
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-wrapper {
+    /*height: 320px;*/
+}
+
+.swiper-slide {
+    background: #ffffff;
+    /*margin-right: 6px !important;*/
+}
+
+.course-container {
+    height: 100%;
+    margin: -8px 0;
+    padding: 12px 10px 8px 10px;
+    position: relative;
+    z-index: 1;
+}
+    
+
+.course-item {
+    height: calc(100% - 10px);
+    border-radius: 2px;
+    box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
+    margin: 4px;
+    padding: 8px;
+    position: relative;
+    vertical-align: top;
+    white-space: normal;
+}
+
+/*.course-item:hover,
+.cours-item:active {
+    box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
+}*/
+
+.card-course-detail {
+    height: 175px;
+    display: flex;
+    flex-direction: column;
+    /*justify-content: space-between;*/
+}
+
+.img-thumbnail.course-image {
+    min-width: 204px;
+    height: 130px;
+}
+
+.detail-wrapper {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.course-price {
+    color: #212121;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-top: .5rem;
+}
+
+.card-bottom-detail {
+    width: 50%;
+    font-size: 0.6rem;
+    color: #757575;
+}
+
+.card-bottom-detail .author-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*max-width: calc(100% - 1.25em);*/
+    position: relative;
+    top: 1px;
+}
+
+.card-course-title-div {
+    height: 48px;
+}
+
+.card-course-title-div h3 {
+    color: #000;
+    font-size: 0.8rem;
+    font-weight: 700;
+    /*margin-top: 6px;*/
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+p {
+    margin: 0;
+}
+
+.course-anchor {
+    /*text-align: center;*/
+    text-decoration: none !important;
+}
+
+
+.card-btn-div {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.card-btn {
+    /*width: 75%;*/
+    padding: 5px 20px;
+    background-color: #f44336;
+    border: 2px solid #f44336;
+    border-radius: 6px;
+    text-align: center;
+    text-decoration: none !important;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin: 4px 2px;
+    cursor: pointer;
+    color: #fff !important;
+}
+
+.card-btn:hover {
+    color: #fff;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    height: 50px;
+    width: 50px;
+    color: #333;
+    background: var(--light);
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px, rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+
+.swiper-button-prev:after, 
+.swiper-button-next:after {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.swiper-button-disabled {
+    display: none;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: none;
+    }
+}
+
+</style>
+<style>
+.tool-tip {
+  position: relative;
+  display: inline-block;
+}
+
+.tool-tip .tool-tip-text {
+  visibility: hidden;
+  width: 220px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 0;
+  margin-left: -60px;
+}
+
+.tool-tip .tool-tip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.tool-tip:hover .tool-tip-text {
+  visibility: visible;
+}
+</style>
+    <!-- Swiper JS -->
+<script src="{% static 'swiper/swiper.js' %}"></script>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        // centeredSlides: true,
+        // init: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            350: {
+                slidesPerView: 1,
+            },
+            600: {
+                slidesPerView: 2,
+                spaceBetween: 40,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 40,
+            },
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 10,
+            },
+        },
+        // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
 
 {% endblock content %}

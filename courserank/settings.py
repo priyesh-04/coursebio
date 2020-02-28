@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #third_party apps
+    'rest_framework',
     'crispy_forms',
     'django_extensions',
     'markdown_deux',
@@ -85,7 +86,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'courses.views.course_category_list',
-                'courses.views.provider_list',
+                'courses.views.course_provider_list',
+                'courses.views.all_courses_list',
                 # 'blog.views.blog_category_list',
             ],
         },

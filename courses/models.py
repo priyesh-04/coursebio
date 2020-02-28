@@ -92,6 +92,7 @@ class Course(models.Model):
 	trial			= models.CharField(max_length=50, null=True, blank=True,)
 	price			= models.DecimalField(max_digits=19, decimal_places=2,)
 	slug    		= models.SlugField(null=True, unique=True, blank=True,)
+	popular			= models.BooleanField(default=False,)
 	updated     	= models.DateTimeField(auto_now=True,)
 	timestamp   	= models.DateTimeField(auto_now_add=True,)
 
