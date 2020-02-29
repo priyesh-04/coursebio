@@ -37,11 +37,6 @@
         font-size: 2rem;
     }
 
-    .category-container {
-        min-height: 400px;
-        /*padding-top: 25px;*/
-        /*background: #fff;*/
-    }
 </style>
 
 <section class="header-section">
@@ -98,6 +93,12 @@
         vertical-align: middle;
         margin-top: -4px;
     }
+
+    .nav-tabs .nav-link.active {
+        color: #fff;
+        background-color: var(--teal);
+        box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
+    }
 </style>
 
 <div class="container category-container">
@@ -110,7 +111,7 @@
     </div>
     <div class="row mt-3">
         {% for category in category_list %}
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-5">
                 <a href="{{category.get_absolute_url}}">
                     <div class="category-wrapper">
                         <p>
@@ -122,11 +123,13 @@
             </div>
         {% endfor %}
     </div>
+</div>
 
-    <div class="bg-dark text-white p-5 font-weight-bold mt-5 mb-5">
-        hello
-    </div>
+<div class="bg-dark text-white p-5 font-weight-bold mb-5">
+    hello
+</div>
 
+<div class="container">
     <div class="row">
         <div class="col-12">
             <div class="tab-div">
@@ -148,7 +151,7 @@
                             <a class="course-anchor" href="{{ course.get_absolute_url }}">
                                     
                                 <div class="course-img-wrapper text-center">
-                                    <img class="img-thumbnail course-image" src="{{course.image_url}}" alt="{{course}} image">
+                                    <img class="course-image" src="{{course.image_url}}" alt="{{course}} image">
                                 </div>
                                     
                                 <div class="card-course-detail">
@@ -299,28 +302,30 @@
 .course-item {
     height: calc(100% - 10px);
     border-radius: 2px;
+    border: 1px solid #eee;
     /*box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);*/
     margin: 4px;
     padding: 8px;
     position: relative;
     vertical-align: top;
     white-space: normal;
+    /*transition: 0.3s;*/
 }
 
-/*.course-item:hover,
+.course-item:hover,
 .cours-item:active {
     box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
-}*/
-
-.card-course-detail {
-    height: 175px;
-    display: flex;
-    flex-direction: column;
-    /*justify-content: space-between;*/
 }
 
-.img-thumbnail.course-image {
-    min-width: 260px;
+.card-course-detail {
+    height: 215px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.course-image {
+    width: 230px;
     height: 130px;
 }
 
@@ -423,6 +428,10 @@ p {
     display: none;
 }
 
+.swiper-slide a {
+    color: #000;
+}
+
 
 @media only screen and (max-width: 600px) {
     .swiper-button-prev,
@@ -496,7 +505,7 @@ p {
                 spaceBetween: 40,
             },
             1024: {
-                slidesPerView: 4,
+                slidesPerView: 4.2,
                 spaceBetween: 10,
             },
         },
