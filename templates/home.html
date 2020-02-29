@@ -154,13 +154,17 @@
                                 <div class="card-course-detail">
                                     <div class="provider-img-wrapper">
                                         <img src="{{course.provider.image_url}}" alt="">
-                                        <span class="provider-name">{{course.provider}}</span> |
+                                        <span class="provider-name">{{course.provider}}</span> 
+                                        {% if course.provider.plan_details %}
+                                            |
                                         
                                         <div class="tool-tip course-trial">
                                             {{course.trial}}
                                             <span class="tool-tip-text">{{course.provider.plan_details}}</span>
                                         </div>
                                         
+                                        
+                                        {% endif %}
                                     </div>
                                     <div class="card-course-title-div">
                                         <h3>
@@ -295,7 +299,7 @@
 .course-item {
     height: calc(100% - 10px);
     border-radius: 2px;
-    box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
+    /*box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);*/
     margin: 4px;
     padding: 8px;
     position: relative;
@@ -316,12 +320,12 @@
 }
 
 .img-thumbnail.course-image {
-    min-width: 204px;
+    min-width: 260px;
     height: 130px;
 }
 
 .detail-wrapper {
-    width: 95%;
+    /*width: 95%;*/
     display: flex;
     justify-content: space-between;
     align-items: center;

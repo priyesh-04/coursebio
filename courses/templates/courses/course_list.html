@@ -143,7 +143,7 @@
     	bottom: 7%;
 		font-size: 0.8rem;
 		font-weight: 700;
-		color: #17a2b8;
+		color: #000;
 	}
 
 	.course-list .btn-div {
@@ -226,12 +226,16 @@
 			<div class="course-detail">
 				<div class="provider-img-wrapper">
 					<img src="{{course.provider.image_url}}" alt="">
-					<span style="font-size: 0.7rem;">{{course.provider}}</span> |
+					<span style="font-size: 0.7rem;">{{course.provider}}</span> 
+					{% if course.provider.plan_details %}
+					    |
 					
 					<div class="tool-tip course-trial">
 						{{course.trial}}
 						<span class="tool-tip-text">{{course.provider.plan_details}}</span>
 					</div>
+					
+					{% endif %}
 					
 				</div>
 				<span class="course-title">

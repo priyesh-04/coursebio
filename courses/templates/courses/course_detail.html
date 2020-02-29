@@ -137,12 +137,17 @@
 			<div class="course-detail mt-3 text-center">
 				<div class="provider-img-wrapper mb-2">
 					<img src="{{course.provider.image_url}}" alt="">
-					<span class="provider-name">{{course.provider}}</span> |
+					<span class="provider-name">{{course.provider}}</span> 
+
+					{% if course.provider.plan_details %}
+					    |
 					
 					<div class="tool-tip course-trial">
 						{{course.trial}}
 						<span class="tool-tip-text">{{course.provider.plan_details}}</span>
 					</div>
+					
+					{% endif %}
 					
 				</div>
 				<div class="course-title-div">
@@ -208,12 +213,16 @@
 	                            <div class="card-course-detail">
 									<div class="provider-img-wrapper mt-3 mb-2">
 										<img src="{{course.provider.image_url}}" alt="">
-										<span class="provider-name">{{course.provider}}</span> |
+										<span class="provider-name">{{course.provider}}</span> 
+										{% if course.provider.plan_details %}
+										    |
 										
 										<div class="tool-tip course-trial">
 											{{course.trial}}
 											<span class="tool-tip-text">{{course.provider.plan_details}}</span>
 										</div>
+										
+										{% endif %}
 										
 									</div>
 									<div class="card-course-title-div">
@@ -308,6 +317,10 @@
 .swiper-slide {
 	background: #ffffff;
 	margin-right: 6px !important;
+}
+
+.swiper-slide a {
+	color: #000;
 }
 
 .course-container {
@@ -414,7 +427,7 @@ p {
     font-weight: 700;
     margin: 4px 2px;
     cursor: pointer;
-    color: #fff;
+    color: #fff !important;
 }
 
 .card-btn:hover {
