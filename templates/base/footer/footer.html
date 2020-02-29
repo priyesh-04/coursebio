@@ -19,7 +19,68 @@
 		letter-spacing: 0.5px;
 	}
 </style>
+<!-- newsletter -->
+<style>
+  .newsletter {
+    background-color: #E4E7ED;
+    /*border-top: 2px solid #E4E7ED;*/
+    border-bottom: 3px solid #20c997;
+    padding-bottom: 45px;
+  }
+  .newsletter p {
+      font-size: 1.2rem;
+      margin: 20px 0 30px 0;
+      text-align: center;
+  }
+  .newsletter-form {
+    width: 60%;
+    margin: auto;
+    font-size: 0.9rem;
+  }
 
+  .newsletter .material-icons {
+    color: #fff;
+    font-size: 0.9rem;
+    vertical-align: middle;
+    margin-top: -5px;
+    margin-right: 0;
+  }
+
+  .subs-btn {
+    display: inline-block;
+    color: #fff;
+    width: 160px;
+      font-weight: 700;
+      background: #20c997;
+      border: none;
+      /*border-radius: 0px 40px 40px 0px;*/
+  }
+
+</style>
+<div class="newsletter">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="newsletter-form-div">
+          <h4><p>Sign Up for the <strong>NEWSLETTER</strong></p></h4>
+          <form method='POST' action='' class="form newsletter-form">
+              <div class="input-group">
+                  <input class="form-control shadow-none" type="text" placeholder="Enter Your Email" name='newsletter'>
+                  <span class="input-group-append">
+                      <button type="submit" class="subs-btn">
+                        <i class="material-icons">
+                    mail
+                  </i>
+                  Subscribe
+                      </button>
+                  </span>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <footer class="mainfooter" role="contentinfo">
   <div class="footer-middle">
   <div class="container">
@@ -124,8 +185,8 @@
 
 footer {
   background: var(--dark);
-  /*background: -webkit-linear-gradient(59deg, #3A6073, #16222A);
-  background: linear-gradient(59deg, #3A6073, #16222A);*/
+  /*background: -webkit-linear-gradient(59deg, #3A6073, #16222A);*/
+  /*background: linear-gradient(59deg, #3A6073, #16222A);*/
   color: white;
 }
 
@@ -142,7 +203,7 @@ footer a:hover {
 
 .copy {
   font-size: 12px;
-  padding: 10px;
+  padding: 20px;
   border-top: 1px solid #FFFFFF;
 }
 
