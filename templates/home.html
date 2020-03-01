@@ -96,7 +96,7 @@
 
     .nav-tabs .nav-link.active {
         color: #fff;
-        background-color: var(--teal);
+        background-color: var(--primary);
         box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
     }
 </style>
@@ -105,7 +105,7 @@
     <div class="tab-div mt-3">
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link border-bottom active" data-toggle="tab">Popular Categories</a>
+            <a class="nav-link border-bottom active" data-toggle="tab">Categories</a>
           </li>
         </ul>
     </div>
@@ -125,8 +125,72 @@
     </div>
 </div>
 
-<div class="bg-dark text-white p-5 font-weight-bold mb-5">
-    hello
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#carouselExampleIndicators').carousel({
+    pause: true,
+    interval: 4000,
+  });
+});
+</script>
+
+<style>
+    .carousel-indicators {
+        bottom: -50px;
+    }
+    .carousel-inner {
+        display: flex;
+        justify-content: center;
+    }
+    .carousel-item {
+        margin-right: 0;
+        width: 50%;
+    }
+
+</style>
+
+<div class="bg-dark text-white p-5 mb-5">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+            <blockquote class="blockquote text-center">
+              <p class="mb-0">“Live as if you were to die tomorrow. Learn as if you were to live forever.”</p>
+              <footer class="blockquote-footer">
+                <cite title="Source Title">Mahatma Gandhi</cite>
+              </footer>
+            </blockquote>
+        </div>
+        <div class="carousel-item">
+            <blockquote class="blockquote text-center">
+              <p class="mb-0"> “The beautiful thing about learning is that nobody can take it away from you.”</p>
+              <footer class="blockquote-footer">
+                <cite title="Source Title">B.B. King</cite>
+              </footer>
+            </blockquote>
+        </div>
+        <div class="carousel-item">
+            <blockquote class="blockquote text-center">
+              <p class="mb-0">“Anyone who stops learning is old, whether at twenty or eighty. Anyone who keeps learning stays young.”</p>
+              <footer class="blockquote-footer">
+                <cite title="Source Title">Henry Ford</cite>
+              </footer>
+            </blockquote>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
 </div>
 
 <div class="container">
@@ -411,11 +475,18 @@ p {
 .swiper-button-next {
     height: 50px;
     width: 50px;
-    color: #333;
-    background: var(--light);
+    color: var(--primary);
+    background: var(--white);
     border-radius: 50%;
     padding: 5px;
     box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px, rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover,
+.swiper-button-prev:active,
+.swiper-button-next:active {
+    box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
 }
 
 .swiper-button-prev:after, 
@@ -425,7 +496,7 @@ p {
 }
 
 .swiper-button-disabled {
-    display: none;
+    /*display: none;*/
 }
 
 .swiper-slide a {

@@ -24,7 +24,7 @@
   .newsletter {
     background-color: #E4E7ED;
     /*border-top: 2px solid #E4E7ED;*/
-    border-bottom: 3px solid #20c997;
+    border-bottom: 3px solid var(--primary);
     padding-bottom: 45px;
   }
   .newsletter p {
@@ -50,14 +50,14 @@
     display: inline-block;
     color: #fff;
     width: 160px;
-      font-weight: 700;
-      background: #20c997;
-      border: none;
-      /*border-radius: 0px 40px 40px 0px;*/
+    font-weight: 700;
+    background: var(--primary);
+    border: none;
+    /*border-radius: 0px 40px 40px 0px;*/
   }
 
 </style>
-<div class="newsletter">
+<div class="newsletter mt-5">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -170,7 +170,7 @@
     </div>
 	<div class="row">
 		<div class="col-md-12 copy">
-			<p class="text-center">&copy; Copyright 2020 - Coursebio. All rights reserved.</p>
+			<p class="text-center m-0">&copy; Copyright 2020 - Coursebio. All rights reserved.</p>
 		</div>
 	</div>
 
@@ -197,7 +197,7 @@ footer a {
 }
 
 footer a:hover {
-  color: var(--teal);
+  color: var(--primary);
   text-decoration: none;
 }
 

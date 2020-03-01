@@ -4,22 +4,6 @@
 {% block content %}
 
 <style>
-	.subcategory-detail-section {
-		min-height: 250px;
-		background: #fff;
-		border-bottom: 1px solid #6c757d;
-	}
-	.subcategory-img-wrapper {
-		margin-top: 15%;
-	}
-	.subcategory-img-wrapper img {
-		height: 100px;
-		width: 100px;
-		vertical-align: middle;
-		margin-top: -5px;
-	}
-</style>
-<style>
 .tool-tip {
   position: relative;
   display: inline-block;
@@ -56,23 +40,7 @@
   visibility: visible;
 }
 </style>
-<section class="subcategory-detail-section">
-	<div class="container">
-		<div class="row">
-			<div class="col-8">
-				<div class="header-text pt-4">
-					<h2>Why {{subcategory}}?</h2>
-					<p>{{subcategory.description}}</p>
-				</div>
-			</div>
-			<div class="col-4">
-				<div class="subcategory-img-wrapper pt-4 text-center">
-					<img class="img-thumbnail" src="{{subcategory.image_url}}" alt="">
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+
 
 <style>
 	.course-wrapper {
@@ -100,7 +68,7 @@
 	}
 
 	.course-img-wrapper {
-		border: 1px solid #eee;
+		/*border: 1px solid #eee;*/
 	}
 
 	.course-img-wrapper img {
@@ -214,12 +182,19 @@
 </style>
 
 <div class="container course-list mt-3 mb-5">
-	<h3>All {{subcategory}} courses</h3>
+	{% if not subcategory %}
+	    <div class="bg-dark text-white p-4 mt-5 mb-5">
+    		<strong>Showing all courses</strong>
+    	</div>
+  	{% else %}
+  		<div class="bg-dark text-white p-4 mt-5 mb-5">
+    		Showing all <strong>{{subcategory}}</strong> courses
+    	</div>
+	{% endif %}
+	    
 	{% for course in course_list %} 
-		<div class="col-sm-12 col-md-12 col-lg-11">
-			<hr>
-		</div>
-		<div class="course-wrapper">
+		
+		<div class="course-wrapper border-top border-bottom">
 			<div class="course-img-wrapper">
 				<img src="{{course.image_url}}" alt="">
 			</div>
@@ -269,9 +244,6 @@
 			</div>
 		</div>
 	{% endfor %} 
-	<div class="col-sm-12 col-md-12 col-lg-11">
-		<hr>
-	</div>
 </div>
 
 

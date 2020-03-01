@@ -106,11 +106,20 @@
         width: 100%;
         height: 100%;
     }
+    .nav-tabs .nav-link.active {
+        color: #fff;
+        background-color: #00a9ff;
+        box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
+    }
 </style>
 
 <div class="container subcategory-container">
-    <div class="subcategory-header-div">
-        <h2>{{category}}</h2>
+    <div class="tab-div mt-3">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link border-bottom active" data-toggle="tab">{{category}}</a>
+          </li>
+        </ul>
     </div>
     <div class="row mt-4">
         {% for subcategory in subcategory_list %}

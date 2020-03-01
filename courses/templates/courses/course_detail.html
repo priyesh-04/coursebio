@@ -109,23 +109,18 @@
 		font-weight: 700;
 	}
 
-	/*.course-description h2::after,
-	.related-tags h2::after,
-	.related-courses h2::after {
-        display: block;
-        height: 2px;
-        background-color: #ffd700;
-        content: " ";
-        width: 100px;
-        margin: 20px auto;
-    }*/
+	.nav-tabs .nav-link.active {
+        color: #fff;
+        background-color: var(--primary);
+        box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
+    }
 
 </style>
 
 <div class="container mt-4">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-lg-12 bg-white top-col p-2">
-			<div>
+			<div class="mt-1">
 				<div class="video-wrapper embed-responsive embed-responsive-16by9">
 					<iframe class="embed-responsive-item" 
 					src="{{course.video_url}}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
@@ -179,26 +174,44 @@
 			</div>
 		</div>
 
-		<div class="col-sm-12 col-md-12 col-lg-12 mt-4">
-			<div class="container">
+		<div class="col-sm-12 col-md-12 col-lg-12 mt-5">
+			<div class="pb-5">
 				<div class="course-description">
-					<h2>Course Description</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis ratione inventore voluptatibus, voluptatum cumque perferendis vel laboriosam quis repellendus culpa, repudiandae magni officia facere. Veniam nulla illum labore, facilis quis.</p>
+					<div class="tab-div mb-3">
+				        <ul class="nav nav-tabs">
+				          <li class="nav-item">
+				            <a class="nav-link border-bottom active" data-toggle="tab">Course Description</a>
+				          </li>
+				        </ul>
+				    </div>
+				    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui, provident, iure. Numquam facilis amet odit, cumque minus molestiae magnam. Molestias ad, architecto quam voluptatibus accusamus deserunt, atque repudiandae minus recusandae?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, quidem impedit maiores. Deleniti vero nam, aperiam facere iste ipsum, nostrum ex rerum eius repellendus iusto sequi dicta asperiores, doloremque id!</p>
 				</div>
 			</div>
 
-			<div class="container">
+			<div class="mb-5">
 				<div class="related-tags">
-					<h2>Related Tags</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis ratione inventore voluptatibus, voluptatum cumque perferendis vel laboriosam quis repellendus culpa, repudiandae magni officia facere. Veniam nulla illum labore, facilis quis.</p>
+					<div class="tab-div mt-3 mb-3">
+				        <ul class="nav nav-tabs">
+				          <li class="nav-item">
+				            <a class="nav-link border-bottom active" data-toggle="tab">Related Tags</a>
+				          </li>
+				        </ul>
+				    </div>
+					<ul>
+						<li><a href=""></a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
 
 		<div class="col-sm-12 col-md-12 col-lg-12 mt-4 mb-5">
-			<div class="container">
-				<h2>Related Courses</h2>
-			</div>
+			<div class="tab-div mb-3">
+		        <ul class="nav nav-tabs">
+		          <li class="nav-item">
+		            <a class="nav-link border-bottom active" data-toggle="tab">Related Courses</a>
+		          </li>
+		        </ul>
+		    </div>
 			<div class="container related-courses course-container mb-3">
 		        <div class="swiper-container">
 		            <div class="swiper-wrapper" >

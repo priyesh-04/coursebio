@@ -6,6 +6,7 @@
 {% url 'logout' as logout_url %}
 {% url 'register' as register_url %}
 {% url 'password_change' as password_change_url %}
+{% url 'posts:list' as blog_url %}
 
 <nav class="blog-navbar navbar navbar-expand-md fixed-top navbar-light bg-light">
   <div class="container-fluid">
@@ -28,8 +29,13 @@
         </div>
       </div>
       <!-- <hr> -->
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
+      <ul class="navbar-nav mr-auto">
+        
+          <div class="ml-3">{% include 'search_forms/search-form3.html' %}</div>
+
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Categories
           </a>
@@ -42,7 +48,7 @@
           </div>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="">
+          <a class="nav-link" href="{{ blog_url }}">
               Blog
           </a>
         </li>
