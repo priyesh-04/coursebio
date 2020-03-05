@@ -63,19 +63,19 @@
       <div class="col-md-12">
         <div class="newsletter-form-div">
           <h4><p>Sign Up for the <strong>NEWSLETTER</strong></p></h4>
-          <form method='POST' action='' class="form newsletter-form">
+          <form method='POST' action="{% url 'email-list-signup' %}" class="form newsletter-form">
+              {% csrf_token %}
               <div class="input-group">
-                  <input class="form-control shadow-none" type="text" placeholder="Enter Your Email" name='newsletter'>
+                  <input type="email" class="form-control shadow-none" placeholder="Enter Your Email" name='email'>
                   <span class="input-group-append">
                       <button type="submit" class="subs-btn">
-                        <i class="material-icons">
-                    mail
-                  </i>
-                  Subscribe
+                        <i class="material-icons">mail</i>
+                        Subscribe
                       </button>
                   </span>
               </div>
           </form>
+          
         </div>
       </div>
     </div>

@@ -33,7 +33,7 @@ from accounts.forms import UserLoginForm, UserCreationForm
 class RegisterView(CreateView):
     form_class = UserCreationForm
     template_name = 'accounts/register.html'
-    success_url = '/accounts/login/'
+    success_url = '/login/'
 
 
 
@@ -57,4 +57,4 @@ def login_view(request, *args, **kwargs):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect("/accounts/login/")
+    return HttpResponseRedirect("/login/")

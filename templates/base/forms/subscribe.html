@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-3">subscribe</legend>
+        {{ form|crispy }}
+    </fieldset>
+    <div class="form-group text-center">
+        <button class="btn btn-danger" style="width: 100%;" type="submit">subscribe</button>
+    </div>
+</form>
+
+{% endblock content %}

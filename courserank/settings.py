@@ -27,6 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+from courserank.secret_keys.mailchimp_api import MAILCHIMP_API_KEY, MAILCHIMP_DATA_CENTER, MAILCHIMP_EMAIL_LIST_ID
+
+MAILCHIMP_API_KEY = MAILCHIMP_API_KEY
+MAILCHIMP_DATA_CENTER = MAILCHIMP_DATA_CENTER
+MAILCHIMP_EMAIL_LIST_ID = MAILCHIMP_EMAIL_LIST_ID
+
 # gmail settings
 from accounts.email import EMAIL_BACKEND, EMAIL_HOST, EMAIL_USE_TLS, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 EMAIL_BACKEND = EMAIL_BACKEND
@@ -57,10 +63,16 @@ INSTALLED_APPS = [
     'accounts',
     'courses',
     'blog',
+    'marketing',
     'tags',
 ]
 
 AUTH_USER_MODEL = 'accounts.MyUser'
+LOGIN_URL = '/login/'
+LOGIN_URL_REDIRECT = '/'
+LOGOUT_URL = '/logout/'
+LOGOUT_REDIRECT_URL = '/login/'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

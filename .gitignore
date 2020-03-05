@@ -10,6 +10,7 @@ email.py*
 
 media/
 static/
+secret_keys/
 myprojectenv/
 
 bin/
