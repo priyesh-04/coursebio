@@ -111,9 +111,19 @@
 
 	.nav-tabs .nav-link.active {
         color: #fff;
-        background-color: var(--primary);
+        background-color: var(--dark);
         box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
     }
+
+    .related-tags .list-inline-item {
+		background: var(--teal);
+		font-size: 0.7rem;
+		padding: 2px 10px;
+	}
+	.related-tags .list-inline-item a {
+		color: #fff;
+		text-decoration: none;
+	}
 
 </style>
 
@@ -197,8 +207,12 @@
 				          </li>
 				        </ul>
 				    </div>
-					<ul>
-						<li><a href=""></a></li>
+					<ul class="list-inline">
+						{% for tag in related_tags %}
+							<li class="list-inline-item">
+								<a href="/search/?q={{tag}}">{{tag}}</a>
+							</li>
+						{% endfor %}
 					</ul>
 				</div>
 			</div>

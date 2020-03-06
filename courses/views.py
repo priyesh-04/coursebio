@@ -12,6 +12,7 @@ from django.views.generic import (ListView,
 
 from django.shortcuts import get_object_or_404
 
+from tags.models import Tag
 from courses.models import (
 								Category,
 							 	SubCategory, 
@@ -105,8 +106,9 @@ class CourseDetailView(TemplateView):
 		slug2 = self.kwargs.get('slug2')
 		course = get_object_or_404(Course, slug=slug2)
 		context['course'] = course
+		context['related_tags'] = Tag.objects.filter(courses=course)
 		context['related_courses'] = Course.objects.filter(category=course.category)
-		# print(context,'con')
+		# print(context['related_tags'],'con')
 		return context
 
 
