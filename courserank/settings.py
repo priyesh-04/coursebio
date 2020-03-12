@@ -100,7 +100,7 @@ TEMPLATES = [
                 'courses.views.course_category_list',
                 'courses.views.course_provider_list',
                 'courses.views.all_courses_list',
-                # 'blog.views.blog_category_list',
+                'blog.views.blog_category_list',
             ],
         },
     },

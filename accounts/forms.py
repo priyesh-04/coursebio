@@ -40,12 +40,8 @@ class UserCreationForm(forms.ModelForm):
     class Meta:
         model = MyUser
         fields = (
-            'firstname',
-            'lastname',
             'username',
             'email',
-            'date_of_birth',
-            'slug',
             )
 
     def clean_password2(self):

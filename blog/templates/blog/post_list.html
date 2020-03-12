@@ -99,9 +99,9 @@
     margin-left: auto;*/
     }
 
-    .post-container {
+    /*.post-container {
         background: #fff;
-    }
+    }*/
 
     .post-container:not(:last-child) {
         margin-bottom: 20px;
@@ -155,7 +155,7 @@
                 <div class="col-sm-12 col-md-4 col-lg-4 pos-list-col mb-3">
                     <a href='{{ post.get_absolute_url }}'>   
                         {% if post.image %}
-                             <img src='{{ post.image.url }}' alt="post image" />
+                             <img src='{{ post.image_url }}' alt="post image" />
                         {% endif %}
                         <div class="post-detail-div">
                             {% if post.draft %}
