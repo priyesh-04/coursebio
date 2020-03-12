@@ -1,161 +1,308 @@
+
+  
+
+<script src="https://use.fontawesome.com/8cacfe3ea2.js"></script>
 <style>
-	/*.footer {
-		height: 250px;
-		background: #222222;
-		color: #fff;
+	.brand-logo-wrapper {
+		width: 110px;
+    	height: 40px;
+	}
+	.brand-logo {
+		height: 100%;
+		width: 100%;
 	}
 
-	.footer a {
-		color: #fff;
-	}
-
-	.footer a:hover {
-		color: var(--danger);
-	}
-
-	.footer-about-section {
-		margin-left: 25px;
-	}
-
-	.footer-about-section ul {
-		list-style: none;
+	.about-div {
+		font-size: 0.6rem;
+		font-weight: 400;
 		margin: 0;
-		padding: 0;
-	}*/
-
-	footer {
-		height: 60px;
-	    background: #000;
+		letter-spacing: 0.5px;
 	}
 </style>
-<!-- <div class="footer">
-	<div class="row">
-		<div class="col-sm-6 col-md-4 col-lg-4 mt-3">
-			<div class="footer-about-section">
-				<div>
-					<h4>Atoz</h4>
-				</div>
-				<div>
-					<ul>
-						<li><a href="">Meet Our Team</a></li>
-						<li><a href="">Contact us</a></li>
-						<li><a href="">About Us</a></li>
-						<li><a href="">Terms and Conditions*</a></li>
-						<li><a href="">Privacy</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->
+<!-- newsletter -->
+<style>
+  .newsletter {
+    background-color: #E4E7ED;
+    /*border-top: 2px solid #E4E7ED;*/
+    border-bottom: 3px solid var(--primary);
+    padding-bottom: 45px;
+  }
+  .newsletter p {
+      font-size: 1.2rem;
+      margin: 20px 0 30px 0;
+      text-align: center;
+  }
+  .newsletter-form {
+    width: 60%;
+    margin: auto;
+    font-size: 0.9rem;
+  }
 
-<div class="newsletter">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="newsletter-form-div">
-					<h4><p>Sign Up for the <strong>NEWSLETTER</strong></p></h4>
-					<form method='POST' action='' class="form newsletter-form">
-					    <div class="input-group">
-					        <input class="form-control" type="text" placeholder="Enter Your Email" name='newsletter'>
-					        <span class="input-group-append">
-					            <button type="submit" class="subs-btn">
-					            	<i class="material-icons">
-										mail
-									</i>
-									Subscribe
-					            </button>
-					        </span>
-					    </div>
-					</form>
-				</div>
-			</div>
+  .newsletter .material-icons {
+    color: #fff;
+    font-size: 0.9rem;
+    vertical-align: middle;
+    margin-top: -5px;
+    margin-right: 0;
+  }
+
+  .subs-btn {
+    display: inline-block;
+    color: #fff;
+    width: 160px;
+    font-weight: 700;
+    background: var(--primary);
+    border: none;
+    /*border-radius: 0px 40px 40px 0px;*/
+  }
+
+</style>
+<div class="newsletter mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="newsletter-form-div">
+          <h4><p>Sign Up for the <strong>NEWSLETTER</strong></p></h4>
+          <form method='POST' action="{% url 'email-list-signup' %}" class="form newsletter-form">
+              {% csrf_token %}
+              <div class="input-group">
+                  <input type="email" class="form-control shadow-none" placeholder="Enter Your Email" name='email'>
+                  <span class="input-group-append">
+                      <button type="submit" class="subs-btn">
+                        <i class="material-icons">mail</i>
+                        Subscribe
+                      </button>
+                  </span>
+              </div>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="mainfooter" role="contentinfo">
+  <div class="footer-middle">
+  <div class="container">
+    <div class="row">
+    	<div class="col-md-3 col-sm-6 mb-2">
+    		<div class="brand-logo-wrapper">
+    			<img class="brand-logo" src="https://www.strunkmedia.com/wp-content/uploads/2018/05/bigstock-Print-163213010.png" alt="Brand Logo">
+    		</div>
+    		<div class="about-div">
+    			<p>
+    				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur assumenda laudantium ex recusandae culpa porro, reiciendis eum aperiam quidem, sed quibusdam fugiat! Doloremque, ut, eius! Perferendis laborum ut minima odio!
+    			</p>
+    		</div>
+    		<h6>Follow Us</h6>
+            <ul class="social-network social-circle">
+	         	<li>
+	             	<a href="#" class="icoFacebook" title="Facebook">
+	             		<i class="fa fa-facebook"></i>
+	         		</a>
+	     		</li>
+	            <li>
+	             	<a href="#" class="icoLinkedin" title="Linkedin">
+	             		<i class="fa fa-linkedin"></i>
+	             	</a>
+	            </li>
+             	<li>
+	             	<a href="#" class="icoInstagram" title="Instagram">
+	             		<i class="fa fa-instagram"></i>
+	         		</a>
+	     		</li>
+	     		<li>
+	             	<a href="#" class="icoTwitter" title="Twitter">
+	             		<i class="fa fa-twitter"></i>
+	         		</a>
+	     		</li>
+            </ul>				
+		</div>
+      <div class="col-md-3 col-sm-6 mb-2">
+        <!--Column1-->
+        <div class="footer-pad">
+          <h4>Categories</h4>
+          <ul class="list-unstyled">
+          	{% for category in course_category_list %}
+              <li><a href="{{category.get_absolute_url}}">{{category}}</a></li>
+            {% endfor %}
+            {% for category in course_category_list %}
+              <li><a href="{{category.get_absolute_url}}">{{category}}</a></li>
+            {% endfor %}
+            {% for category in course_category_list %}
+              <li><a href="{{category.get_absolute_url}}">{{category}}</a></li>
+            {% endfor %}
+            {% for category in course_category_list %}
+              <li><a href="{{category.get_absolute_url}}">{{category}}</a></li>
+            {% endfor %}
+            {% for category in course_category_list %}
+              <li><a href="{{category.get_absolute_url}}">{{category}}</a></li>
+            {% endfor %}
+            {% for category in course_category_list %}
+              <li><a href="{{category.get_absolute_url}}">{{category}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-2">
+        <!--Column1-->
+        <div class="footer-pad">
+          <h4>Providers</h4>
+          <ul class="list-unstyled">
+            {% for provider in course_provider_list %}
+              <li><a href="affiliate Link of provider">{{provider}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-2">
+        <!--Column1-->
+        <div class="footer-pad">
+          <h4>Links</h4>
+          <ul class="list-unstyled">
+            <li><a href="#">Home</a></li>
+            <li><a href="#"></a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+	<div class="row">
+		<div class="col-md-12 copy">
+			<p class="text-center m-0">&copy; Copyright 2020 - Coursebio. All rights reserved.</p>
 		</div>
 	</div>
-</div>
-<div class="footer-info-div">
-	<div class="container text-white">
-		<div class="pt-4 footer-div">
-			<h6>We help you decide "What to Buy" & "Where to Buy".</h6>
-			<p>We have the following features and tools on our site to make the research experience better:</p>
-			<p>
-				<strong>News:</strong> We cover everything and anything in technology – all the important news, launches, live videos, and much more.
-			</p>
-			<p>
-				<strong>Videos:</strong> Prefer watching a video for a mobile review? Check out our YouTube channel. We shoot product videos in Hindi and English for our users.
-			</p>
-			<p>
-				<strong>Price Comparison:</strong> We cover prices from all the top online retailers like Amazon, Flipkart, Paytm, Tata CLiQ etc. and show it along with applicable offers and coupons so that users can get the best price for the product.
-			</p>
-			<p>
-				<strong>Upcoming Products: </strong> We constantly look for information on upcoming products on the certification and other similar sites, and keep our database and section for upcoming products updated at all times. For many of these products, we are the first ones among all tech news sites to cover them.
-			</p>
-		</div>
-	</div>
-</div>
+
+
+  </div>
+  </div>
+</footer>
 
 <style>
-	.newsletter {
-		background-color: #E4E7ED;
-		/*border-top: 2px solid #E4E7ED;*/
-		border-bottom: 3px solid rgba(0, 169, 255, 1);
-		padding-bottom: 45px;
-	}
-	.newsletter p {
-	    font-size: 1.2rem;
-	    margin: 20px 0 30px 0;
-	    text-align: center;
-	}
-	.newsletter-form {
-		width: 60%;
-		margin: auto;
-		font-size: 0.9rem;
-	}
+	
+/*FOOTER*/
 
-	.newsletter .material-icons {
-		color: #fff;
-		font-size: 0.9rem;
-		vertical-align: middle;
-		margin-top: -5px;
-		margin-right: 0;
-	}
+footer {
+  background: var(--dark);
+  /*background: -webkit-linear-gradient(59deg, #3A6073, #16222A);*/
+  /*background: linear-gradient(59deg, #3A6073, #16222A);*/
+  color: white;
+}
 
-	.subs-btn {
-		display: inline-block;
-		color: #fff;
-		width: 160px;
-	    font-weight: 700;
-	    background: rgba(0, 169, 255, 1);
-	    border: none;
-	    /*border-radius: 0px 40px 40px 0px;*/
-	}
-	.footer-info-div {
-		background-color: #15161D;
-	}
+footer a {
+  color: #fff;
+  font-size: 14px;
+  transition-duration: 0.2s;
+}
 
-	.footer-div	{
-		font-size: 0.7rem;
-		font-weight: 300;
-		padding-bottom: 20px;
-	}
+footer a:hover {
+  color: var(--primary);
+  text-decoration: none;
+}
 
-	.footer-div strong {
-		color: rgba(0, 169, 255, 1);
-	}
+.copy {
+  font-size: 12px;
+  padding: 20px;
+  border-top: 1px solid #FFFFFF;
+}
 
-	@media only screen and (max-width: 600px) {
-		.newsletter-form {
-			width: 100%;
-		}
-	}
+.footer-middle {
+  padding-top: 2em;
+  color: white;
+}
+
+
+/*SOCİAL İCONS*/
+
+/* footer social icons */
+
+ul.social-network {
+  list-style: none;
+  display: inline;
+  margin-left: 0 !important;
+  padding: 0;
+}
+
+ul.social-network li {
+  display: inline;
+  margin: 0 5px;
+}
+
+
+/* footer social icons */
+
+.social-network a.icoFacebook:hover {
+  background-color: #3B5998;
+}
+
+.social-network a.icoLinkedin:hover {
+  background-color: #007bb7;
+}
+
+.social-network a.icoInstagram:hover {
+	background-color: #3f729b;
+}
+
+.social-network a.icoTwitter:hover {
+	background-color: #1da1f2;
+}
+
+.social-network a.icoFacebook:hover i,
+.social-network a.icoLinkedin:hover i,
+.social-network a.icoInstagram:hover i,
+.social-network a.icoTwitter:hover i {
+  color: #fff;
+}
+
+.social-network a.socialIcon:hover,
+.socialHoverClass {
+  color: #44BCDD;
+}
+
+.social-circle li a {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto 0 auto;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+}
+
+.social-circle li i {
+  margin: 0;
+  line-height: 30px;
+  text-align: center;
+}
+
+.social-circle li a:hover i,
+.triggeredHover {
+  -moz-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -ms--transform: rotate(360deg);
+  transform: rotate(360deg);
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.social-circle i {
+  color: #595959;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+  -o-transition: all 0.8s;
+  -ms-transition: all 0.8s;
+  transition: all 0.8s;
+}
+
+.social-network a {
+  background-color: #F9F9F9;
+}
+
 </style>
-
-<footer>
-	<div class="container">
-		<div>
-			<h6 class="text-white" style="padding: 20px 0;text-align: center;font-size: 0.7rem;">
-				© AtoZ Web Technology Private Limited. All Rights Reserved.
-			</h6>
-		</div>
-	</div>
-</footer>
