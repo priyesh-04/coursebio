@@ -1,0 +1,10 @@
+<form method='GET' action='{% url "posts:search" %}' class="form search-form">
+	  <div class="input-group">
+	      <input class="form-control py-2" type="text" name='q' aria-label="Search" value='{{ request.GET.q }}'>
+	      <span class="input-group-append">
+	          <button type="submit" class="btn btn-primary">
+	              Search
+	          </button>
+	      </span>
+	  </div>
+</form>

@@ -1,4 +1,6 @@
+from django.db.models import Q
 from django.shortcuts import render
+from django.views.generic.base import TemplateView
 from django.views.generic import (CreateView,
 								  DetailView,
 								  ListView,
@@ -83,4 +85,25 @@ class PostUpdateView(UpdateView):
     def get_context_data(self, *args, **kwargs):
         context = super(PostUpdateView, self).get_context_data(*args, **kwargs)
         context['main_img'] = context['object'].image_url
+        return context
+
+
+class PostSearchListView(TemplateView):
+    template_name = 'blog/search_list.html'
+    queryset = Post.objects.all()
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(PostSearchListView, self).get_context_data(*args, **kwargs)
+        qs1 = self.queryset
+        query = self.request.GET.get("q", None)
+        if query is not None:
+            qs2 = qs1.filter(
+                        Q(title__icontains=query)
+                        |Q(content__icontains=query)
+                        | Q(category__title__icontains=query) 
+                        | Q(tag__title__icontains=query)
+                        )
+            context['post_list'] = qs2
+            context['query'] = query
+            # print(context['query'],'query')
         return context
