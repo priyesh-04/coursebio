@@ -48,6 +48,20 @@
 <body>
   {% include 'base/blog_navbar/blog_navbar.html' %}
 
+  <div class="container mt-2">
+    <div class="row">
+      <div class="col-md-8">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="text-center alert alert-{{ message.tags }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
   {% block content %}
   {% endblock content %}
 
