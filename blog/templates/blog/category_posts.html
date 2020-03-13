@@ -321,7 +321,7 @@
 
                     <div class="block-title-div">
                         <h4 class="block-title">
-                            <span>Popular Mobiles</span>
+                            <span>Latest Articles</span>
                         </h4>
                     </div>
 
@@ -347,7 +347,7 @@
 
                     <div class="block-title-div">
                         <h4 class="block-title">
-                            <span>Popular Gadgets</span>
+                            <span>Popular Articles</span>
                         </h4>
                     </div>
 
@@ -371,32 +371,11 @@
                         {% endfor %}
                     </ul>
 
-                    <div class="block-title-div">
-                        <h4 class="block-title">
-                            <span>Latest Reviews</span>
-                        </h4>
-                    </div>
-
-                    <ul class="sidebar-product-list">
-                        {% for post in post_list %}
-                            <li class="sidebar-product">
-                                <a href="{{ post.get_absolute_url }}">
-                                    <div class="product-img-div">
-                                      <img class="product-img" src="{{post.image.url}}" alt="{{product}} image">
-                                    </div>
-                                    
-                                    <div class="product-details-div">
-                                        <h6 class="product-title">{{post.title}}</h6>
-                                        <span class="product-price" style="color: grey;"> {{post.publish}}</span>
-                                    </div>                       
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    
 
                     <div class="block-title-div">
                         <h4 class="block-title">
-                            <span>Best Mobiles List</span>
+                            <span>Best Learning Platforms</span>
                         </h4>
                     </div>
 
@@ -414,41 +393,9 @@
                     </style>
 
                     <ul class="best-mobiles-list">
-                        <li>
-                            <a href="#">
-                                Best Phones Under 10000
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Best Phones Under 15000
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Best Phones Under 20000
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Best Camera Phones
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Latest Mobiles
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Top 10 Mobiles
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Best Camera Phones Under 15000
-                            </a>
-                        </li>
+                        {% for provider in course_provider_list %}
+                          <li><a href="affiliate Link of provider">{{provider}}</a></li>
+                        {% endfor %}
                     </ul>
 
                     <div class="block-title-div">
@@ -462,7 +409,7 @@
                           <input class="form-control py-2" placeholder="Your Email" type="text" name='' value='' style="height: 40px;border-radius: 0;">
                           <span class="input-group-append">
                               <button type="submit" class="btn btn-primary">
-                                  Search
+                                  Subscribe
                               </button>
                           </span>
                       </div>

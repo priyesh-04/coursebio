@@ -35,7 +35,7 @@ class PostDetailView(DetailView):
         category = reading_post.category
         related_articles = Post.objects.filter(category=category)
         context['related_articles'] = related_articles.exclude(title=reading_post.title)
-        print(context)
+        # print(context)
         return context
 
 
