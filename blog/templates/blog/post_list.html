@@ -90,19 +90,6 @@
         color: #fff;
     }
 
-    .top-post-container {
-        /*background: #fff;*/
-        /*width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;*/
-    }
-
-    /*.post-container {
-        background: #fff;
-    }*/
-
     .post-container:not(:last-child) {
         margin-bottom: 20px;
     }
@@ -393,41 +380,9 @@
                     </style>
 
                     <ul class="best-mobiles-list">
-                        <li>
-                            <a href="#">
-                                Best Phones Under 10000
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Best Phones Under 15000
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Best Phones Under 20000
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Best Camera Phones
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Latest Mobiles
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Top 10 Mobiles
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                Best Camera Phones Under 15000
-                            </a>
-                        </li>
+                        {% for provider in course_provider_list %}
+                          <li><a href="affiliate Link of provider">{{provider}}</a></li>
+                        {% endfor %}
                     </ul>
 
                     <div class="block-title-div">
