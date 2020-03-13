@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block head_title %}
+{{ course.title }} | {{ block.super }}
+{% endblock head_title %}
+
 {% block content %}
 <style>
 .tool-tip {

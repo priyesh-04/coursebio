@@ -1,5 +1,9 @@
 {% extends "blog_base.html" %}
 
+{% block head_title %}
+{{ category.title }} | {{ block.super }}
+{% endblock head_title %}
+
 {% block content %}
 
 <style>

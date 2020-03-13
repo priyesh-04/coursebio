@@ -1,6 +1,9 @@
-
 {% extends "base.html" %}
 {% load static %}
+
+{% block head_title %}
+{{ category.title }} | {{ block.super }}
+{% endblock head_title %}
 
 {% block content %}
 
@@ -108,7 +111,7 @@
     }
     .nav-tabs .nav-link.active {
         color: #fff;
-        background-color: #00a9ff;
+        background-color: var(--primary);
         box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
     }
 </style>

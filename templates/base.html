@@ -8,7 +8,9 @@
 
     {% include 'base/css.html' %}
 
-    <title>Coursebio</title>
+    <title>
+      {% block head_title %}Coursebio{% endblock head_title %}
+    </title>
 
     <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic' rel='stylesheet' type='text/css'>
 

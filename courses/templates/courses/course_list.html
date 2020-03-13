@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block head_title %}
+    {% if subcategory %}
+        {{subcategory.title}} Courses | {{ block.super }}
+    {% else %}
+        Find online Courses | {{ block.super }}
+    {% endif %}
+{% endblock head_title %}
+
 {% block content %}
 
 <style>
