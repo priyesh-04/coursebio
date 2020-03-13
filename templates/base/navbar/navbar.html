@@ -17,10 +17,14 @@
       <strong>Coursebio</strong>
     </a>
 
+    <div class="nav-search-form-div-mobile ml-3">
+      {% include 'search_forms/search-form.html' %}
+    </div>
+
     <div class="navbar-collapse offcanvas-collapse blog-offcanvas-collapse open" id="navbarsExampleDefault">
-      <div class="offcanvas-head-div">
+      <div class="offcanvas-head-div border-bottom pb-2">
         <div class="offcanvas-brand-div">
-          <h6>Happy Learning</h6>
+          <h6><strong>Coursebio - Happy Learning</strong></h6>
         </div>
         <div class="offcanvas-navbar-toggler-div">
           <button class="navbar-toggler mr-2" type="button" data-toggle="offcanvas">
@@ -28,10 +32,12 @@
           </button>
         </div>
       </div>
-      <!-- <hr> -->
+
       <ul class="navbar-nav mr-auto">
         
-          <div class="ml-3">{% include 'search_forms/search-form3.html' %}</div>
+          <div class="nav-search-form-div ml-3">
+            {% include 'search_forms/search-form3.html' %}
+          </div>
 
         </ul>
         <ul class="navbar-nav ml-auto">
