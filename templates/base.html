@@ -50,7 +50,7 @@
         <div class="col-md-8">
           {% if messages %}
             {% for message in messages %}
-              <div class="alert alert-{{ message.tags }}">
+              <div class="text-center alert alert-{{ message.tags }}">
                 {{ message }}
               </div>
             {% endfor %}
@@ -58,14 +58,8 @@
         </div>
       </div>
     </div>
+
 	  {% block content %}
-      {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-      {% endif %}
     {% endblock %}
 
     {% include 'base/footer/footer.html' %}
