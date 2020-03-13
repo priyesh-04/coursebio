@@ -28,9 +28,14 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(PostDetailView, self).get_context_data(*args, **kwargs)
-        # context['related_articles'] = Post.objects.all()
-        # context['product_list'] = Product.objects.all()
-        # context['image_list'] = Images.objects.filter(is_main_image=True)
+        slug = self.kwargs.get("slug")
+        qs = Post.objects.filter(slug=slug)
+        reading_post = qs[0]
+        print(reading_post)
+        category = reading_post.category
+        related_articles = Post.objects.filter(category=category)
+        context['related_articles'] = related_articles.exclude(title=reading_post.title)
+        print(context)
         return context
 
 
@@ -43,7 +48,7 @@ class PostListView(ListView):
         # context['product_list'] = Product.objects.all()
         # context['image_list'] = Images.objects.filter(is_main_image=True)
         # context['page_range'] = context['paginator'].page_range
-        # print(context)
+        # print(context['post_list'].values())
         return context
 
 
@@ -60,9 +65,7 @@ class CategoryPostListView(ListView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(CategoryPostListView, self).get_context_data(*args, **kwargs)
-        # context['product_list'] = Product.objects.all()
-        # context['image_list'] = Images.objects.filter(is_main_image=True)
-        # context['page_range'] = context['paginator'].page_range
+        # print(context)
         return context
 
 
@@ -79,5 +82,5 @@ class PostUpdateView(UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(PostUpdateView, self).get_context_data(*args, **kwargs)
-        context['main_img'] = "http://localhost:8000" + context['object'].image.url
+        context['main_img'] = context['object'].image_url
         return context

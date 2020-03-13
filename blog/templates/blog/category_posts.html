@@ -128,8 +128,8 @@
                 <div class="col-sm-12 col-md-6 col-lg-6 top-post-col mb-4">
                     <div class="post-wrapper">
                         <a href='{{ post.get_absolute_url }}' >   
-                            {% if post.image %}
-                                 <img src='{{ post.image.url }}' alt="post image" />
+                            {% if post.image_url %}
+                                 <img src='{{ post.image_url }}' alt="post image" />
                             {% endif %}
                             <div class="top-post-detail-div">
                                 {% if post.draft %}
@@ -154,7 +154,7 @@
                 {% for post in post_list|slice:":3" %}
                 <div class="col-sm-12 col-md-4 col-lg-4 pos-list-col mb-3">
                     <a href='{{ post.get_absolute_url }}'>   
-                        {% if post.image %}
+                        {% if post.image_url %}
                              <img src='{{ post.image_url }}' alt="post image" />
                         {% endif %}
                         <div class="post-detail-div">
@@ -192,8 +192,8 @@
                         {% for post in post_list %}
                         <div class="col-sm-12 col-md-4 col-lg-4 pos-list-col">
                             <a href='{{ post.get_absolute_url }}'>   
-                                {% if post.image %}
-                                     <img src='{{ post.image.url }}' alt="post image" />
+                                {% if post.image_url %}
+                                     <img src='{{ post.image_url }}' alt="post image" />
                                 {% endif %}
                                 <div class="post-detail-div">
                                     {% if post.draft %}
