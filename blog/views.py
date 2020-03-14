@@ -43,13 +43,11 @@ class PostDetailView(DetailView):
 
 class PostListView(ListView):
     model = Post
-    paginate_by = 3
+    paginate_by = 8
 
     def get_context_data(self, *args, **kwargs):
         context = super(PostListView, self).get_context_data(*args, **kwargs)
-        # context['product_list'] = Product.objects.all()
-        # context['image_list'] = Images.objects.filter(is_main_image=True)
-        # context['page_range'] = context['paginator'].page_range
+        context['page_range'] = context['paginator'].page_range
         # print(context['post_list'].values())
         return context
 
@@ -70,6 +68,7 @@ class CategoryPostListView(ListView):
         slug = self.kwargs.get("slug")
         category = get_object_or_404(BlogCategory, slug=slug)
         context['category'] = category
+        context['page_range'] = context['paginator'].page_range
         # print(context)
         return context
 

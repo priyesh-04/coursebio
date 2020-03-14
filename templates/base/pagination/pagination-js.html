@@ -1,0 +1,36 @@
+<script>
+    $(document).ready(function() {
+        $(".page-num-btn").last().addClass('last-page-btn');
+        $(".page-num-btn").first().addClass('first-page-btn');
+
+        var lastBtnID = $(".page-num-btn").last().attr('id').replace(/\D/g,'');
+
+        $(".page-num-btn").each(function() {
+            var currentBtnID = $(this).attr('id')
+
+            if (window.location.search === '') {
+                $(".page-num-btn").first().addClass('active');
+            }
+
+            if (window.location.search === $(this).attr('href')) {
+                $(this).addClass('active');
+            }
+
+            if ($(this).hasClass('active')) {
+                
+                if(!$(this).is('#btn-2') && !$(this).is('#btn-3')) {
+                    $( ".page-num-btn.active" ).prev().before( "<span class='page-change-btn before-dots' style='border:0;'>....</span>" );
+                }
+
+                if(currentBtnID !== "btn-"+(lastBtnID-1) && currentBtnID !== "btn-"+(lastBtnID-2)) {
+                    $( ".page-num-btn.active" ).next().after( "<span class='page-change-btn after-dots' style='border:0;'>....</span>" );
+                }
+
+                $( "span.after-dots" ).nextUntil('.last-page-btn').css({"display": "none"});
+
+                $( "span.before-dots" ).prevUntil('.first-page-btn').css({"display": "none"});
+            }
+            
+        });
+    });
+</script>
