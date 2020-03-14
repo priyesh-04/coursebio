@@ -1,32 +1,10 @@
 {% extends "blog_base.html" %}
 
-{% block head_title %}
-{{ category.title }} | {{ block.super }}
-{% endblock head_title %}
-
 {% block content %}
 
+{% include "base/pagination/pagination-css.html" %}
+
 <style>
-    .post-title {
-        font-size: 1rem;
-        /* line-height: 20px; */
-        font-weight: bold;
-        /* overflow-wrap: break-word; */
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-        white-space: normal;
-    }
-
-    a {
-        color: #000;
-    }
-    a:hover {
-        text-decoration: none;
-        color: var(--danger);
-    }
-
     .block-title-div {
         position: relative;
     }
@@ -46,122 +24,93 @@
         color: #fff;
     }
 
-    .sidebar-product-list {
-        list-style: none;
+    .post-list {
+        /*height: 150px;*/
     }
-    .sidebar-product {
-        line-height: 20px;
-        margin: 0 0 1px 0;
-        padding: 0.75em 0;
-        font-size: 90%;
-        border-bottom: 1px solid #c6c5c5;
-        display: block;
+
+    .post-list:hover {
+        background-color: #dee2e6;
+        transition-duration: 0.2s;
+    }
+
+    .post-anchor-tag {
+        text-decoration: none !important;
+        color: #333 !important;
+    }
+
+    .post-wrapper {
+        display: flex;
+    }
+
+    .post-img-wrapper {
+        height: 150px;
+        width: 200px;
+    }
+
+    .post-detail-div {
+        height: 150px;
+    }
+
+    .post-title {
+        /*height: 42px;*/
+        max-width: 500px;
+        font-size: 0.9rem;
+        font-weight: 700;
         overflow: hidden;
-    }
-    .sidebar-product:last-child {
-        border: none;
-    }
-    .product-img-div {
-        width: 80px;
-        height: 80px;
-        float: left;
-        position: relative;
-    }
-    .product-img-div .product-img {
-        max-width: 100%;
-        max-height: 100%;
-        position: absolute;
-        margin: auto;
-        padding-right: 5px;
-        left: 0;
-        right: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 
-    .product-details-div .product-title{
+    .content-div {
+        height: 64px;
         font-size: 0.7rem;
-        font-weight: bold;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
-    .product-details-div .product-price {
+
+    .timestamp-div {
         font-size: 0.7rem;
     }
 
-    .top-post-col {
-        margin-top: 48px;
-    }
-    .top-post-detail-div {
-        position: absolute;
-        transform: translate(15px, -90px);
-        color: #fff;
-    }
+    @media only screen and (max-width: 600px) {
 
-    .top-post-container {
-        /*background: #fff;*/
-        /*width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;*/
-    }
+        .post-img-wrapper {
+            width: 55px;
+        }
 
-    .post-container {
-        background: #fff;
-    }
-
-    .post-container:not(:last-child) {
-        margin-bottom: 20px;
-    }
-
-    .post-wrapper img {
-        filter: brightness(0.5);
-    }
-
-    .post-wrapper:hover,
-    .post-wrapper:active,
-    .post-wrapper:focus {
-        transform: scale(1.05);
-        transition: 0.5s;
+        .post-title { 
+            font-size: 0.7rem;
+        }
+        .content-div {
+            font-size: 0.6rem;
+            height: 60px;
+        }
     }
 
 </style>
 
-<div class="main-div">
-    <div class="post-container">
-            <div class="container">
-                <div class="row">
-                {% for post in post_list|slice:":2" %}
-                <div class="col-sm-12 col-md-6 col-lg-6 top-post-col mb-4">
-                    <div class="post-wrapper">
-                        <a href='{{ post.get_absolute_url }}' >   
-                            {% if post.image_url %}
-                                 <img src='{{ post.image_url }}' alt="post image" />
-                            {% endif %}
-                            <div class="top-post-detail-div">
-                                {% if post.draft %}
-                                    <h3>Staff only: Draft</h3>
-                                {% endif %} 
-                                {% if post.publish > today %}
-                                    <h3>Staff Only: Post will publish on {{ post.publish }}</h3>
-                                {% endif %}
-                                <h3 class="post-title" style="font-size: 1.5rem;">{{post.title}}</h3>
-                                <div style="font-size: 0.8rem;">
-                                    <span>Team AtoZ</span>
-                                    <span> - {{ post.publish }}</span>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                {% endfor %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-12 col-md-12 col-lg-8 pos-list-col">
+            <div class="block-title-div">
+                <h4 class="block-title">
+                    <span>Recent Articles</span>
+                </h4>
             </div>
-
-            <div class="row">
-                {% for post in post_list|slice:":3" %}
-                <div class="col-sm-12 col-md-4 col-lg-4 pos-list-col mb-3">
-                    <a href='{{ post.get_absolute_url }}'>   
+            
+            {% for post in post_list %}
+            <div class="border-bottom p-3 post-list">
+                <a class="post-anchor-tag" href='{{post.get_absolute_url}}'>
+                    <div class="post-wrapper">   
                         {% if post.image_url %}
+                        <div class="post-img-wrapper">
                              <img src='{{ post.image_url }}' alt="post image" />
+                         </div>
                         {% endif %}
-                        <div class="post-detail-div">
+                        <div class="post-detail-div ml-2">
                             {% if post.draft %}
                                 <h3>Staff only: Draft</h3>
                             {% endif %} 
@@ -169,244 +118,47 @@
                                 <h3>Staff Only: Post will publish on {{ post.publish }}</h3>
                             {% endif %}
                             <h3 class="post-title">{{post.title}}</h3>
-                            <div style="font-size: 0.7rem;">
-                                <span style="font-weight: bold;color: #000;">Team AtoZ</span>
-                                <span style="color: grey;"> - {{ post.publish }}</span>
+                            <div class="content-div">
+                                <p>
+                                    {{post.content|truncatechars:120}}
+                                    <a href="{{post.get_absolute_url}}">Read more</a>
+                                </p>
+                            </div>
+                            <div class="timestamp-div">
+                                <p><strong>Team CB</strong><span class="text-muted"> - {{ post.publish }}</span>
+                                </p>
                             </div>
                         </div>
-                    </a>
-                </div>
-                {% endfor %}
+                    </div>
+                </a>
             </div>
-        </div>
-    </div>
 
-    <div class="post-container">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 mt-4">
-                
+
+            {% endfor %}
+
+            {% include "base/pagination/pagination.html" %}
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-4">
+            <div class="discount-coupons-wrapper">
+                <div class="course-review-wrapper">
                     <div class="block-title-div">
                         <h4 class="block-title">
-                            <span>Recent News</span>
+                            <span>Course Reviews</span>
                         </h4>
-                    </div>
-
-                    <div class="row">
-                        {% for post in post_list %}
-                        <div class="col-sm-12 col-md-4 col-lg-4 pos-list-col">
-                            <a href='{{ post.get_absolute_url }}'>   
-                                {% if post.image_url %}
-                                     <img src='{{ post.image_url }}' alt="post image" />
-                                {% endif %}
-                                <div class="post-detail-div">
-                                    {% if post.draft %}
-                                        <h3>Staff only: Draft</h3>
-                                    {% endif %} 
-                                    {% if post.publish > today %}
-                                        <h3>Staff Only: Post will publish on {{ post.publish }}</h3>
-                                    {% endif %}
-                                    <h3 class="post-title">{{post.title}}</h3>
-                                    <div style="font-size: 0.7rem;">
-                                        <span style="font-weight: bold;color: #000;">Team AtoZ</span>
-                                        <span style="color: grey;"> - {{ post.publish }}</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        {% endfor %}
-                    </div>
-
-                    <style>
-                        .pagination {
-                            align-items: center;
-                        }
-
-                        .pagination span.current {
-                            color: grey;
-                            font-size: 0.8rem;
-                        }
-
-                        .page-change-btn i {
-                            font-size: 0.6rem;
-                            vertical-align: middle;
-                            margin-top: -4px;
-                            margin-left: 2px
-                        }
-
-                        .page-change-btn {
-                            background: #fff;
-                            color: var(--dark);
-                            border: 1px solid #e3e3e3;
-                            padding: 5px 11px 8px 11px;
-                            margin: 0 8px 8px 0;
-                            font-size: 0.8rem;
-                            color: #666;
-                        }
-                        .page-change-btn:hover {
-                            border: 1px solid var(--dark);
-                            background: var(--dark);
-                            color: #fff;
-                        }
-                        .page-change-btn.active {
-                            border: 1px solid var(--danger);
-                            background: var(--danger);
-                            color: #fff;
-                        }
-                    </style>
-                    <script>
-                        $(document).ready(function() {
-                            $(".page-num-btn").last().addClass('last-page-btn');
-                            $(".page-num-btn").first().addClass('first-page-btn');
-
-                            var lastBtnID = $(".page-num-btn").last().attr('id').replace(/\D/g,'');
-
-                            $(".page-num-btn").each(function() {
-                                var currentBtnID = $(this).attr('id')
-
-                                if (window.location.search === '') {
-                                    $(".page-num-btn").first().addClass('active');
-                                }
-
-                                if (window.location.search === $(this).attr('href')) {
-                                    $(this).addClass('active');
-                                }
-
-                                if ($(this).hasClass('active')) {
-                                    
-                                    if(!$(this).is('#btn-2') && !$(this).is('#btn-3')) {
-                                        $( ".page-num-btn.active" ).prev().before( "<span class='page-change-btn before-dots' style='border:0;'>....</span>" );
-                                    }
-
-                                    if(currentBtnID !== "btn-"+(lastBtnID-1) && currentBtnID !== "btn-"+(lastBtnID-2)) {
-                                        $( ".page-num-btn.active" ).next().after( "<span class='page-change-btn after-dots' style='border:0;'>....</span>" );
-                                    }
-
-                                    $( "span.after-dots" ).nextUntil('.last-page-btn').css({"display": "none"});
-
-                                    $( "span.before-dots" ).prevUntil('.first-page-btn').css({"display": "none"});
-                                }
-                                
-                            });
-                        });
-                    </script>
-                    <div class="pagination mt-5 mb-5">
-                        <span class="step-links">
-                            {% if page_obj.has_previous %}
-                                <!-- <a class="page-change-btn" href="?page=1">&laquo; first</a> -->
-                                <a class="page-change-btn back-btn" href="?page={{ page_obj.previous_page_number }}"> 
-                                    <i class="material-icons">
-                                        arrow_back_ios
-                                    </i>
-                                </a>
-                            {% endif %}
-
-                            {% for pageNum in page_range %}
-                                <a class="page-change-btn page-num-btn" id="btn-{{pageNum}}" href="?page={{pageNum}}">
-                                    {{pageNum}}
-                                </a>
-                            {% endfor %}
-
-                            {% if page_obj.has_next %}
-                                <a class="page-change-btn next-btn" href="?page={{ page_obj.next_page_number }}"> 
-                                    <i class="material-icons">
-                                        arrow_forward_ios
-                                    </i>
-                                </a>
-                                <!-- <a class="page-change-btn" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a> -->
-                            {% endif %}
-                        </span>
-                        <span class="current ml-auto">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-                        </span>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-4 col-lg-4 mt-4">
-
-                    <div class="block-title-div">
-                        <h4 class="block-title">
-                            <span>Latest Articles</span>
-                        </h4>
-                    </div>
-
-                    <ul class="sidebar-product-list">
-                        {% for product in product_list %}
-                            <li class="sidebar-product">
-                                <a href="{{ product.get_absolute_url }}">
-                                    {% for image in image_list %}
-                                        {% if product == image.product %}
-                                          <div class="product-img-div">
-                                              <img class="product-img" src="{{image.get_image_url}}" alt="{{product}} image">
-                                          </div>
-                                        {% endif %}
-                                    {% endfor %} 
-                                    <div class="product-details-div">
-                                        <h6 class="product-title">{{product.title}}</h6>
-                                        <span class="product-price text-dark">Rs. {{product.price}}</span>
-                                    </div>                       
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-
-                    <div class="block-title-div">
-                        <h4 class="block-title">
-                            <span>Popular Articles</span>
-                        </h4>
-                    </div>
-
-                    <ul class="sidebar-product-list">
-                        {% for product in product_list %}
-                            <li class="sidebar-product">
-                                <a href="{{ product.get_absolute_url }}">
-                                    {% for image in image_list %}
-                                        {% if product == image.product %}
-                                          <div class="product-img-div">
-                                              <img class="product-img" src="{{image.get_image_url}}" alt="{{product}} image">
-                                          </div>
-                                        {% endif %}
-                                    {% endfor %} 
-                                    <div class="product-details-div">
-                                        <h6 class="product-title">{{product.title}}</h6>
-                                        <span class="product-price text-dark">Rs. {{product.price}}</span>
-                                    </div>                       
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-
-                    
-
-                    <div class="block-title-div">
-                        <h4 class="block-title">
-                            <span>Best Learning Platforms</span>
-                        </h4>
-                    </div>
-
-                    <style>
-                        .best-mobiles-list {
-                            list-style: none;
-                            font-size: 16px;
-                            padding:0;
-                            margin-left: 10px;
-                            font-weight: bold;
-                        }
-                        .best-mobiles-list li {
-                            margin-bottom: 10px;
-                        }
-                    </style>
-
-                    <ul class="best-mobiles-list">
-                        {% for provider in course_provider_list %}
-                          <li><a href="affiliate Link of provider">{{provider}}</a></li>
-                        {% endfor %}
-                    </ul>
-
+                <div class="block-title-div">
+                    <h4 class="block-title">
+                        <span>Discount Coupons</span>
+                    </h4>
                 </div>
             </div>
         </div>
     </div> 
-
 </div>
+
+{% include "base/pagination/pagination-js.html" %}
+
 {% endblock content %}
 
