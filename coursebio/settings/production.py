@@ -26,7 +26,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['134.122.30.155',]
+ALLOWED_HOSTS = ['134.122.30.155', 'localhost', '127.0.0.1',]
 
 from coursebio.secret_keys.mailchimp_api import MAILCHIMP_API_KEY, MAILCHIMP_DATA_CENTER, MAILCHIMP_EMAIL_LIST_ID
 
@@ -109,6 +109,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'coursebio.wsgi.application'
 
 from coursebio.secret_keys.database import PASSWORD
+print(PASSWORD,'pass')
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
