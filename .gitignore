@@ -12,6 +12,7 @@ media/
 static/
 secret_keys/
 myprojectenv/
+coursebioenv/
 
 bin/
 include/
