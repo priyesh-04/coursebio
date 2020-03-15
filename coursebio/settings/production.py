@@ -109,7 +109,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'coursebio.wsgi.application'
 
 from coursebio.secret_keys.database import PASSWORD
-print(PASSWORD,'pass')
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -175,7 +174,7 @@ MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 CORS_REPLACE_HTTPS_REFERER      = True
-HOST_SCHEME                     = "https://"
+HOST_SCHEME                     = "http://"
 SECURE_PROXY_SSL_HEADER         = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT             = True
 SESSION_COOKIE_SECURE           = True
