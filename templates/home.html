@@ -147,21 +147,46 @@ $(document).ready(function() {
 </script>
 
 <style>
+    .quotes-carousel-container {
+        background: #adb5bd;
+    }
     .carousel-indicators {
         bottom: -50px;
     }
     .carousel-inner {
         display: flex;
         justify-content: center;
+        padding: 10px;
     }
     .carousel-item {
         margin-right: 0;
         width: 50%;
     }
 
+    .carousel-item {
+        background: #fff;
+        color: #333;
+        padding: 12px 10px 8px 10px;
+        border-radius: 2px;
+        box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
+        /*box-shadow: 0 -2px 10px rgba(0, 0, 0, 1);*/
+    }
+    .blockquote-footer {
+        background: inherit;
+    }
+
+    @media only screen and (max-width: 600px) {
+      .blockquote {
+        font-size: 0.7rem;
+      }
+      .carousel-item {
+        width: 70%;
+      }
+    }
+
 </style>
 
-<div class="bg-dark text-white p-5 mb-5">
+<div class="quotes-carousel-container p-5 mb-5">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
