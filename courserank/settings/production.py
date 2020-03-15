@@ -26,7 +26,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['64.227.29.11']
 
 from courserank.secret_keys.mailchimp_api import MAILCHIMP_API_KEY, MAILCHIMP_DATA_CENTER, MAILCHIMP_EMAIL_LIST_ID
 
@@ -108,14 +108,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'courserank.wsgi.application'
 
-
+from courserank.secret_keys.database import PASSWORD
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'coursebio',
+        'USER': 'priyesh',
+        'PASSWORD': PASSWORD,
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
