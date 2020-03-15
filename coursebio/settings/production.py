@@ -26,7 +26,7 @@ SECRET_KEY = SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['64.227.29.11']
+ALLOWED_HOSTS = ['134.122.30.155',]
 
 from coursebio.secret_keys.mailchimp_api import MAILCHIMP_API_KEY, MAILCHIMP_DATA_CENTER, MAILCHIMP_EMAIL_LIST_ID
 
