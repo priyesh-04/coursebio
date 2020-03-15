@@ -1,5 +1,5 @@
 """
-WSGI config for courserank project.
+WSGI config for coursebio project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'courserank.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'coursebio.settings')
 
 application = get_wsgi_application()
