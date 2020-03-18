@@ -24,6 +24,20 @@
     .post-container:not(:last-child) {
         margin-bottom: 20px;
     }
+    .post-header {
+        font-size: 1.5rem;
+    }
+    .post-detail-item p {
+        font-size: 1rem;
+    }
+    @media only screen and (max-width: 600px) { 
+        .post-header {
+            font-size: 1.2rem;
+        }
+        .post-detail-item p {
+            font-size: 0.8rem;
+        }
+    }
 </style>
 
 <div class="main-div">
@@ -32,12 +46,12 @@
             <div class="row">
                 <div class="col-sm-12 col-md-8 col-lg-8 mt-4 post-detail-col">
                     <h2 class="post-header">{{ object.title }} <br>
-                        <!-- <p> Read time: 
+                        <p> Read time: 
                             {% if object.read_time <= 1 %} < 1 Minute 
                             {% else %}
                                 {{ object.read_time }} minutes 
                             {% endif %}
-                        </p> -->
+                        </p>
                         <small>
                             {% if object.draft %}
                                 <span style='color:red;'>Draft</span> 
