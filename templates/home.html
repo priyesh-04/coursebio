@@ -36,7 +36,7 @@
 
     .header-info {
         background: #fff;
-        height: 270px;
+        /*height: 270px;*/
         width: 440px;
         color: #343a40;
         padding: 25px;
@@ -48,14 +48,34 @@
         letter-spacing: -.02rem;
         font-size: 2rem;
     }
+    .header-info h3 {
+        font-size: 1rem;
+        font-weight: 400;
+    }
+    @media only screen and (max-width: 600px) {
+        .header-info h1 {
+            font-size: 1.6rem;
+        }
+        .header-info h3 {
+            font-size: 0.8rem;
+        }
+    }
+    @media only screen and (max-width: 350px) {
+        .header-info h1 {
+            font-size: 1.4rem;
+        }
+        .header-info h3 {
+            font-size: 0.7rem;
+        }
+    }
 
 </style>
 
 <section class="header-section">
     <div class="container header-container">
         <div class="header-info">
-            <h1>Always be learning. Invest in you.</h1>
-            <h3 style="font-size: 1rem;font-weight: 400;">Find and compare <strong>online courses</strong>
+            <h1>Always be learning. <br /> Invest in you.</h1>
+            <h3>Find and compare <strong>online courses</strong>
                         from multiple e-learning platforms at one place.
                         </h3>
             {% include 'search_forms/search-form2.html' %}
