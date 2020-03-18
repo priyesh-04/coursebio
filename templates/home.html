@@ -134,16 +134,16 @@
 </style>
 
 <div class="container category-container">
-    <div class="tab-div mt-3">
+    <div class="tab-div mt-3 mb-3">
         <ul class="nav nav-tabs">
           <li class="nav-item">
             <a class="nav-link border-bottom active" data-toggle="tab">Categories</a>
           </li>
         </ul>
     </div>
-    <div class="row mt-3">
+    <div class="row">
         {% for category in category_list %}
-            <div class="col-sm-12 col-md-6 col-lg-4 mb-5">
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-2">
                 <a href="{{category.get_absolute_url}}">
                     <div class="category-wrapper">
                         <p>
@@ -206,7 +206,7 @@ $(document).ready(function() {
 
 </style>
 
-<div class="quotes-carousel-container p-5 mb-5">
+<div class="quotes-carousel-container p-5 mb-5 mt-5">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
