@@ -4,6 +4,9 @@ from django.db.models.signals import post_save, pre_save
 from django.urls import reverse
 
 from .utils import unique_slug_generator
+
+from django.utils.safestring import mark_safe
+from markdown_deux import markdown
 # Create your models here.
 
 class Category(models.Model):
@@ -103,6 +106,13 @@ class Course(models.Model):
 		return reverse("courses:course-detail", 
 						kwargs={"slug":self.provider.slug, "slug2":self.slug}
 						)
+	class Meta:
+		ordering = ["-timestamp", "-updated"]
+
+	def get_markdown(self):
+		description = self.description
+		markdown_text = markdown(description)
+		return mark_safe(markdown_text)
 
 
 def course_pre_save_receiver(sender, instance, *args, **kwargs):

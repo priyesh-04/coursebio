@@ -1,12 +1,22 @@
 from django.contrib import admin
 
 # Register your models here
+from django.db import models
+
+from pagedown.widgets import AdminPagedownWidget
+
 from .models import (
 						Category, 
 						SubCategory, 
 						Course, 
 						Provider,
 					)
+
+@admin.register(Course)
+class PostModelAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.TextField: {'widget': AdminPagedownWidget},
+    }
 
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = ('id', 'title', 'slug', 'updated',)
@@ -31,15 +41,15 @@ class ProviderAdmin(admin.ModelAdmin):
 	ordering = ('-timestamp',)
 
 
-class CourseAdmin(admin.ModelAdmin):
-	list_display = ('id', 'title', 'price', 'provider', 'subcategory', 'category', 'slug', 'updated',)
-	list_display_links = ('title', 'category', 'id')
-	list_filter = ('category', 'price', 'provider', 'subcategory', 'timestamp', 'updated')
-	search_fields = ('category__title', 'subcategory__title', 'title', 'description')
-	ordering = ('-timestamp',)
+# class CourseAdmin(admin.ModelAdmin):
+# 	list_display = ('id', 'title', 'price', 'provider', 'subcategory', 'category', 'slug', 'updated',)
+# 	list_display_links = ('title', 'category', 'id')
+# 	list_filter = ('category', 'price', 'provider', 'subcategory', 'timestamp', 'updated')
+# 	search_fields = ('category__title', 'subcategory__title', 'title', 'description')
+# 	ordering = ('-timestamp',)
 
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(Provider, ProviderAdmin)
-admin.site.register(Course, CourseAdmin)
+# admin.site.register(Course, CourseAdmin)
