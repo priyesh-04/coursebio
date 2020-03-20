@@ -242,7 +242,11 @@
 				</div>
 				<div class="price-details">
 					<div>
-						$ {{course.price}} <span>/month</span>
+						{% if course.provider.price %}
+						    $ {{course.provider.price}} <span>/month</span>				
+						{% else %}
+							$ {{course.price}} <span></span>				
+						{% endif %}
 					</div>
 				</div>
 

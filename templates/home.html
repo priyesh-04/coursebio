@@ -307,13 +307,18 @@ $(document).ready(function() {
                                             </p>
                                         </div>
                                         <div class="course-price card-course-price">
-                                            <p>
-                                                $ {{course.price}}
-                                            </p>
+                                            {% if course.provider.price %}
+                                                <p>
+                                                    $ {{course.provider.price}} <span>/month</span>
+                                                </p>
+                                            {% else %}
+                                                <p>
+                                                    $ {{course.price}}
+                                                </p>                
+                                            {% endif %}
                                         </div>
                                     </div>
                                         
-                                    
                                     <div class="card-btn-div">
                                         <a href="{{course.get_absolute_url}}" class="card-btn">See Details</a>
                                     </div>
