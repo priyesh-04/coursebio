@@ -151,8 +151,7 @@
 					</iframe>
 				</div>
 			</div> <hr>
-		<!-- </div>
-		<div class="col-sm-12 col-md-12 col-lg-12"> -->
+
 			<div class="course-detail mt-3 text-center">
 				<div class="provider-img-wrapper mb-2">
 					<img src="{{course.provider.image_url}}" alt="">
@@ -303,6 +302,8 @@
 		                {% endfor %}
 		            </div>
 		            <div class="swiper-pagination"></div>
+		            <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
 		        </div>
 			</div>
 		</div>
@@ -339,6 +340,11 @@
                 slidesPerView: 4,
                 spaceBetween: 10,
             },
+        },
+         // Navigation arrows
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
         },
     });
 </script>
@@ -421,7 +427,6 @@
 	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    /*max-width: calc(100% - 1.25em);*/
     position: relative;
     top: 1px;
 }
@@ -445,7 +450,6 @@ p {
 }
 
 .course-anchor {
-	/*text-align: center;*/
 	text-decoration: none !important;
 }
 
@@ -473,6 +477,41 @@ p {
 
 .card-btn:hover {
 	color: #fff;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    height: 50px;
+    width: 50px;
+    color: var(--primary);
+    background: var(--white);
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px, rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover,
+.swiper-button-prev:active,
+.swiper-button-next:active {
+    box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
+}
+
+.swiper-button-prev:after, 
+.swiper-button-next:after {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.swiper-button-disabled {
+    /*display: none;*/
+}
+
+@media only screen and (max-width: 600px) {
+    .swiper-button-prev,
+    .swiper-button-next {
+        display: none;
+    }
 }
 
 </style>
