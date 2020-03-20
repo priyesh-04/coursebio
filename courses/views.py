@@ -100,14 +100,14 @@ class CourseDetailView(TemplateView):
 	model = Course
 	template_name = 'courses/course_detail.html'
 
-
 	def get_context_data(self, *args, **kwargs):
 		context = super(CourseDetailView, self).get_context_data(*args, **kwargs)
 		slug2 = self.kwargs.get('slug2')
 		course = get_object_or_404(Course, slug=slug2)
 		context['course'] = course
 		context['related_tags'] = Tag.objects.filter(courses=course)
-		context['related_courses'] = Course.objects.filter(category=course.category)
+		related_courses = Course.objects.filter(category=course.category)
+		context['related_courses'] = related_courses.exclude(title=course.title)
 		# print(context['related_tags'],'con')
 		return context
 
