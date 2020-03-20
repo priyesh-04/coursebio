@@ -184,9 +184,15 @@
 					</span>
 				</div>
 				<div class="course-price mb-2">
-					<p>
-						$ {{course.price}} <span>/month</span>
-					</p>
+					{% if course.provider.price %}
+					    <p>
+							$ {{course.provider.price}} <span>/month</span>
+						</p>
+					{% else %}
+						<p>
+							$ {{course.price}}
+						</p>				
+					{% endif %}
 				</div>
 				<div class="btn-div">
 					<div>
@@ -282,9 +288,15 @@
 											</p>
 										</div>
 										<div class="course-price card-course-price">
-											<p>
-												$ {{course.price}}
-											</p>
+											{% if course.provider.price %}
+											    <p>
+													$ {{course.provider.price}} <span>/month</span>
+												</p>
+											{% else %}
+												<p>
+													$ {{course.price}}
+												</p>				
+											{% endif %}
 										</div>
 									</div>
 										
