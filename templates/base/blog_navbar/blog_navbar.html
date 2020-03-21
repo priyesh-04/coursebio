@@ -1,9 +1,12 @@
+{% url 'course:home' as home_url %}
+
+
 <nav class="blog-navbar navbar navbar-expand-md fixed-top navbar-dark bg-dark">
   <div class="container-fluid">
     <button class="navbar-toggler mr-2" type="button" data-toggle="offcanvas">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand mr-auto" href="/blog">
+    <a class="navbar-brand mr-auto" href="{{home_url}}">
       <strong>Coursebio</strong>
     </a>
 
