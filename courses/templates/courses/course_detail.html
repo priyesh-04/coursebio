@@ -182,12 +182,13 @@
 				<div class="course-price mb-2">
 					{% if course.provider.price %}
 					    <p>
-							$ {{course.provider.price}} <span>/month</span>
+					    	$ {{course.provider.price}}
+					    	<span>/month</span>
 						</p>
+					{% elif course.is_free %}
+ 						<p>Free</p>
 					{% else %}
-						<p>
-							$ {{course.price}}
-						</p>				
+						<p>$ {{course.price}}</p>				
 					{% endif %}
 				</div>
 				<div class="btn-div">
@@ -286,8 +287,11 @@
 										<div class="course-price card-course-price">
 											{% if course.provider.price %}
 											    <p>
-													$ {{course.provider.price}} <span>/month</span>
+													$ {{course.provider.price}}
+													<span>/month</span>
 												</p>
+											{% elif course.is_free %}
+												<p>Free</p>
 											{% else %}
 												<p>
 													$ {{course.price}}
@@ -512,7 +516,7 @@ p {
 }
 
 .swiper-button-disabled {
-    /*display: none;*/
+    display: none;
 }
 
 @media only screen and (max-width: 600px) {

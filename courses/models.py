@@ -94,6 +94,7 @@ class Course(models.Model):
 	duration        = models.CharField(max_length=50, null=True, blank=True,)
 	trial			= models.CharField(max_length=50, null=True, blank=True,)
 	price			= models.DecimalField(max_digits=19, decimal_places=2, null=True, blank=True,)
+	is_free			= models.BooleanField(default=False,)
 	slug    		= models.SlugField(null=True, unique=True, blank=True,)
 	popular			= models.BooleanField(default=False,)
 	updated     	= models.DateTimeField(auto_now=True,)

@@ -245,6 +245,8 @@
 					<div>
 						{% if course.provider.price %}
 							$ {{course.provider.price}} <span>/month</span>
+						{% elif course.is_free %}
+							Free
 						{% else %}
 							$ {{course.price}}			
 						{% endif %}

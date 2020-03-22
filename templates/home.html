@@ -308,12 +308,13 @@ $(document).ready(function() {
                                         <div class="course-price card-course-price">
                                             {% if course.provider.price %}
                                                 <p>
-                                                    $ {{course.provider.price}} <span>/month</span>
+                                                    $ {{course.provider.price}} 
+                                                    <span>/month</span>
                                                 </p>
+                                            {% elif course.is_free %}
+                                                <p class="mr-2">Free</p>     
                                             {% else %}
-                                                <p>
-                                                    $ {{course.price}}
-                                                </p>                
+                                                <p>$ {{course.price}}</p>             
                                             {% endif %}
                                         </div>
                                     </div>
@@ -547,7 +548,7 @@ p {
 }
 
 .swiper-button-disabled {
-    /*display: none;*/
+    display: none;
 }
 
 .swiper-slide a {
@@ -627,7 +628,7 @@ p {
                 spaceBetween: 40,
             },
             1024: {
-                slidesPerView: 4.2,
+                slidesPerView: 4,
                 spaceBetween: 10,
             },
         },
