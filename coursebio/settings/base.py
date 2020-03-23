@@ -25,7 +25,7 @@ from coursebio.secret_keys.project_secret_key import SECRET_KEY
 SECRET_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 

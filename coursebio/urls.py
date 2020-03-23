@@ -33,7 +33,7 @@ urlpatterns = [
     # url(r'^settings/email/$', MarketingPreferenceUpdateView.as_view(), name='marketing-pref'),
     url(r'^u/(?P<code>[a-z0-9].*)/$', MarketingPreferenceUpdateView.as_view(), name='marketing-pref'),
     url(r'^webhooks/mailchimp/$', MailchimpWebhookView.as_view(), name='webhooks-mailchimp'),
-    url(r'^', include('accounts.urls')),
+    url(r'^accounts/', include('accounts.urls')),
     url(r'^accounts/', include('accounts.password.urls')),
     url(r'^blog/', include(('blog.urls', 'blog'), namespace='posts')),
     url(r'^', include(('courses.urls', 'courses'), namespace='course')),

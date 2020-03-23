@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<style>
+
+    .form-group {
+        margin-bottom: 0.5rem;
+    }
+
+    .login-container{
+        display: flex;
+        justify-content: center;
+        padding-bottom: 100px;
+    }
+    .content-section {
+        width: 380px;
+        max-width: 380px;
+        border: 1px solid #dae0e5;
+        padding: 25px;
+        /*background: white;*/
+    }
+</style>
+
+<section class="main-section">
+    <div class="container login-container pt-5">
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-3">Update Account</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group text-center">
+                    <button class="btn btn-danger" style="width: 100%;" type="submit">Update</button>
+                </div>
+            </form>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Don't want to update? <a class="ml-1" href="{% url 'detail' username=object.username %}">Cancel</a>
+                </small>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
