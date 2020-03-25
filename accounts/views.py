@@ -11,7 +11,7 @@ from django.views.generic import (
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 # from accounts.mixins import NextUrlMixin, RequestFormAttachMixin
-from accounts.forms import UserLoginForm, UserCreationForm, UserChangeForm
+from accounts.forms import UserLoginForm, UserCreationForm, UserDetailUpdateForm
 from accounts.models import MyUser
 
 # Create your views here.
@@ -71,7 +71,7 @@ class UserDetailView(DetailView):
 
 
 class UserUpdateView(UpdateView):
-    form_class = UserChangeForm
+    form_class = UserDetailUpdateForm
     template_name = 'accounts/user_profile_edit.html'
 
     def get_object(self):

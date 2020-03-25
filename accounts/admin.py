@@ -31,24 +31,15 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_admin','is_active')
     list_display_links = ('id', 'username')
     fieldsets = (
-        (None, {'fields': (
-                        'firstname',
-                        'lastname',
-                        'username',
-                        'email',
-                        'password',
-                        'slug',
-                    )}),
-        ('Personal info', {'fields': ('date_of_birth',)}),
-        ('Permissions', {'fields': ('is_admin',)}),
-        ('Access', {'fields': ('is_active',)}),
+        (None, {'fields': ('email', 'password')}),
+        (('Personal info'), {'fields': ('firstname', 'lastname')}),
+        (('Permissions'), {'fields': ('is_active', 'is_staff', 'is_admin', 'is_superuser', 'groups', 'user_permissions')}),
+        (('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
-    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
-    # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'date_of_birth', 'password1', 'password2')}
+            'fields': ('email', 'password1', 'password2')}
         ),
     )
     search_fields = ('username', 'email',)
@@ -61,3 +52,25 @@ admin.site.register(MyUser, UserAdmin)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
 admin.site.unregister(Group)
+
+# fieldsets = (
+#         (None, {'fields': (
+#                         'firstname',
+#                         'lastname',
+#                         'username',
+#                         'email',
+#                         'password',
+#                         'slug',
+#                     )}),
+#         ('Personal info', {'fields': ('date_of_birth',)}),
+#         ('Permissions', {'fields': ('is_admin',)}),
+#         ('Access', {'fields': ('is_active',)}),
+#     )
+#     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
+#     # overrides get_fieldsets to use this attribute when creating a user.
+#     add_fieldsets = (
+#         (None, {
+#             'classes': ('wide',),
+#             'fields': ('email', 'date_of_birth', 'password1', 'password2')}
+#         ),
+#     )
