@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 from django.views.generic import (CreateView,
 								  DetailView,
 								  ListView,
@@ -10,9 +10,8 @@ from django.shortcuts import get_object_or_404
 from blog.models import BlogCategory, Post
 from django.core.paginator import Paginator
 
+from blog.mixins import AccessMixin
 from blog.forms import PostForm
-# from products.models import Product, Images
-
 # Create your views here.
 
 def blog_category_list(request):
@@ -73,13 +72,13 @@ class CategoryPostListView(ListView):
         return context
 
 
-class PostCreateView(CreateView):
+class PostCreateView(AccessMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = "blog/post_create.html"
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(AccessMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = "blog/post_update.html"
