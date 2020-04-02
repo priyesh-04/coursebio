@@ -7,13 +7,6 @@
 {{ object.title }} | {{ block.super }}
 {% endblock head_title %}
 
-
-<!-- {% block post_detail_link %}
-  <li><a href='{{ object.get_absolute_url }}'>{{ object.title }}</a></li>
-{% endblock %} -->
-
-
-
 {% block content %}
 
 <style>
@@ -57,7 +50,7 @@
                                 <span style='color:red;'>Draft</span> 
                             {% endif %}
                             <div class="mt-2" style="font-size: 0.7rem;">
-                                <span style="font-weight: bold;color: #000;"><span style="color: grey;font-weight: normal;">By</span> Team AtoZ</span>
+                                <span style="font-weight: bold;color: #000;"><span style="color: grey;font-weight: normal;">By</span> Team Coursebio</span>
                                 <span style="color: grey;"> - Published On: {{ post.publish }} | Last Updated: {{ post.updated }}</span>
                             </div>
                         </small>
@@ -68,17 +61,12 @@
                     {% endif %}
 
                     {% if object.user.get_full_name %}
-                        <p>Author: {{ object.user.get_full_name }}</p>
+                        <p class="text-muted text-right" style="font-size: 0.8rem;">Author: Coursebio</p>
                     {% endif %}
 
 
                     <div class='post-detail-item'>{{ object.get_markdown }}</div>
 
-                    <hr />
-
-                    <div class="text-center">
-                        <button class="btn btn-outline-success mt-5 mb-5">Buy the Product at Best Price</button>
-                    </div>
 
                     <div class="block-title-div">
                         <h4 class="block-title">
