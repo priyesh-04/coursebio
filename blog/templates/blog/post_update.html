@@ -1,0 +1,53 @@
+{% extends "blog_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block head_extra %} 
+{{ form.media }}
+
+{% endblock head_extra %}
+
+
+
+{% block content %}
+<style>
+
+	.wmd-panel {
+		margin: auto 0;
+	}
+	
+	.wmd-input,
+	.wmd-button-bar {
+		background-color: #fff;
+	}
+	form .wmd-wrapper .wmd-preview {
+		display: none;
+	}
+
+	#preview-title {
+		width: 100%;
+		word-wrap: break-word;
+	}
+</style>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 col-md-6 col-lg-6 mt-5">
+			<h1 class="text-center" style="color: #8395a7;">Preview</h1>
+			<hr />
+			<div class='content-preview mb-2'>
+			    <h1 id='preview-title'></h1>
+			    <img id="main_img" src="{{main_img}}"/>
+			</div>
+			<div id="wmd-preview-id_content" class="wmd-preview"></div>
+		</div>
+		<div class="col-sm-12 col-md-6 col-lg-6 mt-5">
+			<form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+				{{ form|crispy }}
+				<button type='submit' class='btn btn-primary'>Update Post</button>
+				<a type="button" href="{% url 'posts:list' %}" class="btn btn-warning">Cancel</a>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock content %}
