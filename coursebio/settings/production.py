@@ -42,6 +42,14 @@ EMAIL_USE_TLS = EMAIL_USE_TLS
 EMAIL_PORT = EMAIL_PORT
 EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+DEFAULT_FROM_EMAIL = 'Python ecommerce <tecnicotrixx@gmail.com>'
+BASE_URL = 'https://www.coursebio.com/'
+
+MANAGERS = (
+    ('Priyesh Shukla', "tecnicotrixx@gmail.com"),
+)
+
+ADMINS = MANAGERS
 
 # Application definition
 
