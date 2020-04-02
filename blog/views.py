@@ -10,7 +10,7 @@ from django.shortcuts import get_object_or_404
 from blog.models import BlogCategory, Post
 from django.core.paginator import Paginator
 
-# from blog.mixins import AccessMixin
+from blog.mixins import AccessMixin
 from blog.forms import PostForm
 # Create your views here.
 
@@ -72,21 +72,21 @@ class CategoryPostListView(ListView):
         return context
 
 
-# class PostCreateView(AccessMixin, CreateView):
-#     model = Post
-#     form_class = PostForm
-#     template_name = "blog/post_create.html"
+class PostCreateView(AccessMixin, CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = "blog/post_create.html"
 
 
-# class PostUpdateView(AccessMixin, UpdateView):
-#     model = Post
-#     form_class = PostForm
-#     template_name = "blog/post_update.html"
+class PostUpdateView(AccessMixin, UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = "blog/post_update.html"
 
-#     def get_context_data(self, *args, **kwargs):
-#         context = super(PostUpdateView, self).get_context_data(*args, **kwargs)
-#         context['main_img'] = context['object'].image_url
-#         return context
+    def get_context_data(self, *args, **kwargs):
+        context = super(PostUpdateView, self).get_context_data(*args, **kwargs)
+        context['main_img'] = context['object'].image_url
+        return context
 
 
 class PostSearchListView(TemplateView):
