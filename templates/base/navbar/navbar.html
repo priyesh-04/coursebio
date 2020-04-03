@@ -45,12 +45,12 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Categories
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu category-dropdown" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ allcourse_url }}">All Courses</a>
+            <div class="dropdown-divider"></div>
             {% for category in course_category_list %}
               <a class="dropdown-item" href="{{category.get_absolute_url}}">{{category}}</a>
             {% endfor %}
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{ allcourse_url }}">All Courses</a>
           </div>
         </li>
         <li class="nav-item active">
