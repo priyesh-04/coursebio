@@ -1,7 +1,6 @@
 db.sqlite3*
 email.txt*
 email.py*
-hosting_setup.txt*
 
 *.pyc
 *.swp

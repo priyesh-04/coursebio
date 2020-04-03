@@ -256,7 +256,7 @@
 
 			<div class="btn-div">
 				<div>
-					<a href="{{course.get_absolute_url}}" class="btn1">Go to Course</a>
+					<a href="{{course.course_url}}" class="btn1">Go to Course</a>
 				</div> 
 				<div>
 					<a href="{{course.get_absolute_url}}" class="btn2">View Details</a>
@@ -270,9 +270,4 @@
 
 {% endblock content %}
 
-<div class="course-video">
-				<iframe width="200" height="112"
-				src="{{course.video_url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-				</iframe>
-			</div>
 

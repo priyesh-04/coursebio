@@ -39,12 +39,6 @@
             <div class="row">
                 <div class="col-sm-12 col-md-8 col-lg-8 mt-4 post-detail-col">
                     <h2 class="post-header">{{ object.title }} <br>
-                        <p> Read time: 
-                            {% if object.read_time <= 1 %} < 1 Minute 
-                            {% else %}
-                                {{ object.read_time }} minutes 
-                            {% endif %}
-                        </p>
                         <small>
                             {% if object.draft %}
                                 <span style='color:red;'>Draft</span> 
@@ -256,7 +250,10 @@
 
                     <ul class="best-mobiles-list">
                         {% for provider in course_provider_list %}
-                          <li><a href="affiliate Link of provider">{{provider}}</a></li>
+                        <li>
+                            <img src="{{provider.image_url}}" alt="" style="width: 20px;height: 20px;border-radius: 50%;border: 1px solid grey;">
+                            <a href="affiliate Link of provider">{{provider}}</a>
+                        </li>
                         {% endfor %}
                     </ul>
 
@@ -267,5 +264,3 @@
 </div>
 
 {% endblock content %}
-
-<!-- {% if object.read_time|time:"i" <= "01" %} < 1 minute {% else %}{{ object.read_time|time:"i" }} minutes {% endif %} -->
