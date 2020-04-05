@@ -26,9 +26,12 @@ from marketing.views import (
                             email_list_signup
                         )
 
+from contact.views import ContactUs
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^contact-us/', ContactUs.as_view(), name='contact-us'),
     url(r'^subscribe/$', email_list_signup, name='email-list-signup'),
     # url(r'^settings/email/$', MarketingPreferenceUpdateView.as_view(), name='marketing-pref'),
     url(r'^u/(?P<code>[a-z0-9].*)/$', MarketingPreferenceUpdateView.as_view(), name='marketing-pref'),
