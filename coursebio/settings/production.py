@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'blog',
     'marketing',
     'tags',
+    'contact',
 ]
 
 AUTH_USER_MODEL = 'accounts.MyUser'
