@@ -118,7 +118,7 @@
                             <h3 class="post-title">{{post.title}}</h3>
                             <div class="content-div">
                                 <p>
-                                    {{post.content|truncatechars:120}}
+                                    {{post.get_markdown|truncatechars:120}}
                                     <a href="{{post.get_absolute_url}}">Read more</a>
                                 </p>
                             </div>
