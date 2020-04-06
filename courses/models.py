@@ -85,7 +85,7 @@ pre_save.connect(provider_pre_save_receiver, sender=Provider)
 class Course(models.Model):
 	user			= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
 	category 		= models.ForeignKey(Category, on_delete=models.CASCADE,)
-	subcategory 	= models.ForeignKey(SubCategory, on_delete=models.CASCADE,)
+	subcategory 	= models.ManyToManyField(SubCategory, blank=True,)
 	provider 		= models.ForeignKey(Provider, on_delete=models.CASCADE,)
 	image_url       = models.URLField(null=True, blank=True,)
 	video_url 		= models.URLField(null=True, blank=True,)
