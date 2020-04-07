@@ -56,7 +56,7 @@ class HomePageView(ListView):
 	def get_context_data(self, *args, **kwargs):
 		context = super(HomePageView, self).get_context_data(*args, **kwargs)
 		context['category_list'] = Category.objects.all()
-		context['popular_course_list'] = Course.objects.filter(popular=True)
+		context['popular_course_list'] = Course.objects.filter(popular=True).distinct()
 		# print(context,'con')
 		return context
 
@@ -78,7 +78,6 @@ class SubcategoryListView(ListView):
 		context['category'] = category
 		context['category_image'] = category.image_url
 		context['subcategory_list'] = SubCategory.objects.filter(category=category).order_by('title')
-		# context['image_list'] = Images.objects.filter(is_main_image=True)
 		# print(context,'con')
 		return context
 
@@ -91,7 +90,7 @@ class CourseListView(ListView):
 		slug2 = self.kwargs.get('slug2')
 		subcategory = get_object_or_404(SubCategory, slug=slug2)
 		context['subcategory'] = subcategory
-		context['course_list'] = Course.objects.filter(subcategory=subcategory)
+		context['course_list'] = Course.objects.filter(subcategory=subcategory).distinct()
 		# print(context,'con')
 		return context
 
@@ -131,7 +130,7 @@ class SearchListView(TemplateView):
 						| Q(subcategory__title__icontains=query)
 						| Q(tag__title__icontains=query)
 						)
-			context['course_list'] = qs2
+			context['course_list'] = qs2.distinct()
 			context['query'] = query
 			# print(context['query'],'query')
 		return context
