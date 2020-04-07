@@ -140,12 +140,16 @@
 <div class="container main-container-div">
 	<div class="row">
 		<div class="col-sm-12 col-md-12 col-lg-12 bg-white top-col p-2">
-			<div class="mt-1">
+			<div class="mt-1 text-center">
+				{% if course.video_url %}
 				<div class="video-wrapper embed-responsive embed-responsive-16by9">
 					<iframe class="embed-responsive-item" 
 					src="{{course.video_url}}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 					</iframe>
 				</div>
+				{% else %}
+					<img src="{{course.image_url}}" alt="">				
+				{% endif %}
 			</div> <hr>
 
 			<div class="course-detail mt-3 text-center">
