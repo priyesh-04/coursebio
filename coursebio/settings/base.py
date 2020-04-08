@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #third_party apps
+    'rest_framework',
     'crispy_forms',
     'django_extensions',
     'markdown_deux',
