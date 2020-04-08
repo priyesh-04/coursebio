@@ -44,6 +44,32 @@ def all_courses_list(request):
 	return context
 
 
+
+from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
+from rest_framework.response import Response
+from rest_framework import authentication, permissions
+from .serializers import CourseModelSerializer, CategoryModelSerializer
+
+class HomePageAPIView(ListAPIView):
+	serializer_class = CourseModelSerializer
+
+	def get_queryset(self, slug=None, *args, **kwargs):
+		slug = self.kwargs.get("slug")
+		print(slug,'slug')
+		category = get_object_or_404(Category, slug=slug)
+		print(category,'category')
+		url_ = category.get_absolute_url()
+		print(url_,'url_')
+		qs = Course.objects.filter(category=category)
+		data = {
+		    "qs": qs,
+		}
+		print(qs[0].provider.image_url,'qs')
+		return qs
+
+
+
 class HomePageView(ListView):
 	model = Course
 	# context_object_name = 'course_list'
@@ -59,7 +85,6 @@ class HomePageView(ListView):
 		context['popular_course_list'] = Course.objects.filter(popular=True).distinct()
 		# print(context,'con')
 		return context
-
 
 
 class AllCourseListView(ListView):

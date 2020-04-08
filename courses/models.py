@@ -24,6 +24,9 @@ class Category(models.Model):
 	def get_absolute_url(self):
 		return reverse("course:subcategory-list", kwargs={"slug":self.slug})
 
+	def get_home_api_absolute_url(self):
+		return reverse("course:home-api", kwargs={"slug":self.slug})
+
 
 def category_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
