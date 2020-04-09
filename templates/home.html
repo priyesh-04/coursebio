@@ -273,10 +273,72 @@ $(document).ready(function() {
         </div>
 
         <div class="col-sm-12 col-md-12 col-lg-12 mt-2 mb-5">
+            
             <div class="container related-courses course-container">
                 <div class="swiper-container">
                     <div class="swiper-wrapper" >
-                        
+                        {% for course in popular_course_list %}
+                        <div class="swiper-slide course-item">
+                            <a class="course-anchor" href="{{ course.get_absolute_url }}">
+                                    
+                                <div class="course-img-wrapper text-center">
+                                    <img class="course-image" src="{{course.image_url}}" alt="{{course}} image">
+                                </div>
+                                    
+                                <div class="card-course-detail">
+                                    <div class="provider-img-wrapper">
+                                        <img src="{{course.provider.image_url}}" alt="">
+                                        <span class="provider-name">{{course.provider}}</span> 
+                                        {% if course.provider.plan_details %}
+                                            |
+                                        
+                                        <div class="tool-tip course-trial">
+                                            {{course.trial}}
+                                            <span class="tool-tip-text">{{course.provider.plan_details}}</span>
+                                        </div>
+                                        
+                                        
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-course-title-div">
+                                        <h3>
+                                            {{course.title}}
+                                        </h3>
+                                    </div>
+                                    <div class="detail-wrapper">
+                                        <div class="bottom-detail-div card-bottom-detail">
+                                            <p class="author-name">
+                                                <i class="material-icons">person</i>
+                                                {{course.author}}
+                                            </p> 
+                                            <p>
+                                                <i class="material-icons">access_time</i>
+                                                {{course.duration}}
+                                            </p>
+                                        </div>
+                                        <div class="course-price card-course-price">
+                                            {% if course.provider.price %}
+                                                <p>
+                                                    $ {{course.provider.price}} 
+                                                    <span>/month</span>
+                                                </p>
+                                            {% elif course.is_free %}
+                                                <p class="mr-2">Free</p>     
+                                            {% else %}
+                                                <p>$ {{course.price}}</p>             
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                        
+                                    <div class="card-btn-div">
+                                        <a href="{{course.get_absolute_url}}" class="card-btn">See Details</a>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </a>
+                        </div>
+                        {% endfor %}
                     </div>
                     <div class="swiper-button-prev"></div>
                     <div class="swiper-button-next"></div>
@@ -285,118 +347,8 @@ $(document).ready(function() {
         </div>
     </div>
 </div>
-<div class="container mt-5">
-    <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        {% for category in course_category_list %}
-            <a class="nav-item nav-link show-data" id="nav-home-tab" data-href="{{category.get_home_api_absolute_url}}" data-toggle="tab" href="#{{category.id}}" role="tab" aria-controls="nav-home" aria-selected="true">{{category}}</a>        
-        {% endfor %}
-      </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-        {% for category in course_category_list %}
-            <div class="tab-pane fade show active" id="{{category.id}}" role="tabpanel" aria-labelledby="nav-home-tab"></div>
-        {% endfor %}
-    </div>
-</div>
-<script>
-     $(document).ready(function(){
-          
-      $(".show-data").click(function(e){
-        e.preventDefault()
-        var this_ = $(this)
-        console.log(this_,'this_')
-        var dataUrl = this_.attr("data-href")
-        console.log(dataUrl,'dataUrl')
-        if (dataUrl){
-           $.ajax({
-            url: dataUrl,
-            method: "GET",
-            data: {},
-            success: function(data){
-              console.log(data,'data')
-              var qs = data
-              var tabID = this_.attr("href")
-              console.log(tabID,'tabID')
-              var courseItem='';
-              for (var i = qs.length - 1; i >= 0; i--) {
-                courseItem = `<div class="container related-courses course-container">
-                <div class="swiper-container">
-                    <div class="swiper-wrapper" >`
-                courseItem = courseItem +`<div class="swiper-slide course-item">
-                            <a class="course-anchor" href="${qs[i].get_absolute_url}">
-                                    
-                                <div class="course-img-wrapper text-center">
-                                    <img class="course-image" src="${qs[i].image_url}" alt="${qs[i]} image">
-                                </div>
-                                    
-                                <div class="card-course-detail">
-                                    <div class="provider-img-wrapper">
-                                        <img src="${qs[i].provider.image_url}" alt="">
-                                        <span class="provider-name">${qs[i].provider}</span>`
-                courseItem = courseItem +"{% if "+qs[i].provider.plan_details+" %}|"
-                                        
-                courseItem = courseItem +`<div class="tool-tip course-trial">
-                                            ${qs[i].trial}
-                                            <span class="tool-tip-text">${qs[i].provider.plan_details}</span>
-                                        </div>
-                                        
-                                        
-                                        {% endif %}
-                                    </div>
-                                    <div class="card-course-title-div">
-                                        <h3>
-                                            ${qs[i].title}
-                                        </h3>
-                                    </div>
-                                    <div class="detail-wrapper">
-                                        <div class="bottom-detail-div card-bottom-detail">
-                                            <p class="author-name">
-                                                <i class="material-icons">person</i>
-                                                ${qs[i].author}
-                                            </p> 
-                                            <p>
-                                                <i class="material-icons">access_time</i>
-                                                ${qs[i].duration}
-                                            </p>
-                                        </div>
-                                        <div class="course-price card-course-price">`
-                courseItem = courseItem +"{% if "+qs[i].provider.price+" %}"
-                courseItem = courseItem +`<p>
-                                                    $ ${qs[i].provider.price} 
-                                                    <span>/month</span>
-                                                </p>`
-                courseItem = courseItem +'{% elif '+qs[i].is_free+' %}<p class="mr-2">Free</p>{% else %}<p>$ '+qs[i].price+'</p>{% endif %}'
-                courseItem = courseItem +`</div>
-                                    </div>
-                                        
-                                    <div class="card-btn-div">
-                                        <a href="${qs[i].get_absolute_url}" class="card-btn">See Details</a>
-                                    </div>
-                                    
-                                </div>
-                                
-                            </a>
-                        </div>
-                        </div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                </div>
-            </div>`
-                $(tabID).empty();
-                $(tabID).append(courseItem);
-                courseItem='';
-              }
-             
-            }, error: function(error){
-              console.log(error,"error")
-            }
-          })
-        }
-       
-      })
-  })
-</script>
+
+
 
 <style>
     

@@ -72,7 +72,6 @@
           <span>
             <p>
               Subscribe to our <strong>NEWSLETTER</strong> <br>
-              <small>Recieve discount coupons and tech news</small>
             </p>
           </span>
           <form method='POST' action="{% url 'email-list-signup' %}" class="form newsletter-form">
@@ -147,7 +146,7 @@
           <h4>Providers</h4>
           <ul class="list-unstyled">
             {% for provider in course_provider_list %}
-              <li><a href="affiliate Link of provider">{{provider}}</a></li>
+              <li><a href="{{provider.provider_url}}">{{provider}}</a></li>
             {% endfor %}
           </ul>
         </div>
