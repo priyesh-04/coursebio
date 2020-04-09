@@ -82,7 +82,7 @@ class HomePageView(ListView):
 	def get_context_data(self, *args, **kwargs):
 		context = super(HomePageView, self).get_context_data(*args, **kwargs)
 		context['category_list'] = Category.objects.all()
-		context['popular_course_list'] = Course.objects.filter(popular=True).distinct()
+		context['popular_course_list'] = Course.objects.filter(popular=True).distinct().order_by("?")[:10]
 		# print(context,'con')
 		return context
 
@@ -131,7 +131,7 @@ class CourseDetailView(TemplateView):
 		context['course'] = course
 		context['related_tags'] = Tag.objects.filter(courses=course)
 		related_courses = Course.objects.filter(category=course.category)
-		context['related_courses'] = related_courses.exclude(title=course.title)
+		context['related_courses'] = related_courses.exclude(title=course.title).order_by("?")[:10]
 		# print(context['related_tags'],'con')
 		return context
 
