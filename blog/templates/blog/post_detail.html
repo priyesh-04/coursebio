@@ -231,7 +231,7 @@
 
                     <div class="block-title-div">
                         <h4 class="block-title">
-                            <span>Best Learning Platforms</span>
+                            <span>Online Learning Platforms</span>
                         </h4>
                     </div>
 
@@ -252,7 +252,7 @@
                         {% for provider in course_provider_list %}
                         <li>
                             <img src="{{provider.image_url}}" alt="" style="width: 20px;height: 20px;border-radius: 50%;border: 1px solid grey;">
-                            <a href="affiliate Link of provider">{{provider}}</a>
+                            <a href="{{provider.provider_url}}">{{provider}}</a>
                         </li>
                         {% endfor %}
                     </ul>

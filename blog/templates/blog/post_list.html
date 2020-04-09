@@ -137,20 +137,34 @@
             {% include "base/pagination/pagination.html" %}
         </div>
 
-        <div class="col-sm-12 col-md-12 col-lg-4">
-            <div class="discount-coupons-wrapper">
-                <div class="course-review-wrapper">
-                    <div class="block-title-div">
-                        <h4 class="block-title">
-                            <span>Latest Reviews</span>
-                        </h4>
-                    </div>
-                </div>
+            <div class="col-sm-12 col-md-12 col-lg-4">
                 <div class="block-title-div">
                     <h4 class="block-title">
-                        <span>Discount Coupons</span>
+                        <span>Online Learning Platforms</span>
                     </h4>
                 </div>
+
+                <style>
+                    .best-mobiles-list {
+                        list-style: none;
+                        font-size: 16px;
+                        padding:0;
+                        margin-left: 10px;
+                        font-weight: bold;
+                    }
+                    .best-mobiles-list li {
+                        margin-bottom: 10px;
+                    }
+                </style>
+
+                <ul class="best-mobiles-list">
+                    {% for provider in course_provider_list %}
+                    <li>
+                        <img src="{{provider.image_url}}" alt="" style="width: 20px;height: 20px;border-radius: 50%;border: 1px solid grey;">
+                        <a href="{{provider.provider_url}}">{{provider}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div> 
