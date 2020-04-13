@@ -61,7 +61,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     firstname       = models.CharField(max_length=255, blank=True)
     lastname        = models.CharField(max_length=255, blank=True)
     date_of_birth 	= models.DateField(blank=True, null=True)
-    slug            = models.SlugField(null=True, unique=True, blank=True)
+    slug            = models.SlugField(max_length = 255, null=True, unique=True, blank=True)
     is_staff        = models.BooleanField(('staff status'), default=False,
                     help_text=('Designates whether the user can log into this admin '
                     'site.'))
