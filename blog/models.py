@@ -20,7 +20,7 @@ from .utils import get_read_time
 
 class BlogCategory(models.Model):
     title               = models.CharField(max_length=100, unique=True)
-    slug                = models.SlugField(null=True, unique=True, blank=True)
+    slug                = models.SlugField(max_length = 255, null=True, unique=True, blank=True)
     updated             = models.DateTimeField(auto_now=True)
     timestamp           = models.DateTimeField(auto_now_add=True)
 
@@ -51,7 +51,7 @@ class Post(models.Model):
     image_url 		= models.URLField(null=True, blank=True)
     content 		= models.TextField()
     draft 			= models.BooleanField(default=False)
-    slug 			= models.SlugField(null=True, unique=True, blank=True)
+    slug 			= models.SlugField(max_length = 255, null=True, unique=True, blank=True)
     publish 		= models.DateField(auto_now=False, auto_now_add=False)
     read_time 		= models.IntegerField(default=0) # models.TimeField(null=True, 														blank=True) #assume minutes
     updated 		= models.DateTimeField(auto_now=True, auto_now_add=False)

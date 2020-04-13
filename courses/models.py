@@ -13,7 +13,7 @@ class Category(models.Model):
 	title				= models.CharField(max_length=100, unique=True)
 	image_url 			= models.URLField(null=True, blank=True)
 	icon_name			= models.CharField(max_length=100, null=True, blank=True)
-	slug       			= models.SlugField(null=True, unique=True, blank=True)
+	slug       			= models.SlugField(max_length = 255, null=True, unique=True, blank=True)
 	updated     		= models.DateTimeField(auto_now=True)
 	timestamp   		= models.DateTimeField(auto_now_add=True)
 
@@ -39,7 +39,7 @@ class SubCategory(models.Model):
 	category			= models.ForeignKey(Category, on_delete=models.CASCADE,)
 	title				= models.CharField(max_length=100, unique=True)
 	image_url 			= models.URLField(null=True, blank=True)
-	slug       			= models.SlugField(null=True, unique=True, blank=True)
+	slug       			= models.SlugField(max_length = 255, null=True, unique=True, blank=True)
 	updated     		= models.DateTimeField(auto_now=True)
 	timestamp   		= models.DateTimeField(auto_now_add=True)
 
@@ -64,7 +64,7 @@ class Provider(models.Model):
 	plan_details        = models.CharField(max_length=140, null=True, blank=True,)
 	price				= models.DecimalField(max_digits=19, decimal_places=2, null=True, blank=True,)
 	provider_url		= models.URLField(null=True, blank=True,)
-	slug       			= models.SlugField(null=True, unique=True, blank=True,)
+	slug       			= models.SlugField(max_length = 255, null=True, unique=True, blank=True,)
 	updated     		= models.DateTimeField(auto_now=True,)
 	timestamp   		= models.DateTimeField(auto_now_add=True,)
 
@@ -103,7 +103,7 @@ class Course(models.Model):
 	is_free			= models.BooleanField(default=False,)
 	certificate		= models.BooleanField(default=False,)
 	course_url		= models.URLField(null=True, blank=True,)
-	slug    		= models.SlugField(null=True, unique=True, blank=True,)
+	slug    		= models.SlugField(max_length = 255, null=True, unique=True, blank=True,)
 	popular			= models.BooleanField(default=False,)
 	updated     	= models.DateTimeField(auto_now=True,)
 	timestamp   	= models.DateTimeField(auto_now_add=True,)

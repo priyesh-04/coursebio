@@ -9,7 +9,7 @@ from blog.models import Post
 
 class Tag(models.Model):
     title       = models.CharField(max_length=120)
-    slug        = models.SlugField(null=True, blank=True)
+    slug        = models.SlugField(max_length = 255, null=True, blank=True)
     timestamp   = models.DateTimeField(auto_now_add=True)
     active      = models.BooleanField(default=True)
     courses     = models.ManyToManyField(Course, blank=True)
