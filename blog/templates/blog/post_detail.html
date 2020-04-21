@@ -44,7 +44,7 @@
                                 <span style='color:red;'>Draft</span> 
                             {% endif %}
                             <div class="mt-2" style="font-size: 0.7rem;">
-                                <span style="font-weight: bold;color: #000;"><span style="color: grey;font-weight: normal;">By </span>Priyesh Shukla</span>
+                                <span style="font-weight: bold;color: #000;"><span style="color: grey;font-weight: normal;">By </span>{{object.author}}</span>
                                 <span style="color: grey;"> - Published On: {{ post.publish }} | Last Updated: {{ post.updated }}</span>
                             </div>
                         </small>
@@ -54,9 +54,7 @@
                         <img src='{{ object.image_url }}'/>
                     {% endif %}
 
-                    {% if object.user.get_full_name %}
-                        <p class="text-muted text-right" style="font-size: 0.8rem;">Author: <strong>Priyesh Shukla</strong></p>
-                    {% endif %}
+                    <p class="text-muted text-right" style="font-size: 0.8rem;">Author: <strong>{{object.author}}</strong></p>
 
 
                     <div class='post-detail-item'>{{ object.get_markdown }}</div>
@@ -84,7 +82,7 @@
                                     {% endif %}
                                     <h3 class="post-title">{{post.title}}</h3>
                                     <div style="font-size: 0.7rem;">
-                                        <span style="font-weight: bold;color: #000;">Priyesh Shukla</span>
+                                        <span style="font-weight: bold;color: #000;">{{post.author}}</span>
                                         <span style="color: grey;"> - {{ post.publish }}</span>
                                     </div>
                                 </div>
@@ -183,7 +181,7 @@
 
                     <ul class="best-mobiles-list">
                         {% for post in recent_articles %}
-                        <li>
+                        <li class="border-bottom">
                             <a href="{{post.get_absolute_url}}">{{post}}</a>
                         </li>
                         {% endfor %}
