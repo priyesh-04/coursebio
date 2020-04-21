@@ -32,9 +32,11 @@ class PostDetailView(DetailView):
         slug = self.kwargs.get("slug")
         qs = Post.objects.filter(slug=slug)
         reading_post = qs[0]
-        print(reading_post)
+        # print(reading_post)
         category = reading_post.category
         related_articles = Post.objects.filter(category=category)
+        recent_articles = Post.objects.filter(category=category).order_by('-publish')[:7]
+        context['recent_articles'] = related_articles.exclude(title=reading_post.title)
         context['related_articles'] = related_articles.exclude(title=reading_post.title)
         # print(context)
         return context
