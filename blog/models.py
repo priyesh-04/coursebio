@@ -50,6 +50,7 @@ class Post(models.Model):
     title 			= models.CharField(max_length=120, unique=True)
     image_url 		= models.URLField(null=True, blank=True)
     content 		= models.TextField()
+    author          = models.CharField(max_length=120, null=True, blank=True,)
     draft 			= models.BooleanField(default=False)
     slug 			= models.SlugField(max_length = 255, null=True, unique=True, blank=True)
     publish 		= models.DateField(auto_now=False, auto_now_add=False)

@@ -14,7 +14,6 @@
         margin-top: 0;
         margin-bottom: 26px;
         border-bottom: 2px solid #222;
-        /*background-color: #4db2ec;*/
     }
     .block-title span {
         line-height: 17px;
@@ -22,10 +21,6 @@
         padding: 7px 12px 4px;
         background-color: #222;
         color: #fff;
-    }
-
-    .post-list {
-        /*height: 150px;*/
     }
 
     .post-list:hover {
@@ -52,7 +47,6 @@
     }
 
     .post-title {
-        /*height: 42px;*/
         max-width: 500px;
         font-size: 0.9rem;
         font-weight: 700;
@@ -89,7 +83,11 @@
             height: 60px;
         }
     }
-
+    @media only screen and (max-width: 374px) { 
+        .content-div { 
+            height: 89px;
+        }
+    }
 </style>
 
 <div class="container">
@@ -120,7 +118,7 @@
                             <h3 class="post-title">{{post.title}}</h3>
                             <div class="content-div">
                                 <p>
-                                    {{post.content|truncatechars:120}}
+                                    {{post.get_markdown|truncatechars:120}}
                                     <a href="{{post.get_absolute_url}}">Read more</a>
                                 </p>
                             </div>
@@ -139,20 +137,34 @@
             {% include "base/pagination/pagination.html" %}
         </div>
 
-        <div class="col-sm-12 col-md-12 col-lg-4">
-            <div class="discount-coupons-wrapper">
-                <div class="course-review-wrapper">
-                    <div class="block-title-div">
-                        <h4 class="block-title">
-                            <span>Course Reviews</span>
-                        </h4>
-                    </div>
-                </div>
+            <div class="col-sm-12 col-md-12 col-lg-4">
                 <div class="block-title-div">
                     <h4 class="block-title">
-                        <span>Discount Coupons</span>
+                        <span>Online Learning Platforms</span>
                     </h4>
                 </div>
+
+                <style>
+                    .best-mobiles-list {
+                        list-style: none;
+                        font-size: 16px;
+                        padding:0;
+                        margin-left: 10px;
+                        font-weight: bold;
+                    }
+                    .best-mobiles-list li {
+                        margin-bottom: 10px;
+                    }
+                </style>
+
+                <ul class="best-mobiles-list">
+                    {% for provider in course_provider_list %}
+                    <li>
+                        <img src="{{provider.image_url}}" alt="" style="width: 20px;height: 20px;border-radius: 50%;border: 1px solid grey;">
+                        <a href="{{provider.provider_url}}">{{provider}}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div> 
