@@ -44,7 +44,7 @@
                                 <span style='color:red;'>Draft</span> 
                             {% endif %}
                             <div class="mt-2" style="font-size: 0.7rem;">
-                                <span style="font-weight: bold;color: #000;"><span style="color: grey;font-weight: normal;">By</span> Team Coursebio</span>
+                                <span style="font-weight: bold;color: #000;"><span style="color: grey;font-weight: normal;">By </span>Priyesh Shukla</span>
                                 <span style="color: grey;"> - Published On: {{ post.publish }} | Last Updated: {{ post.updated }}</span>
                             </div>
                         </small>
@@ -55,7 +55,7 @@
                     {% endif %}
 
                     {% if object.user.get_full_name %}
-                        <p class="text-muted text-right" style="font-size: 0.8rem;">Author: Coursebio</p>
+                        <p class="text-muted text-right" style="font-size: 0.8rem;">Author: <strong>Priyesh Shukla</strong></p>
                     {% endif %}
 
 
@@ -84,7 +84,7 @@
                                     {% endif %}
                                     <h3 class="post-title">{{post.title}}</h3>
                                     <div style="font-size: 0.7rem;">
-                                        <span style="font-weight: bold;color: #000;">Team AtoZ</span>
+                                        <span style="font-weight: bold;color: #000;">Priyesh Shukla</span>
                                         <span style="color: grey;"> - {{ post.publish }}</span>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
             }
             a:hover {
                 text-decoration: none;
-                color: var(--danger);
+                color: #007bff;
             }
 
             .block-title-div {
@@ -181,53 +181,13 @@
                         </h4>
                     </div>
 
-                    <ul class="sidebar-product-list">
-                        {% for product in product_list %}
-                            <li class="sidebar-product">
-                                <a href="{{ product.get_absolute_url }}">
-                                    {% for image in image_list %}
-                                        {% if product == image.product %}
-                                          <div class="product-img-div">
-                                              <img class="product-img" src="{{image.get_image_url}}" alt="{{product}} image">
-                                          </div>
-                                        {% endif %}
-                                    {% endfor %} 
-                                    <div class="product-details-div">
-                                        <h6 class="product-title">{{product.title}}</h6>
-                                        <span class="product-price text-dark">Rs. {{product.price}}</span>
-                                    </div>                       
-                                </a>
-                            </li>
+                    <ul class="best-mobiles-list">
+                        {% for post in recent_articles %}
+                        <li>
+                            <a href="{{post.get_absolute_url}}">{{post}}</a>
+                        </li>
                         {% endfor %}
-                    </ul>
-
-                    <div class="block-title-div">
-                        <h4 class="block-title">
-                            <span>Popular Articles</span>
-                        </h4>
-                    </div>
-
-                    <ul class="sidebar-product-list">
-                        {% for product in product_list %}
-                            <li class="sidebar-product">
-                                <a href="{{ product.get_absolute_url }}">
-                                    {% for image in image_list %}
-                                        {% if product == image.product %}
-                                          <div class="product-img-div">
-                                              <img class="product-img" src="{{image.get_image_url}}" alt="{{product}} image">
-                                          </div>
-                                        {% endif %}
-                                    {% endfor %} 
-                                    <div class="product-details-div">
-                                        <h6 class="product-title">{{product.title}}</h6>
-                                        <span class="product-price text-dark">Rs. {{product.price}}</span>
-                                    </div>                       
-                                </a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-
-                    
+                    </ul>                  
 
                     <div class="block-title-div">
                         <h4 class="block-title">
@@ -241,7 +201,6 @@
                             font-size: 16px;
                             padding:0;
                             margin-left: 10px;
-                            font-weight: bold;
                         }
                         .best-mobiles-list li {
                             margin-bottom: 10px;
