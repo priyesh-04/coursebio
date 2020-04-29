@@ -228,9 +228,11 @@
 					{% endif %}
 					
 				</div>
-				<span class="course-title">
-					{{course.title}}
-				</span>
+				<a href="{{course.get_absolute_url}}" class="text-decoration-none text-dark">
+					<span class="course-title">
+						{{course.title}}
+					</span>
+				</a>
 				<div class="bottom-detail-div">
 					<p class="author-name">
 						<i class="material-icons">person</i>
@@ -277,10 +279,3 @@
 
 
 {% endblock content %}
-
-<div class="course-video">
-				<iframe width="200" height="112"
-				src="{{course.video_url}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-				</iframe>
-			</div>
-
