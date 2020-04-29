@@ -12,11 +12,21 @@ from .models import (
 						Provider,
 					)
 
-@admin.register(Course)
-class PostModelAdmin(admin.ModelAdmin):
-    formfield_overrides = {
+# @admin.register(Course)
+# class PostModelAdmin(admin.ModelAdmin):
+#     formfield_overrides = {
+#         models.TextField: {'widget': AdminPagedownWidget},
+#     }
+
+class CourseAdmin(admin.ModelAdmin):
+	formfield_overrides = {
         models.TextField: {'widget': AdminPagedownWidget},
     }
+	list_display = ('id', 'title', 'provider', 'category', 'updated',)
+	list_display_links = ('title', 'category', 'id')
+	list_filter = ('user', 'category', 'subcategory', 'provider', 'timestamp', 'updated')
+	search_fields = ('category__title', 'subcategory__title', 'title', 'description')
+	ordering = ('-timestamp',)
 
 class CategoryAdmin(admin.ModelAdmin):
 	list_display = ('id', 'title', 'slug', 'updated',)
@@ -41,15 +51,10 @@ class ProviderAdmin(admin.ModelAdmin):
 	ordering = ('-timestamp',)
 
 
-# class CourseAdmin(admin.ModelAdmin):
-# 	list_display = ('id', 'title', 'price', 'provider', 'subcategory', 'category', 'slug', 'updated',)
-# 	list_display_links = ('title', 'category', 'id')
-# 	list_filter = ('category', 'price', 'provider', 'subcategory', 'timestamp', 'updated')
-# 	search_fields = ('category__title', 'subcategory__title', 'title', 'description')
-# 	ordering = ('-timestamp',)
+
 
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(Provider, ProviderAdmin)
-# admin.site.register(Course, CourseAdmin)
+admin.site.register(Course, CourseAdmin)
