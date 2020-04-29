@@ -22,7 +22,7 @@ class CourseAdmin(admin.ModelAdmin):
 	formfield_overrides = {
         models.TextField: {'widget': AdminPagedownWidget},
     }
-	list_display = ('id', 'title', 'provider', 'category', 'updated',)
+	list_display = ('id', 'title', 'provider', 'category', 'user', 'timestamp', 'updated',)
 	list_display_links = ('title', 'category', 'id')
 	list_filter = ('user', 'category', 'subcategory', 'provider', 'timestamp', 'updated')
 	search_fields = ('category__title', 'subcategory__title', 'title', 'description')
