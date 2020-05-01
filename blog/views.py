@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.utils import timezone
 from django.shortcuts import render
 from django.views.generic.base import TemplateView, View
 from django.views.generic import (CreateView,
@@ -6,6 +7,7 @@ from django.views.generic import (CreateView,
 								  ListView,
 								  UpdateView,
 								)
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from blog.models import BlogCategory, Post
 from django.core.paginator import Paginator
@@ -30,15 +32,20 @@ class PostDetailView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(PostDetailView, self).get_context_data(*args, **kwargs)
         slug = self.kwargs.get("slug")
-        qs = Post.objects.filter(slug=slug)
-        reading_post = qs[0]
+        instance = get_object_or_404(Post, slug=slug)
+        if instance.publish > timezone.now().date() or instance.draft:
+            if not self.request.user.is_staff or not self.request.user.is_superuser:
+                raise Http404
+        qs = Post.objects.active().filter(slug=slug)
+        if qs:
+            reading_post = qs[0]
         # print(reading_post)
-        category = reading_post.category
-        related_articles = Post.objects.filter(category=category)
-        recent_articles = Post.objects.filter(category=category).order_by('-publish')[:7]
-        context['recent_articles'] = related_articles.exclude(title=reading_post.title)
-        context['related_articles'] = related_articles.exclude(title=reading_post.title)
-        # print(context)
+            category = reading_post.category
+            related_articles = Post.objects.active().filter(category=category)
+            recent_articles = Post.objects.active().filter(category=category).order_by('-publish')[:7]
+            context['recent_articles'] = related_articles.exclude(title=reading_post.title)
+            context['related_articles'] = related_articles.exclude(title=reading_post.title)
+        print(context,'DetailView')
         return context
 
 
@@ -46,10 +53,18 @@ class PostListView(ListView):
     model = Post
     paginate_by = 8
 
+    def get_queryset(self, *args, **kwargs):
+        today = timezone.now().date()
+        post_list = Post.objects.active() #.order_by("-timestamp")
+        if self.request.user.is_staff or self.request.user.is_superuser:
+            post_list = Post.objects.all()
+        # print(post_list,'qs')
+        return post_list
+
     def get_context_data(self, *args, **kwargs):
         context = super(PostListView, self).get_context_data(*args, **kwargs)
         context['page_range'] = context['paginator'].page_range
-        # print(context['post_list'].values())
+        # print(context,'ListView')
         return context
 
 
@@ -61,7 +76,9 @@ class CategoryPostListView(ListView):
     def get_queryset(self, *args, **kwargs):
         slug = self.kwargs.get("slug")
         category = get_object_or_404(BlogCategory, slug=slug)
-        qs = Post.objects.filter(category=category)
+        qs = Post.objects.active().filter(category=category)
+        if self.request.user.is_staff or self.request.user.is_superuser:
+            qs = Post.objects.filter(category=category)
         return qs
 
     def get_context_data(self, *args, **kwargs):
@@ -93,7 +110,7 @@ class PostUpdateView(AccessMixin, UpdateView):
 
 class PostSearchListView(TemplateView):
     template_name = 'blog/search_list.html'
-    queryset = Post.objects.all()
+    queryset = Post.objects.active()
 
     def get_context_data(self, *args, **kwargs):
         context = super(PostSearchListView, self).get_context_data(*args, **kwargs)
