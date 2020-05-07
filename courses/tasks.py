@@ -6,29 +6,31 @@ from .udemy import Udemy
 
 from accounts.models import MyUser
 from courses.models import Category, SubCategory, Provider, Course
+from tags.models import Tag
 
-# @task(name="sum_two_numbers")
-# def add(x, y):
-#     return x + y
+from random import randrange
 
-# @task(name="multiply_two_numbers")
-# def mul(x, y):
-#     total = x * (y * random.randint(3, 100))
-#     return total
 
-# @task(name="sum_list_numbers")
-# def xsum(numbers):
-#     return sum(numbers)
+@task(name="coursebio.tasks.create_post")
+def create_post():
+	num = randrange(10)
+	num2 = randrange(10)
+	val = num+num2
+	val2 = str(val)
+	print(val2,'val2')
+	tag_obj = Tag(title=val2)
+	tag_obj.save()
+	return 'Success'
 
-@task(name="udemy_api")
-def udemyapi():
+@task(name="coursebio.tasks.udemy")
+def udemy():
 	user = MyUser.objects.filter(id=1)[0]
 	category = Category.objects.filter(id=3)[0]
 	provider=Provider.objects.filter(id=1)[0]
 
 	udemy = Udemy('A3NMCg6nzLUPjTYR2bIjYeU9cUW1k3wHRQyzTX03', '9PPNGtZy0SPqcLn2mfIltOFzOkqzPQRInEmlLQAtscDkEjadVCO0wwc1Cu2qxMwt4ZlhlMcUZibyIrRx45pWeJmb7KJK4bCt6HgGAolEXDZA94VRpUmkYxWTFMbhB69f')
 
-	udemy_course_list = udemy.courses(page=1, page_size=25,category='Lifestyle')
+	udemy_course_list = udemy.courses(page=25, page_size=27,category='Lifestyle')
 	for i in range(len(udemy_course_list['results'])):
 		
 		udemy_course_detail = udemy.course_detail(udemy_course_list['results'][i]['id'], course ='@all')
@@ -55,5 +57,5 @@ def udemyapi():
 
 		else:
 			print('All courses already exists in our database.')
-	return None
+	return 'Success'
     
