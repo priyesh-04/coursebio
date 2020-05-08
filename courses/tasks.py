@@ -6,56 +6,64 @@ from .udemy import Udemy
 
 from accounts.models import MyUser
 from courses.models import Category, SubCategory, Provider, Course
-from tags.models import Tag
 
-from random import randrange
-
-
-@task(name="coursebio.tasks.create_post")
-def create_post():
-	num = randrange(10)
-	num2 = randrange(10)
-	val = num+num2
-	val2 = str(val)
-	print(val2,'val2')
-	tag_obj = Tag(title=val2)
-	tag_obj.save()
-	return 'Success'
 
 @task(name="coursebio.tasks.udemy")
 def udemy():
-	user = MyUser.objects.filter(id=1)[0]
-	category = Category.objects.filter(id=3)[0]
-	provider=Provider.objects.filter(id=1)[0]
+	user = MyUser.objects.get(email='priyesh.shukla070@gmail.com')
+	provider = Provider.objects.get(title='udemy')
 
 	udemy = Udemy('A3NMCg6nzLUPjTYR2bIjYeU9cUW1k3wHRQyzTX03', '9PPNGtZy0SPqcLn2mfIltOFzOkqzPQRInEmlLQAtscDkEjadVCO0wwc1Cu2qxMwt4ZlhlMcUZibyIrRx45pWeJmb7KJK4bCt6HgGAolEXDZA94VRpUmkYxWTFMbhB69f')
 
-	udemy_course_list = udemy.courses(page=25, page_size=27,category='Lifestyle')
-	for i in range(len(udemy_course_list['results'])):
-		
-		udemy_course_detail = udemy.course_detail(udemy_course_list['results'][i]['id'], course ='@all')
-		course_ = Course.objects.filter(title=udemy_course_detail['title'])
+	udemy_cats = ['Development', 'Design', 'Business', 'Finance+%26+Accounting', 'Health+%26+Fitness', 'IT+%26+Software', 'Lifestyle', 'Marketing', 'Music', 'Office Productivity', 'Personal Development', 'Photography', 'Teaching+%26+Academics', 'Udemy Free Resource Center']
 
-		if course_:
-			i=i+1
-			continue
-		
-		elif not course_:
-			print('Total',i,'courses added in database.')
-			course_obj = Course(user=user, category=category, provider=provider,title=udemy_course_detail['title'],description=udemy_course_detail['description'],)
-			course_obj.save()
-			d = udemy_course_detail['course_has_labels']
+	my_cat_dict = {'Development':'Computer Science', 'Design':'Arts & Design', 'Business':'Business', 'Finance+%26+Accounting':'Finance & Accounting', 'Health+%26+Fitness':'Health & Fitness', 'IT+%26+Software':'IT & Software', 'Lifestyle':'Lifestyle', 'Marketing':'Marketing', 'Music':'Music', 'Office Productivity':'Office Productivity', 'Personal Development':'Personal Development', 'Photography':'Photography', 'Teaching+%26+Academics':'Teaching & Academics', 'Udemy Free Resource Center':'Others', }
 
-			for i in range(len(d)):
+	for cats in range(len(udemy_cats)):
+		for i in range(1,3):
+			udemy_course_list = udemy.courses(page=1, page_size=2,category=udemy_cats[cats])
+			print(udemy_course_list,'list')
+			for i in range(len(udemy_course_list['results'])):
+				
+				udemy_course_detail = udemy.course_detail(udemy_course_list['results'][i]['id'], course ='@all')
+				course_ = Course.objects.filter(title=udemy_course_detail['title'])
+				print('Detail',udemy_course_detail,'Detail')
+				if course_:
+					i=i+1
+					continue
+				
+				elif not course_:
+					# print('Total',i,'courses added in database.')
+					category = Category.objects.get(title=my_cat_dict[udemy_cats[cats]])
+					image = udemy_course_detail['image_480x270']
+					author = udemy_course_detail['visible_instructors'][0]['title']
+					duration = udemy_course_detail['content_info']
+					level = udemy_course_detail['instructional_level']
+					url = 'https://www.udemy.com/' + udemy_course_detail['url']
+					course_obj = Course(user=user, category=category, provider=provider, image_url=image, title=udemy_course_detail['title'], description=udemy_course_detail['description'], author=author, duration=duration, level=level, course_url=url)
+					
+					if udemy_course_detail['promo_asset'] is not None:
+						video = udemy_course_detail['promo_asset']['download_urls']['Video'][0]['file']
+						course_obj.video_url = video
+					if udemy_course_detail['is_paid']:
+						course_obj.price = 13.0
+					else:
+						course_obj.is_free=True
+					course_obj.certificate = True
+					course_obj.save()
+					d = udemy_course_detail['course_has_labels']
 
-				subcategory = SubCategory.objects.filter(title=d[i]['label']['title'])
-				if not subcategory:
-					new_subcat = SubCategory.objects.create(category=category,title=d[i]['label']['title'])
-					course_obj.subcategory.add(new_subcat)
+					for i in range(len(d)):
+
+						subcategory = SubCategory.objects.filter(title=d[i]['label']['title'])
+						if not subcategory:
+							new_subcat = SubCategory.objects.create(category=category,title=d[i]['label']['title'])
+							course_obj.subcategory.add(new_subcat)
+						else:
+							course_obj.subcategory.add(subcategory[0])
+
 				else:
-					course_obj.subcategory.add(subcategory[0])
+					print('All courses already exists in our database.')
 
-		else:
-			print('All courses already exists in our database.')
 	return 'Success'
     
