@@ -121,7 +121,8 @@ class Course(models.Model):
 	def get_markdown(self):
 		description = self.description
 		markdown_text = markdown(description)
-		return mark_safe(markdown_text)
+		# return mark_safe(markdown_text)
+		return description
 
 
 def course_pre_save_receiver(sender, instance, *args, **kwargs):
