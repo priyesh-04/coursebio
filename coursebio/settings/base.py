@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'markdown_deux',
     'pagedown',
+    'django_celery_beat',
+    'django_celery_results',
 
     #local apps
     'accounts',
@@ -181,3 +183,11 @@ CSRF_COOKIE_SECURE              = False
 SECURE_HSTS_SECONDS             = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS  = False
 SECURE_FRAME_DENY               = False
+
+
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE

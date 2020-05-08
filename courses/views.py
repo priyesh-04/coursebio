@@ -89,8 +89,7 @@ class HomePageView(ListView):
 
 class AllCourseListView(ListView):
 	model = Course
-	template_name = 'courses/course_list.html'
-		
+	template_name = 'courses/course_list.html'	
 
 
 class SubcategoryListView(ListView):
