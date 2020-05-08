@@ -99,13 +99,13 @@ class AllCourseListView(ListView):
 		provider 	= Provider.objects.get(title='udemy')
 
 		udemy = Udemy('A3NMCg6nzLUPjTYR2bIjYeU9cUW1k3wHRQyzTX03', '9PPNGtZy0SPqcLn2mfIltOFzOkqzPQRInEmlLQAtscDkEjadVCO0wwc1Cu2qxMwt4ZlhlMcUZibyIrRx45pWeJmb7KJK4bCt6HgGAolEXDZA94VRpUmkYxWTFMbhB69f')
-		udemy_cats = ['Development', 'Design', 'Business', 'Finance & Accounting', 'Health & Fitness', 'IT & Software', 'Lifestyle', 'Marketing', 'Music', 'Office Productivity', 'Personal Development', 'Photography', 'Teaching & Academics', 'Udemy Free Resource Center']
+		udemy_cats = ['Development', 'Design', 'Business', 'Finance+%26+Accounting', 'Health+%26+Fitness', 'IT+%26+Software', 'Lifestyle', 'Marketing', 'Music', 'Office Productivity', 'Personal Development', 'Photography', 'Teaching+%26+Academics', 'Udemy Free Resource Center']
 
-		my_cat_dict = {'Development':'Computer Science', 'Design':'Arts & Design', 'Business':'Business', 'Finance & Accounting':'Finance & Accounting', 'Health & Fitness':'Health & Fitness', 'IT & Software':'IT & Software', 'Lifestyle':'Lifestyle', 'Marketing':'Marketing', 'Music':'Music', 'Office Productivity':'Office Productivity', 'Personal Development':'Personal Development', 'Photography':'Photography', 'Teaching & Academics':'Teaching & Academics', 'Udemy Free Resource Center':'Others', }
+		my_cat_dict = {'Development':'Computer Science', 'Design':'Arts & Design', 'Business':'Business', 'Finance+%26+Accounting':'Finance & Accounting', 'Health+%26+Fitness':'Health & Fitness', 'IT+%26+Software':'IT & Software', 'Lifestyle':'Lifestyle', 'Marketing':'Marketing', 'Music':'Music', 'Office Productivity':'Office Productivity', 'Personal Development':'Personal Development', 'Photography':'Photography', 'Teaching+%26+Academics':'Teaching & Academics', 'Udemy Free Resource Center':'Others', }
 
 		for cats in range(len(udemy_cats)):
 			for i in range(1,3):
-				udemy_course_list = udemy.courses(page=1, page_size=3,category=udemy_cats[cats])
+				udemy_course_list = udemy.courses(page=1, page_size=7,category=udemy_cats[cats])
 				print(udemy_course_list,'list')
 				for i in range(len(udemy_course_list['results'])):
 					
@@ -119,13 +119,16 @@ class AllCourseListView(ListView):
 					elif not course_:
 						print('Total',i,'courses added in database.')
 						category = Category.objects.get(title=my_cat_dict[udemy_cats[cats]])
-						video = udemy_course_detail['promo_asset']['download_urls']['Video'][0]['file']
 						image = udemy_course_detail['image_480x270']
 						author = udemy_course_detail['visible_instructors'][0]['title']
 						duration = udemy_course_detail['content_info']
 						level = udemy_course_detail['instructional_level']
 						url = 'https://www.udemy.com/' + udemy_course_detail['url']
-						course_obj = Course(user=user, category=category, provider=provider,image_url=image,video_url=video, title=udemy_course_detail['title'],description=udemy_course_detail['description'],author=author,duration=duration,level=level,course_url=url)
+						course_obj = Course(user=user, category=category, provider=provider, image_url=image, title=udemy_course_detail['title'], description=udemy_course_detail['description'], author=author, duration=duration, level=level, course_url=url)
+						
+						if udemy_course_detail['promo_asset'] is not None:
+							video = udemy_course_detail['promo_asset']['download_urls']['Video'][0]['file']
+							course_obj.video_url = video
 						if udemy_course_detail['is_paid']:
 							course_obj.price = 13.0
 						else:
