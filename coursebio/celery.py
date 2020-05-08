@@ -20,26 +20,10 @@ app.autodiscover_tasks()
 
 from celery.schedules import crontab
 app.conf.beat_schedule = {
-    # 'add-every-minute-contrab': {
-    #     'task': 'courses.tasks.create_post',
-    #     'schedule': crontab(),
-    #     'args': (),
-    # },
-    # Executes every Monday morning at 7:30 a.m.
     'add-every-monday-morning': {
         'task': 'courses.tasks.udemy',
-        'schedule': crontab(hour=7, minute=30, day_of_week=1),
-        'args': (),
-    },
-    'add-every-5-seconds': {
-        'task': 'courses.tasks.create_post',
         'schedule': 5.0,
-        'args': ()
-    },
-    'add-every-minute-contrab': {
-        'task': 'courses.tasks.udemy',
-        'schedule': crontab(),
-        'args': ()
+        'args': (),
     },
 }
 
