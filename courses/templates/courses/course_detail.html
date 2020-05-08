@@ -143,9 +143,13 @@
 			<div class="mt-1 text-center">
 				{% if course.video_url %}
 				<div class="video-wrapper embed-responsive embed-responsive-16by9">
-					<iframe class="embed-responsive-item" 
-					src="{{course.video_url}}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-					</iframe>
+					<video controls width="250">
+					    <source src="{{course.video_url}}"
+					            type="video/webm">
+					    <source src="{{course.video_url}}"
+					            type="video/mp4">
+					    Sorry, your browser doesn't support embedded videos.
+					</video>
 				</div>
 				{% else %}
 					<img class="img-fluid" src="{{course.image_url}}" alt="">
