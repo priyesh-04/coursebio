@@ -92,7 +92,7 @@ class Course(models.Model):
 	provider 		= models.ForeignKey(Provider, on_delete=models.CASCADE,)
 	image_url       = models.URLField(null=True, blank=True,)
 	video_url 		= models.URLField(null=True, blank=True,)
-	title			= models.CharField(max_length=400, unique=True,)
+	title			= models.CharField(max_length=255, unique=True,)
 	description		= models.TextField()
 	author          = models.CharField(max_length=120, null=True, blank=True,)
 	duration        = models.CharField(max_length=50, null=True, blank=True,)
