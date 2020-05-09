@@ -48,11 +48,7 @@ def udemy():
 						video = udemy_course_detail['promo_asset']['download_urls']['Video'][0]['file']
 						course_obj.video_url = video
 					except Exception as e:
-						subject = 'An Exception occured.'
-						from_email = settings.EMAIL_HOST_USER
-						message = e
-						recipient_list = ['tecnicotrixx@gmail.com', 'coursebio100@gmail.com']
-						send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+						print(e,'Exception')
 					if udemy_course_detail['is_paid']:
 						course_obj.price = 13.0
 					else:
