@@ -86,10 +86,22 @@ class HomePageView(ListView):
 		# print(context,'con')
 		return context
 
-
+from .tasks import udemy
 class AllCourseListView(ListView):
 	model = Course
-	template_name = 'courses/course_list.html'	
+	template_name = 'courses/course_list.html'
+
+	# def get_context_data(self, *args, **kwargs):
+	# 	context = super(AllCourseListView, self).get_context_data(*args, **kwargs)
+		
+	# 	udemy()
+	# 	return context
+
+from django.http import HttpResponse
+
+def udemy_api(request):
+    udemy()
+    return HttpResponse(status=404)
 
 
 class SubcategoryListView(ListView):

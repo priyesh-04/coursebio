@@ -8,9 +8,13 @@ from .views import (
 		CourseListView,
 		CourseDetailView,
 		SearchListView,
+
+		udemy_api
 		)
 
 urlpatterns = [
+	url(r'^udemy-api/$',udemy_api),
+
 	url(r'^search/$', SearchListView.as_view(), name='search'),
 	url(r'^$', HomePageView.as_view(), name='home'),
 	url(r'^home/api/(?P<slug>[\w-]+)/$', HomePageAPIView.as_view(), name='home-api'),
