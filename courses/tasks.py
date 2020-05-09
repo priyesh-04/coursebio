@@ -69,26 +69,7 @@ def udemy():
 							course_obj.subcategory.add(new_subcat)
 						else:
 							course_obj.subcategory.add(subcategory[0])
-			else:
-				subject = 'Udemy Course List Loop Terminated.'
-				from_email = settings.EMAIL_HOST_USER
-				message = 'Udemy Course List Loop Terminated without completing the  process.'
-				recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@gmail.com']
-				send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-
-		else:
-			subject = 'Page Loop Terminated.'
-			from_email = settings.EMAIL_HOST_USER
-			message = 'Page Loop Terminated without completing the process.'
-			recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@gmail.com']
-			send_mail(subject, message, from_email, recipient_list, fail_silently=False)
-
-	else:
-		subject = 'Categories Loop Terminated.'
-		from_email = settings.EMAIL_HOST_USER
-		message = 'Categories Loop Terminated without completing the process.'
-		recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@gmail.com']
-		send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+			
 
 	updated_courses_count = Course.objects.filter(provider__title='udemy').count()
 	if present_courses_count == updated_courses_count:
