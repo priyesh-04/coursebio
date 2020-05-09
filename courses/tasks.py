@@ -44,9 +44,15 @@ def udemy():
 					url = 'https://www.udemy.com/' + udemy_course_detail['url']
 					course_obj = Course(user=user, category=category, provider=provider, image_url=image, title=udemy_course_detail['title'], description=udemy_course_detail['description'], author=author, duration=duration, level=level, course_url=url)
 					
-					if udemy_course_detail['promo_asset'] is not None:
+					try:
 						video = udemy_course_detail['promo_asset']['download_urls']['Video'][0]['file']
 						course_obj.video_url = video
+					except Exception as e:
+						subject = 'An Exception occured.'
+						from_email = settings.EMAIL_HOST_USER
+						message = e
+						recipient_list = ['tecnicotrixx@gmail.com', 'coursebio100@gmail.com']
+						send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 					if udemy_course_detail['is_paid']:
 						course_obj.price = 13.0
 					else:
@@ -63,6 +69,26 @@ def udemy():
 							course_obj.subcategory.add(new_subcat)
 						else:
 							course_obj.subcategory.add(subcategory[0])
+			else:
+				subject = 'Udemy Course List Loop Terminated.'
+				from_email = settings.EMAIL_HOST_USER
+				message = 'Udemy Course List Loop Terminated without completing the  process.'
+				recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@gmail.com']
+				send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
+		else:
+			subject = 'Page Loop Terminated.'
+			from_email = settings.EMAIL_HOST_USER
+			message = 'Page Loop Terminated without completing the process.'
+			recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@gmail.com']
+			send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
+	else:
+		subject = 'Categories Loop Terminated.'
+		from_email = settings.EMAIL_HOST_USER
+		message = 'Categories Loop Terminated without completing the process.'
+		recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@gmail.com']
+		send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
 	updated_courses_count = Course.objects.filter(provider__title='udemy').count()
 	if present_courses_count == updated_courses_count:
