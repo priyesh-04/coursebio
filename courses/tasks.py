@@ -28,6 +28,7 @@ def udemy():
 			for i in range(len(udemy_course_list['results'])):
 				
 				udemy_course_detail = udemy.course_detail(udemy_course_list['results'][i]['id'], course ='@all')
+				course_ = ''
 				try:
 					course_ = Course.objects.get(title=udemy_course_detail['title'])
 				except Exception as e:
