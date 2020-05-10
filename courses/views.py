@@ -22,11 +22,27 @@ from courses.models import (
 
 def course_category_list(request):
     # Category loops on index page.
-    category_list = Category.objects.all()
-    context = {
-        "course_category_list": category_list,
-    }
-    return context
+	qs = Category.objects.all()
+	categories = []
+	categories.append(qs.get(title='Computer Science'))
+	categories.append(qs.get(title='Business'))
+	categories.append(qs.get(title='Data Science'))
+	categories.append(qs.get(title='IT & Software'))
+	categories.append(qs.get(title='Marketing'))
+	categories.append(qs.get(title='Office Productivity'))
+	categories.append(qs.get(title='Personal Development'))
+	categories.append(qs.get(title='Finance & Accounting'))
+	categories.append(qs.get(title='Music'))
+	categories.append(qs.get(title='Arts & Design'))
+	categories.append(qs.get(title='Health & Fitness'))
+	categories.append(qs.get(title='Lifestyle'))
+	categories.append(qs.get(title='Teaching & Academics'))
+	categories.append(qs.get(title='Others'))
+	category_list = categories
+	context = {
+	    "course_category_list": category_list,
+	}
+	return context
 
 def course_provider_list(request):
     course_provider_list = Provider.objects.all()
@@ -81,7 +97,23 @@ class HomePageView(ListView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(HomePageView, self).get_context_data(*args, **kwargs)
-		context['category_list'] = Category.objects.all()
+		qs = Category.objects.all()
+		categories = []
+		categories.append(qs.get(title='Computer Science'))
+		categories.append(qs.get(title='Business'))
+		categories.append(qs.get(title='Data Science'))
+		categories.append(qs.get(title='IT & Software'))
+		categories.append(qs.get(title='Marketing'))
+		categories.append(qs.get(title='Office Productivity'))
+		categories.append(qs.get(title='Personal Development'))
+		categories.append(qs.get(title='Finance & Accounting'))
+		categories.append(qs.get(title='Music'))
+		categories.append(qs.get(title='Arts & Design'))
+		categories.append(qs.get(title='Health & Fitness'))
+		categories.append(qs.get(title='Lifestyle'))
+		categories.append(qs.get(title='Teaching & Academics'))
+		categories.append(qs.get(title='Others'))
+		context['category_list'] = categories
 		context['popular_course_list'] = Course.objects.filter(popular=True).distinct().order_by("?")[:10]
 		# print(context,'con')
 		return context
