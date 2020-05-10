@@ -86,7 +86,7 @@
 <style>
 
     .category-container .row .category-wrapper {
-        min-height: 65px;
+        /*min-height: 65px;*/
         background: #fff;
         border: 1px solid #dee2e6;
         padding: 12px;
@@ -120,8 +120,8 @@
         text-decoration: none;
         color: #343a40;
     }
-    .category-wrapper .material-icons {
-        vertical-align: middle;
+    .category-wrapper .category-icons {
+        /*vertical-align: middle;*/
         margin-top: -4px;
     }
 
@@ -146,7 +146,7 @@
                 <a href="{{category.get_absolute_url}}">
                     <div class="category-wrapper">
                         <p>
-                            <i class="material-icons">{{category.icon_name}}</i>
+                            <i class="category-icons {{category.icon_name}}"></i>
                             {{category}}
                         </p>
                     </div>
