@@ -69,9 +69,9 @@ def udemy():
 								new_subcat = SubCategory.objects.create(category=category,title=d[j]['label']['title'])
 								course_obj.subcategory.add(new_subcat)
 							else:
-								course_obj.subcategory.add(subcategory[0])
+								course_obj.subcategory.add(subcategory)
 					except Exception as e:
-						print(e,'Exception')
+						continue
 			
 
 	updated_courses_count = Course.objects.filter(provider__title='udemy').count()
