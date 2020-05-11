@@ -29,7 +29,7 @@ class CourseAdmin(admin.ModelAdmin):
 	ordering = ('-timestamp',)
 
 class CategoryAdmin(admin.ModelAdmin):
-	list_display = ('id', 'title', 'slug', 'updated',)
+	list_display = ('id', 'title', 'slug', 'timestamp', 'updated',)
 	list_display_links = ('title', 'id')
 	list_filter = ('timestamp', 'updated')
 	search_fields = ('title',)
@@ -38,8 +38,8 @@ class CategoryAdmin(admin.ModelAdmin):
 class SubCategoryAdmin(admin.ModelAdmin):
 	list_display = ('id', 'title', 'category', 'slug', 'updated',)
 	list_display_links = ('title', 'id')
-	list_filter = ('timestamp', 'updated')
-	search_fields = ('title',)
+	list_filter = ('category__title', 'timestamp', 'updated')
+	search_fields = ('category__title', 'title',)
 	ordering = ('-timestamp',)
 
 
