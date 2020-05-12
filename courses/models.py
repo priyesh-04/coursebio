@@ -9,6 +9,27 @@ from django.utils.safestring import mark_safe
 from markdown_deux import markdown
 # Create your models here.
 
+
+class CategoryManager(models.Manager):
+    def sorted_categories(self):
+    	qs = Category.objects.all()
+    	categories = []
+    	categories.append(qs.get(title='Computer Science'))
+    	categories.append(qs.get(title='Business'))
+    	categories.append(qs.get(title='Data Science'))
+    	categories.append(qs.get(title='IT & Software'))
+    	categories.append(qs.get(title='Marketing'))
+    	categories.append(qs.get(title='Office Productivity'))
+    	categories.append(qs.get(title='Personal Development'))
+    	categories.append(qs.get(title='Finance & Accounting'))
+    	categories.append(qs.get(title='Music'))
+    	categories.append(qs.get(title='Arts & Design'))
+    	categories.append(qs.get(title='Photography'))
+    	categories.append(qs.get(title='Health & Fitness'))
+    	categories.append(qs.get(title='Lifestyle'))
+    	categories.append(qs.get(title='Teaching & Academics'))
+    	return categories
+
 class Category(models.Model):
 	title				= models.CharField(max_length=100, unique=True)
 	image_url 			= models.URLField(null=True, blank=True)
@@ -17,6 +38,7 @@ class Category(models.Model):
 	updated     		= models.DateTimeField(auto_now=True)
 	timestamp   		= models.DateTimeField(auto_now_add=True)
 
+	objects = CategoryManager()
 
 	def __str__(self):
 		return str(self.title)
@@ -85,6 +107,7 @@ pre_save.connect(provider_pre_save_receiver, sender=Provider)
 
 
 
+
 class Course(models.Model):
 	user			= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
 	category 		= models.ForeignKey(Category, on_delete=models.CASCADE,)
@@ -107,6 +130,7 @@ class Course(models.Model):
 	popular			= models.BooleanField(default=False,)
 	updated     	= models.DateTimeField(auto_now=True,)
 	timestamp   	= models.DateTimeField(auto_now_add=True,)
+
 
 	def __str__(self):
 		return str(self.title)
