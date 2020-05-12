@@ -34,6 +34,7 @@ def course_category_list(request):
 	categories.append(qs.get(title='Finance & Accounting'))
 	categories.append(qs.get(title='Music'))
 	categories.append(qs.get(title='Arts & Design'))
+	categories.append(qs.get(title='Photography'))
 	categories.append(qs.get(title='Health & Fitness'))
 	categories.append(qs.get(title='Lifestyle'))
 	categories.append(qs.get(title='Teaching & Academics'))
@@ -108,10 +109,10 @@ class HomePageView(ListView):
 		categories.append(qs.get(title='Finance & Accounting'))
 		categories.append(qs.get(title='Music'))
 		categories.append(qs.get(title='Arts & Design'))
+		categories.append(qs.get(title='Photography'))
 		categories.append(qs.get(title='Health & Fitness'))
 		categories.append(qs.get(title='Lifestyle'))
 		categories.append(qs.get(title='Teaching & Academics'))
-		categories.append(qs.get(title='Others'))
 		context['category_list'] = categories
 		context['popular_course_list'] = Course.objects.filter(popular=True).distinct().order_by("?")[:10]
 		# print(context,'con')
