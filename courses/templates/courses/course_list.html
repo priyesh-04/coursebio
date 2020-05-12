@@ -11,6 +11,8 @@
 
 {% block content %}
 
+{% include "base/pagination/pagination-css.html" %}
+
 <style>
 .tool-tip {
   position: relative;
@@ -264,9 +266,11 @@
 			</div>
 		</div>
 	{% endfor %} 
+
+	{% include "base/pagination/pagination.html" %}
 </div>
 
-
+{% include "base/pagination/pagination-js.html" %}
 
 {% endblock content %}
 
