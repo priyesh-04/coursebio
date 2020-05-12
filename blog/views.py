@@ -70,7 +70,7 @@ class PostListView(ListView):
 
 class CategoryPostListView(ListView):
     model = Post
-    paginate_by = 3
+    paginate_by = 8
     template_name = "blog/category_posts.html"
 
     def get_queryset(self, *args, **kwargs):

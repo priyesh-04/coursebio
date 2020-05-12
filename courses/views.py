@@ -9,7 +9,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic import (ListView, 
 								  DetailView
 								)
-
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 
 from tags.models import Tag
@@ -89,6 +89,12 @@ class HomePageView(ListView):
 class AllCourseListView(ListView):
 	model = Course
 	template_name = 'courses/course_list.html'
+	paginate_by = 25
+
+	def get_context_data(self, *args, **kwargs):
+		context = super(AllCourseListView, self).get_context_data(*args, **kwargs)
+		context['page_range'] = context['paginator'].page_range
+		return context
 
 
 
@@ -108,6 +114,8 @@ class SubcategoryListView(ListView):
 
 class CourseListView(ListView):
 	model = Course
+	context_object_name = 'course_list'
+	paginate_by = 25
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(CourseListView, self).get_context_data(*args, **kwargs)
@@ -115,6 +123,23 @@ class CourseListView(ListView):
 		subcategory = get_object_or_404(SubCategory, slug=slug2)
 		context['subcategory'] = subcategory
 		context['course_list'] = Course.objects.filter(subcategory=subcategory).distinct()
+		page_size = self.get_paginate_by(context['course_list'])
+		if page_size:
+			paginator, page, queryset, is_paginated = self.paginate_queryset(context['course_list'], page_size)
+			context = {
+			    'paginator': paginator,
+			    'page_obj': page,
+			    'is_paginated': is_paginated,
+			    'course_list': context['course_list']
+			}
+		else:
+			context = {
+			    'paginator': None,
+			    'page_obj': None,
+			    'is_paginated': False,
+			    'course_list': context['course_list']
+			}
+		context['page_range'] = context['paginator'].page_range
 		# print(context,'con')
 		return context
 
@@ -138,6 +163,7 @@ class CourseDetailView(TemplateView):
 class SearchListView(TemplateView):
 	template_name = 'courses/search_list.html'
 	queryset = Course.objects.all()
+	paginate_by = 8
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(SearchListView, self).get_context_data(*args, **kwargs)
