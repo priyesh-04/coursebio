@@ -113,34 +113,22 @@ class SubcategoryListView(ListView):
 
 
 class CourseListView(ListView):
-	model = Course
 	context_object_name = 'course_list'
-	paginate_by = 25
+	paginate_by = 3
+
+	def get_queryset(self, *args, **kwargs):
+		slug2 = self.kwargs.get('slug2')
+		subcategory = get_object_or_404(SubCategory, slug=slug2)
+		course_list = Course.objects.filter(subcategory=subcategory).distinct()
+		return course_list
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(CourseListView, self).get_context_data(*args, **kwargs)
 		slug2 = self.kwargs.get('slug2')
 		subcategory = get_object_or_404(SubCategory, slug=slug2)
 		context['subcategory'] = subcategory
-		context['course_list'] = Course.objects.filter(subcategory=subcategory).distinct()
-		page_size = self.get_paginate_by(context['course_list'])
-		if page_size:
-			paginator, page, queryset, is_paginated = self.paginate_queryset(context['course_list'], page_size)
-			context = {
-			    'paginator': paginator,
-			    'page_obj': page,
-			    'is_paginated': is_paginated,
-			    'course_list': context['course_list']
-			}
-		else:
-			context = {
-			    'paginator': None,
-			    'page_obj': None,
-			    'is_paginated': False,
-			    'course_list': context['course_list']
-			}
 		context['page_range'] = context['paginator'].page_range
-		# print(context,'con')
+		print(context,'con')
 		return context
 
 
