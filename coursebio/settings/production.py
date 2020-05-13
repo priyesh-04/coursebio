@@ -129,7 +129,7 @@ DATABASES = {
     # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'coursebio',
+        'NAME': 'coursebiooo',
         'USER': 'priyesh',
         'PASSWORD': PASSWORD,
         'HOST': 'localhost',
