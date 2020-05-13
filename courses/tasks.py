@@ -32,7 +32,7 @@ def udemy():
 				try:
 					course_ = Course.objects.get(title=udemy_course_detail['title'])
 				except Exception as e:
-					print(e,'Exception')
+					print(e,'Exception line 35')
 				# print('Detail',udemy_course_detail,'Detail')
 				if course_:
 					course_obj = course_
@@ -42,7 +42,7 @@ def udemy():
 					try:
 						subcategory = SubCategory.objects.get(title=udemy_course_detail['primary_subcategory']['title'])
 					except Exception as e:
-						print(e,'Exception line 67')
+						print(e,'Exception line 45')
 					if not subcategory:
 						subcat_obj = SubCategory.objects.create(category=category,title=udemy_course_detail['primary_subcategory']['title'])
 						course_obj.subcategory.add(subcat_obj)
@@ -55,7 +55,7 @@ def udemy():
 						try:
 							topic = Topic.objects.get(title=d[j]['label']['title'])
 						except Exception as e:
-							print(e,'Exception line 80')
+							print(e,'Exception line 58')
 						if not topic:
 							topic_obj = Topic.objects.create(category=category,title=d[j]['label']['title'])
 							course_obj.topic.add(topic_obj)
@@ -111,10 +111,11 @@ def udemy():
 								course_obj.topic.add(topic)
 						course_obj.save()
 					except Exception as e:
+						print(e,'Exception line 114')
 						continue
 
 		except Exception as e:
-			print(e,'Exception')
+			print(e,'Exception line 118')
 			continue
 			
 
