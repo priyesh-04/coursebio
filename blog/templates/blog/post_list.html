@@ -145,22 +145,32 @@
                 </div>
 
                 <style>
-                    .best-mobiles-list {
+                    .best-providers-list {
                         list-style: none;
                         font-size: 16px;
                         padding:0;
                         margin-left: 10px;
                         font-weight: bold;
                     }
-                    .best-mobiles-list li {
+                    .best-providers-list li {
                         margin-bottom: 10px;
+                    }
+                    .best-providers-list .provider-image{
+                        width: 32px;
+                        height: 32px;
+                        padding: 2.2px;
+                        vertical-align: middle;
+                        margin-top: -4px;
+                        border-style: none;
+                        border: 1px solid #d3d3d3;
+                        border-radius: 50%;
                     }
                 </style>
 
-                <ul class="best-mobiles-list">
+                <ul class="best-providers-list">
                     {% for provider in course_provider_list %}
                     <li>
-                        <img src="{{provider.image_url}}" alt="" style="width: 20px;height: 20px;border-radius: 50%;border: 1px solid grey;">
+                        <img class="provider-image" src="{{provider.image_url}}" alt="">
                         <a href="{{provider.provider_url}}">{{provider}}</a>
                     </li>
                     {% endfor %}

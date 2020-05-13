@@ -17,7 +17,8 @@ from courses.models import (
 								Category,
 							 	SubCategory, 
 							 	Course, 
-							 	Provider
+							 	Provider,
+							 	Topic
 							)
 
 def course_category_list(request):
@@ -157,16 +158,19 @@ class SearchListView(TemplateView):
 		context = super(SearchListView, self).get_context_data(*args, **kwargs)
 		qs1 = self.queryset
 		query = self.request.GET.get("q", None)
+		if query == 'Free' or query == 'free':
+			qs1 = qs1.filter(is_free=True)
 		if query is not None:
 			qs2 = qs1.filter(
 						Q(title__icontains=query)
-						|Q(description__icontains=query)
+						# |Q(description__icontains=query)
 						|Q(author__icontains=query)
 						| Q(price__icontains=query) 
 						| Q(provider__title__icontains=query)
 						| Q(category__title__icontains=query) 
 						| Q(subcategory__title__icontains=query)
-						| Q(tag__title__icontains=query)
+						| Q(topic__title__icontains=query)
+						# | Q(tag__title__icontains=query)
 						)
 			context['course_list'] = qs2.distinct()
 			context['query'] = query
