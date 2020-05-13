@@ -38,6 +38,7 @@ def udemy():
 					course_obj = course_
 					category = Category.objects.get(title='Computer Science')
 					course_obj.category = category
+					course_obj.save()
 					subcategory = ''
 					try:
 						subcategory = SubCategory.objects.get(title=udemy_course_detail['primary_subcategory']['title'])
@@ -46,9 +47,11 @@ def udemy():
 					if not subcategory:
 						subcat_obj = SubCategory.objects.create(category=category,title=udemy_course_detail['primary_subcategory']['title'])
 						course_obj.subcategory.add(subcat_obj)
+						print(subcat_obj,'subcategory added')
 					else:
 						course_obj.subcategory.add(subcategory)
-					course_obj.save()
+						print(subcategory,'subcategory added')
+
 					d = udemy_course_detail['course_has_labels']
 					topic = ''
 					for j in range(len(d)):
@@ -59,9 +62,10 @@ def udemy():
 						if not topic:
 							topic_obj = Topic.objects.create(category=category,title=d[j]['label']['title'])
 							course_obj.topic.add(topic_obj)
+							print(topic_obj,'topic added')
 						else:
 							course_obj.topic.add(topic)
-					course_obj.save()
+							print(topic,'topic added')
 
 				
 				elif not course_:
