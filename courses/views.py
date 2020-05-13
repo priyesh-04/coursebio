@@ -80,7 +80,7 @@ class HomePageView(ListView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(HomePageView, self).get_context_data(*args, **kwargs)
-		context['category_list'] = Category.objects.all()
+		context['category_list'] = Category.objects.sorted_categories()
 		context['popular_course_list'] = Course.objects.filter(popular=True).distinct().order_by("?")[:10]
 		# print(context,'con')
 		return context
