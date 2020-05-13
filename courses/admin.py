@@ -10,6 +10,7 @@ from .models import (
 						SubCategory, 
 						Course, 
 						Provider,
+						Topic,
 					)
 
 # @admin.register(Course)
@@ -42,6 +43,13 @@ class SubCategoryAdmin(admin.ModelAdmin):
 	search_fields = ('category__title', 'title',)
 	ordering = ('-timestamp',)
 
+class TopicAdmin(admin.ModelAdmin):
+	list_display = ('id', 'title', 'category', 'slug', 'updated',)
+	list_display_links = ('title', 'id')
+	list_filter = ('category__title', 'subcategory__title', 'timestamp', 'updated')
+	search_fields = ('category__title', 'subcategory__title', 'title',)
+	ordering = ('-timestamp',)
+
 
 class ProviderAdmin(admin.ModelAdmin):
 	list_display = ('id', 'title', 'slug', 'updated',)
@@ -56,5 +64,6 @@ class ProviderAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
+admin.site.register(Topic, TopicAdmin)
 admin.site.register(Provider, ProviderAdmin)
 admin.site.register(Course, CourseAdmin)

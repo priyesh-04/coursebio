@@ -36,10 +36,17 @@ def udemy():
 					course_obj = course_
 					category = Category.objects.get(title='Computer Science')
 					course_obj.category = category
-					sub_cat = SubCategory.objects.filter(course__title=course_.title)
-					for t in range(len(sub_cat)):
-						sub_cat[t].category = category
-						sub_cat[t].save()
+					d = udemy_course_detail['course_has_labels']
+					for j in range(len(d)):
+						subcategory = SubCategory.objects.filter(title=d[j]['label']['title'])
+						if not subcategory:
+							new_subcat = SubCategory.objects.create(category=category,title=d[j]['label']['title'])
+							course_obj.subcategory.add(new_subcat)
+							course_obj.save()
+						else:
+							course_obj.subcategory.add(subcategory)
+							course_obj.save()
+					
 
 				elif not course_:
 					# print('Total',i,'courses added in database.')
@@ -62,17 +69,18 @@ def udemy():
 						else:
 							course_obj.is_free=True
 						course_obj.certificate = True
-						course_obj.save()
 						d = udemy_course_detail['course_has_labels']
-
+						course_obj.save()
 						for j in range(len(d)):
 
 							subcategory = SubCategory.objects.filter(title=d[j]['label']['title'])
 							if not subcategory:
 								new_subcat = SubCategory.objects.create(category=category,title=d[j]['label']['title'])
 								course_obj.subcategory.add(new_subcat)
+								course_obj.save()
 							else:
 								course_obj.subcategory.add(subcategory)
+								course_obj.save()
 					except Exception as e:
 						print(e,'Exception Category line 76')
 
