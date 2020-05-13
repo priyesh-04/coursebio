@@ -25,8 +25,8 @@ class CourseAdmin(admin.ModelAdmin):
     }
 	list_display = ('id', 'title', 'provider', 'category', 'user', 'timestamp', 'updated',)
 	list_display_links = ('title', 'category', 'id')
-	list_filter = ('user', 'category', 'subcategory', 'provider', 'timestamp', 'updated')
-	search_fields = ('category__title', 'subcategory__title', 'title', 'description')
+	list_filter = ('user', 'category', 'subcategory', 'topic', 'provider', 'timestamp', 'updated')
+	search_fields = ('category__title', 'subcategory__title', 'topic__title', 'title', 'description')
 	ordering = ('-timestamp',)
 
 class CategoryAdmin(admin.ModelAdmin):

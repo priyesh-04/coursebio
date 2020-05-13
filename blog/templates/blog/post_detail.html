@@ -132,10 +132,10 @@
                 color: #fff;
             }
 
-            .sidebar-product-list {
+            .sidebar-course-list {
                 list-style: none;
             }
-            .sidebar-product {
+            .sidebar-course {
                 line-height: 20px;
                 margin: 0 0 1px 0;
                 padding: 0.75em 0;
@@ -144,16 +144,16 @@
                 display: block;
                 overflow: hidden;
             }
-            .sidebar-product:last-child {
+            .sidebar-course:last-child {
                 border: none;
             }
-            .product-img-div {
+            .course-img-div {
                 width: 80px;
                 height: 80px;
                 float: left;
                 position: relative;
             }
-            .product-img-div .product-img {
+            .course-img-div .course-img {
                 max-width: 100%;
                 max-height: 100%;
                 position: absolute;
@@ -163,11 +163,11 @@
                 right: 0;
             }
 
-            .product-details-div .product-title{
+            .course-details-div .course-title{
                 font-size: 0.7rem;
                 font-weight: bold;
             }
-            .product-details-div .product-price {
+            .course-details-div .course-price {
                 font-size: 0.7rem;
             }
         </style>
@@ -179,7 +179,7 @@
                         </h4>
                     </div>
 
-                    <ul class="best-mobiles-list">
+                    <ul class="best-providers-list">
                         {% for post in recent_articles %}
                         <li class="border-bottom">
                             <a href="{{post.get_absolute_url}}">{{post}}</a>
@@ -194,21 +194,31 @@
                     </div>
 
                     <style>
-                        .best-mobiles-list {
+                        .best-providers-list {
                             list-style: none;
                             font-size: 16px;
                             padding:0;
                             margin-left: 10px;
                         }
-                        .best-mobiles-list li {
+                        .best-providers-list li {
                             margin-bottom: 10px;
+                        }
+                        .best-providers-list .provider-image{
+                            width: 32px;
+                            height: 32px;
+                            padding: 2.2px;
+                            vertical-align: middle;
+                            margin-top: -4px;
+                            border-style: none;
+                            border: 1px solid #d3d3d3;
+                            border-radius: 50%;
                         }
                     </style>
 
-                    <ul class="best-mobiles-list">
+                    <ul class="best-providers-list">
                         {% for provider in course_provider_list %}
                         <li>
-                            <img src="{{provider.image_url}}" alt="" style="width: 20px;height: 20px;border-radius: 50%;border: 1px solid grey;">
+                            <img class="provider-image" src="{{provider.image_url}}" alt="">
                             <a href="{{provider.provider_url}}">{{provider}}</a>
                         </li>
                         {% endfor %}
