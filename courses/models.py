@@ -9,26 +9,6 @@ from django.utils.safestring import mark_safe
 from markdown_deux import markdown
 
 
-class CategoryManager(models.Manager):
-    def sorted_categories(self):
-    	# pass
-    	qs = Category.objects.all()
-    	categories = []
-    	categories.append(qs.get(title='Computer Science'))
-    	categories.append(qs.get(title='Business'))
-    	# categories.append(qs.get(title='Data Science'))
-    	categories.append(qs.get(title='IT & Software'))
-    	categories.append(qs.get(title='Marketing'))
-    	# categories.append(qs.get(title='Office Productivity'))
-    	categories.append(qs.get(title='Personal Development'))
-    	categories.append(qs.get(title='Finance & Accounting'))
-    	categories.append(qs.get(title='Music'))
-    	categories.append(qs.get(title='Arts & Design'))
-    	categories.append(qs.get(title='Photography'))
-    	categories.append(qs.get(title='Health & Fitness'))
-    	categories.append(qs.get(title='Lifestyle'))
-    	categories.append(qs.get(title='Teaching & Academics'))
-    	return categories
 
 class Category(models.Model):
 	title				= models.CharField(max_length=100, unique=True)
@@ -38,7 +18,6 @@ class Category(models.Model):
 	updated     		= models.DateTimeField(auto_now=True)
 	timestamp   		= models.DateTimeField(auto_now_add=True)
 
-	objects = CategoryManager()
 
 	def __str__(self):
 		return str(self.title)
