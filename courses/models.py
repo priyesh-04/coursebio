@@ -28,7 +28,7 @@ class CategoryManager(models.Manager):
     	# categories.append(qs.get(title='Health & Fitness'))
     	# categories.append(qs.get(title='Lifestyle'))
     	# categories.append(qs.get(title='Teaching & Academics'))
-    	return categories
+    	# return categories
 
 class Category(models.Model):
 	title				= models.CharField(max_length=100, unique=True)
