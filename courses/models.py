@@ -9,9 +9,9 @@ from django.utils.safestring import mark_safe
 from markdown_deux import markdown
 
 
-class CategoryManager(models.Manager):
-    def sorted_categories(self):
-    	pass
+# class CategoryManager(models.Manager):
+#     def sorted_categories(self):
+#     	pass
     	# qs = Category.objects.all()
     	# categories = []
     	# categories.append(qs.get(title='Computer Science'))
@@ -38,7 +38,7 @@ class Category(models.Model):
 	updated     		= models.DateTimeField(auto_now=True)
 	timestamp   		= models.DateTimeField(auto_now_add=True)
 
-	objects = CategoryManager()
+	# objects = CategoryManager()
 
 	def __str__(self):
 		return str(self.title)
