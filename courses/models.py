@@ -91,6 +91,12 @@ class Topic(models.Model):
 	def __str__(self):
 		return str(self.title)
 
+def topic_pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+
+pre_save.connect(topic_pre_save_receiver, sender=Topic)
+
 
 class Provider(models.Model):
 	title				= models.CharField(max_length=100,)

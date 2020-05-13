@@ -5,19 +5,21 @@ from celery.decorators import task
 from .udemy import Udemy
 
 from accounts.models import MyUser
-from courses.models import Category, SubCategory, Provider, Course
+from courses.models import Category, SubCategory, Provider, Course, Topic
 from django.conf import settings
 from django.core.mail import send_mail
 
 # @task(name="coursebio.tasks.udemy")
 def udemy():
 	user = MyUser.objects.get(email='priyesh.shukla070@gmail.com')
-	provider = Provider.objects.get(title='udemy')
-	present_courses_count = Course.objects.filter(provider__title='udemy').count()
+	provider = Provider.objects.get(title='Udemy')
+	present_courses_count = Course.objects.filter(provider__title='Udemy').count()
 
 	udemy = Udemy('A3NMCg6nzLUPjTYR2bIjYeU9cUW1k3wHRQyzTX03', '9PPNGtZy0SPqcLn2mfIltOFzOkqzPQRInEmlLQAtscDkEjadVCO0wwc1Cu2qxMwt4ZlhlMcUZibyIrRx45pWeJmb7KJK4bCt6HgGAolEXDZA94VRpUmkYxWTFMbhB69f')
 
 	udemy_cats = ['Development', 'Design', 'Business', 'Finance+%26+Accounting', 'Health+%26+Fitness', 'IT+%26+Software', 'Lifestyle', 'Marketing', 'Music', 'Office Productivity', 'Personal Development', 'Photography', 'Teaching+%26+Academics',]
+
+	my_cat_dict = {'Development':'Computer Science', 'Design':'Arts & Design', 'Business':'Business', 'Finance+%26+Accounting':'Finance & Accounting', 'Health+%26+Fitness':'Health & Fitness', 'IT+%26+Software':'IT & Software', 'Lifestyle':'Lifestyle', 'Marketing':'Marketing', 'Music':'Music', 'Office Productivity':'Office Productivity', 'Personal Development':'Personal Development', 'Photography':'Photography', 'Teaching+%26+Academics':'Teaching & Academics',}
 
 	for k in range(1,101):
 		udemy_course_list = udemy.courses(page=k, page_size=100,category='Development')
@@ -30,24 +32,38 @@ def udemy():
 				try:
 					course_ = Course.objects.get(title=udemy_course_detail['title'])
 				except Exception as e:
-					print(e,'Exception course_ line 32')
+					print(e,'Exception')
 				# print('Detail',udemy_course_detail,'Detail')
 				if course_:
 					course_obj = course_
 					category = Category.objects.get(title='Computer Science')
 					course_obj.category = category
+					subcategory = ''
+					try:
+						subcategory = SubCategory.objects.get(title=udemy_course_detail['primary_subcategory']['title'])
+					except Exception as e:
+						print(e,'Exception line 67')
+					if not subcategory:
+						subcat_obj = SubCategory.objects.create(category=category,title=udemy_course_detail['primary_subcategory']['title'])
+						course_obj.subcategory.add(subcat_obj)
+					else:
+						course_obj.subcategory.add(subcategory)
+					course_obj.save()
 					d = udemy_course_detail['course_has_labels']
+					topic = ''
 					for j in range(len(d)):
-						subcategory = SubCategory.objects.filter(title=d[j]['label']['title'])
-						if not subcategory:
-							new_subcat = SubCategory.objects.create(category=category,title=d[j]['label']['title'])
-							course_obj.subcategory.add(new_subcat)
-							course_obj.save()
+						try:
+							topic = Topic.objects.get(title=d[j]['label']['title'])
+						except Exception as e:
+							print(e,'Exception line 80')
+						if not topic:
+							topic_obj = Topic.objects.create(category=category,title=d[j]['label']['title'])
+							course_obj.topic.add(topic_obj)
 						else:
-							course_obj.subcategory.add(subcategory)
-							course_obj.save()
-					
+							course_obj.topic.add(topic)
+					course_obj.save()
 
+				
 				elif not course_:
 					# print('Total',i,'courses added in database.')
 					try:
@@ -63,35 +79,48 @@ def udemy():
 							video = udemy_course_detail['promo_asset']['download_urls']['Video'][0]['file']
 							course_obj.video_url = video
 						except Exception as e:
-							print(e,'Exception Video Line 58')
+							print(e,'Exception')
 						if udemy_course_detail['is_paid']:
 							course_obj.price = 13.0
 						else:
 							course_obj.is_free=True
 						course_obj.certificate = True
-						d = udemy_course_detail['course_has_labels']
 						course_obj.save()
-						for j in range(len(d)):
+						subcategory = ''
+						try:
+							subcategory = SubCategory.objects.get(title=udemy_course_detail['primary_subcategory']['title'])
+						except Exception as e:
+							print(e,'Exception line 67')
+						if not subcategory:
+							subcat_obj = SubCategory.objects.create(category=category,title=udemy_course_detail['primary_subcategory']['title'])
+							course_obj.subcategory.add(subcat_obj)
+						else:
+							course_obj.subcategory.add(subcategory)
 
-							subcategory = SubCategory.objects.filter(title=d[j]['label']['title'])
-							if not subcategory:
-								new_subcat = SubCategory.objects.create(category=category,title=d[j]['label']['title'])
-								course_obj.subcategory.add(new_subcat)
-								course_obj.save()
+						d = udemy_course_detail['course_has_labels']
+						topic = ''
+						for j in range(len(d)):
+							try:
+								topic = Topic.objects.get(title=d[j]['label']['title'])
+							except Exception as e:
+								print(e,'Exception line 80')
+							if not topic:
+								topic_obj = Topic.objects.create(category=category,title=d[j]['label']['title'])
+								course_obj.topic.add(topic_obj)
 							else:
-								course_obj.subcategory.add(subcategory)
-								course_obj.save()
+								course_obj.topic.add(topic)
+						course_obj.save()
 					except Exception as e:
-						print(e,'Exception Category line 76')
+						continue
 
 		except Exception as e:
-			print(e,'Exception main block line 79')
+			print(e,'Exception')
 			continue
 			
 
 	updated_courses_count = Course.objects.filter(provider__title='udemy').count()
 	if present_courses_count == updated_courses_count:
-		subject = 'All Development courses already exists in our database.'
+		subject = 'All courses already exists in our database.'
 		from_email = settings.EMAIL_HOST_USER
 		message = 'Not found any new course to add in our database.All courses already exists in our database'
 		recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@gmail.com']
@@ -100,7 +129,7 @@ def udemy():
 
 	subject = 'Successfully completed udemy course adding feature.'
 	from_email = settings.EMAIL_HOST_USER
-	message = 'Udemy api Development process completed.'
+	message = 'Udemy api process completed.'
 	recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@gmail.com']
 	html_message = '<h1>Udemy api process completed.</h1>' + message
 	return send_mail(subject, message, from_email, recipient_list, fail_silently=False, html_message=html_message)
