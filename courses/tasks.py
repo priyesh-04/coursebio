@@ -36,7 +36,7 @@ def udemy():
 				# print('Detail',udemy_course_detail,'Detail')
 				if course_:
 					course_obj = course_
-					category = Category.objects.get(title='Finance+%26+Accounting')
+					category = Category.objects.get(title='Finance & Accounting')
 					course_obj.category = category
 					course_obj.save()
 					subcategory = ''
@@ -71,7 +71,7 @@ def udemy():
 				elif not course_:
 					# print('Total',i,'courses added in database.')
 					try:
-						category = Category.objects.get(title='Finance+%26+Accounting')
+						category = Category.objects.get(title='Finance & Accounting')
 						image = udemy_course_detail['image_480x270']
 						author = udemy_course_detail['visible_instructors'][0]['title']
 						duration = udemy_course_detail['content_info']
