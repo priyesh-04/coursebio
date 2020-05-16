@@ -22,7 +22,7 @@ def udemy():
 	my_cat_dict = {'Development':'Computer Science', 'Design':'Arts & Design', 'Business':'Business', 'Finance+%26+Accounting':'Finance & Accounting', 'Health+%26+Fitness':'Health & Fitness', 'IT+%26+Software':'IT & Software', 'Lifestyle':'Lifestyle', 'Marketing':'Marketing', 'Music':'Music', 'Office Productivity':'Office Productivity', 'Personal Development':'Personal Development', 'Photography':'Photography', 'Teaching+%26+Academics':'Teaching & Academics',}
 
 	for k in range(1,101):
-		udemy_course_list = udemy.courses(page=k, page_size=100,category='Development')
+		udemy_course_list = udemy.courses(page=k, page_size=100,category='Business')
 		# print(udemy_cats[cats],'list')
 		try:
 			for i in range(len(udemy_course_list['results'])):
@@ -36,7 +36,7 @@ def udemy():
 				# print('Detail',udemy_course_detail,'Detail')
 				if course_:
 					course_obj = course_
-					category = Category.objects.get(title='Computer Science')
+					category = Category.objects.get(title='Business')
 					course_obj.category = category
 					try:
 						num_subscribers = udemy_course_detail['num_subscribers']
@@ -87,7 +87,7 @@ def udemy():
 				elif not course_:
 					# print('Total',i,'courses added in database.')
 					try:
-						category = Category.objects.get(title='Computer Science')
+						category = Category.objects.get(title='Business')
 						image = udemy_course_detail['image_480x270']
 						author = udemy_course_detail['visible_instructors'][0]['title']
 						duration = udemy_course_detail['content_info']
@@ -117,7 +117,7 @@ def udemy():
 							print(e,'Exception video not available line 90')
 
 						if udemy_course_detail['is_paid']:
-							course_obj.price = 12.0
+							course_obj.price = 13.0
 						else:
 							course_obj.is_free=True
 						course_obj.has_certificate = True
@@ -160,14 +160,14 @@ def udemy():
 		subject = 'All courses already exists in our database.'
 		from_email = settings.EMAIL_HOST_USER
 		message = 'Not found any new course to add in our database.All courses already exists in our database'
-		recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@gmail.com']
+		recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@hotmail.com']
 		html_message = '<h1>No new course found to add in our database.</h1>'
 		send_mail(subject, message, from_email, recipient_list, fail_silently=False, html_message=html_message)
 
 	subject = 'Successfully completed udemy course adding feature.'
 	from_email = settings.EMAIL_HOST_USER
 	message = 'Udemy api process completed.'
-	recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@gmail.com']
+	recipient_list = ['tecnicotrixx@gmail.com', 'priyesh.shukla070@hotmail.com']
 	html_message = '<h1>Udemy api process completed.</h1>' + message
 	return send_mail(subject, message, from_email, recipient_list, fail_silently=False, html_message=html_message)
     
