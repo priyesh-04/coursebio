@@ -38,6 +38,21 @@ def udemy():
 					course_obj = course_
 					category = Category.objects.get(title='Computer Science')
 					course_obj.category = category
+					try:
+						popular = udemy_course_detail['num_subscribers']
+						if popular > 5000:
+							course_obj.is_popular = True
+					except Exception as e:
+						print(e,'Exception line 84')
+
+					try:
+						rating = udemy_course_detail['avg_rating']
+						num_reviews = udemy_course_detail['num_reviews']
+						course_obj.rating = rating
+						course_obj.num_reviews = num_reviews
+					except Exception as e:
+						print(e,'Exception line 92')
+						
 					course_obj.save()
 					subcategory = ''
 					try:
