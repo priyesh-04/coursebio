@@ -39,8 +39,9 @@ def udemy():
 					category = Category.objects.get(title='Computer Science')
 					course_obj.category = category
 					try:
-						popular = udemy_course_detail['num_subscribers']
-						if popular > 5000:
+						num_subscribers = udemy_course_detail['num_subscribers']
+						course_obj.num_subscribers = num_subscribers
+						if num_subscribers > 5000:
 							course_obj.is_popular = True
 					except Exception as e:
 						print(e,'Exception line 84')
@@ -94,8 +95,9 @@ def udemy():
 						url = 'https://www.udemy.com/' + udemy_course_detail['url']
 						course_obj = Course(user=user, category=category, provider=provider, image_url=image, title=udemy_course_detail['title'], description=udemy_course_detail['description'], author=author, duration=duration, level=level, course_url=url)
 						try:
-							popular = udemy_course_detail['num_subscribers']
-							if popular > 5000:
+							num_subscribers = udemy_course_detail['num_subscribers']
+							course_obj.num_subscribers = num_subscribers
+							if num_subscribers > 5000:
 								course_obj.is_popular = True
 						except Exception as e:
 							print(e,'Exception line 84')
