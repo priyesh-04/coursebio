@@ -22,7 +22,7 @@ def udemy():
 	my_cat_dict = {'Development':'Computer Science', 'Design':'Arts & Design', 'Business':'Business', 'Finance+%26+Accounting':'Finance & Accounting', 'Health+%26+Fitness':'Health & Fitness', 'IT+%26+Software':'IT & Software', 'Lifestyle':'Lifestyle', 'Marketing':'Marketing', 'Music':'Music', 'Office Productivity':'Office Productivity', 'Personal Development':'Personal Development', 'Photography':'Photography', 'Teaching+%26+Academics':'Teaching & Academics',}
 
 	for k in range(1,101):
-		udemy_course_list = udemy.courses(page=k, page_size=100,category='Office Productivity')
+		udemy_course_list = udemy.courses(page=k, page_size=100,category='Development')
 		# print(udemy_cats[cats],'list')
 		try:
 			for i in range(len(udemy_course_list['results'])):
@@ -36,7 +36,7 @@ def udemy():
 				# print('Detail',udemy_course_detail,'Detail')
 				if course_:
 					course_obj = course_
-					category = Category.objects.get(title='Personal Development')
+					category = Category.objects.get(title='Computer Science')
 					course_obj.category = category
 					course_obj.save()
 					subcategory = ''
@@ -71,21 +71,36 @@ def udemy():
 				elif not course_:
 					# print('Total',i,'courses added in database.')
 					try:
-						category = Category.objects.get(title='Personal Development')
+						category = Category.objects.get(title='Computer Science')
 						image = udemy_course_detail['image_480x270']
 						author = udemy_course_detail['visible_instructors'][0]['title']
 						duration = udemy_course_detail['content_info']
 						level = udemy_course_detail['instructional_level']
 						url = 'https://www.udemy.com/' + udemy_course_detail['url']
 						course_obj = Course(user=user, category=category, provider=provider, image_url=image, title=udemy_course_detail['title'], description=udemy_course_detail['description'], author=author, duration=duration, level=level, course_url=url)
-						
+						try:
+							popular = udemy_course_detail['num_subscribers']
+							if popular > 5000:
+								course_obj.is_popular = True
+						except Exception as e:
+							print(e,'Exception line 84')
+
+						try:
+							rating = udemy_course_detail['avg_rating']
+							num_reviews = udemy_course_detail['num_reviews']
+							course_obj.rating = rating
+							course_obj.num_reviews = num_reviews
+						except Exception as e:
+							print(e,'Exception line 92')
+
 						try:
 							video = udemy_course_detail['promo_asset']['download_urls']['Video'][0]['file']
 							course_obj.video_url = video
 						except Exception as e:
-							print(e,'Exception')
+							print(e,'Exception video not available line 90')
+
 						if udemy_course_detail['is_paid']:
-							course_obj.price = 13.0
+							course_obj.price = 12.0
 						else:
 							course_obj.is_free=True
 						course_obj.has_certificate = True
