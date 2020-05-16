@@ -133,6 +133,8 @@ class Course(models.Model):
 	updated     	= models.DateTimeField(auto_now=True,)
 	timestamp   	= models.DateTimeField(auto_now_add=True,)
 
+	class Meta:
+		ordering = ["num_subscribers"]
 
 	def __str__(self):
 		return str(self.title)
@@ -141,8 +143,6 @@ class Course(models.Model):
 		return reverse("courses:course-detail", 
 						kwargs={"slug":self.provider.slug, "slug2":self.slug}
 						)
-	class Meta:
-		ordering = ["-timestamp", "-updated"]
 
 	def get_markdown(self):
 		description = self.description
