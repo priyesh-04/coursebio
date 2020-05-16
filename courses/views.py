@@ -82,7 +82,7 @@ class HomePageView(ListView):
 	def get_context_data(self, *args, **kwargs):
 		context = super(HomePageView, self).get_context_data(*args, **kwargs)
 		context['category_list'] = Category.objects.all()
-		context['popular_course_list'] = Course.objects.filter(is_popular=True).distinct().order_by("num_subscribers")[:10]
+		context['popular_course_list'] = Course.objects.filter(is_popular=True).distinct()[:10]
 		# print(context,'con')
 		return context
 
@@ -94,7 +94,6 @@ class AllCourseListView(ListView):
 
 	def get_context_data(self, *args, **kwargs):
 		context = super(AllCourseListView, self).get_context_data(*args, **kwargs)
-		context['course_list'] = Course.objects.all().order_by("num_subscribers")
 		context['page_range'] = context['paginator'].page_range
 		return context
 
@@ -121,7 +120,7 @@ class CourseListView(ListView):
 	def get_queryset(self, *args, **kwargs):
 		slug2 = self.kwargs.get('slug2')
 		subcategory = get_object_or_404(SubCategory, slug=slug2)
-		course_list = Course.objects.filter(subcategory=subcategory).order_by("num_subscribers")
+		course_list = Course.objects.filter(subcategory=subcategory)
 		return course_list
 
 	def get_context_data(self, *args, **kwargs):
