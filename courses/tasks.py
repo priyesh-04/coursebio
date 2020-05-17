@@ -22,7 +22,7 @@ def udemy():
 	my_cat_dict = {'Development':'Computer Science', 'Design':'Arts & Design', 'Business':'Business', 'Finance+%26+Accounting':'Finance & Accounting', 'Health+%26+Fitness':'Health & Fitness', 'IT+%26+Software':'IT & Software', 'Lifestyle':'Lifestyle', 'Marketing':'Marketing', 'Music':'Music', 'Office Productivity':'Office Productivity', 'Personal Development':'Personal Development', 'Photography':'Photography', 'Teaching+%26+Academics':'Teaching & Academics',}
 
 	for k in range(1,101):
-		udemy_course_list = udemy.courses(page=k, page_size=100,category='Marketing')
+		udemy_course_list = udemy.courses(page=k, page_size=100,category='Personal Development')
 		# print(udemy_cats[cats],'list')
 		try:
 			for i in range(len(udemy_course_list['results'])):
@@ -36,7 +36,7 @@ def udemy():
 				# print('Detail',udemy_course_detail,'Detail')
 				if course_:
 					course_obj = course_
-					category = Category.objects.get(title='Marketing')
+					category = Category.objects.get(title='Personal Development')
 					course_obj.category = category
 					try:
 						num_subscribers = udemy_course_detail['num_subscribers']
@@ -87,7 +87,7 @@ def udemy():
 				elif not course_:
 					# print('Total',i,'courses added in database.')
 					try:
-						category = Category.objects.get(title='Marketing')
+						category = Category.objects.get(title='Personal Development')
 						image = udemy_course_detail['image_480x270']
 						author = udemy_course_detail['visible_instructors'][0]['title']
 						duration = udemy_course_detail['content_info']
