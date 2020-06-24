@@ -1,3 +1,5 @@
+# command to reassociate courses to right category and subcategory
+
 from django.core.management.base import BaseCommand, CommandError
 from courses.models import Course, Category, SubCategory
 
