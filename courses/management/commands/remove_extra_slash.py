@@ -8,7 +8,7 @@ from courses.models import Course
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        _courses = Course.objects.all()
+        _courses = Course.objects.all().iterator()
         for course in _courses:
         	url = course.course_url
         	if "https://www.udemy.com//" in url:
