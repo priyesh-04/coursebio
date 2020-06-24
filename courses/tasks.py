@@ -92,7 +92,7 @@ def udemy():
 						author = udemy_course_detail['visible_instructors'][0]['title']
 						duration = udemy_course_detail['content_info']
 						level = udemy_course_detail['instructional_level']
-						url = 'https://www.udemy.com/' + udemy_course_detail['url']
+						url = 'https://www.udemy.com' + udemy_course_detail['url']
 						course_obj = Course(user=user, category=category, provider=provider, image_url=image, title=udemy_course_detail['title'], description=udemy_course_detail['description'], author=author, duration=duration, level=level, course_url=url)
 						try:
 							num_subscribers = udemy_course_detail['num_subscribers']
