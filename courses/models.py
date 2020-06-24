@@ -146,7 +146,7 @@ class Course(models.Model):
 
 	def get_markdown(self):
 		description = self.description
-		markdown_text = markdown(description)
+		# markdown_text = markdown(description)
 		# return mark_safe(markdown_text)
 		return description
 

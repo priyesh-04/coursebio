@@ -221,25 +221,6 @@
 				    <div class="bg-light p-3">{{course.get_markdown|safe}}</div>
 				</div>
 			</div>
-
-			<div class="mb-5">
-				<div class="related-tags">
-					<div class="tab-div mt-3 mb-3">
-				        <ul class="nav nav-tabs">
-				          <li class="nav-item">
-				            <a class="nav-link border-bottom active" data-toggle="tab">Related Tags</a>
-				          </li>
-				        </ul>
-				    </div>
-					<ul class="list-inline">
-						{% for tag in related_tags %}
-							<li class="list-inline-item">
-								<a href="/search/?q={{tag}}">{{tag}}</a>
-							</li>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
 		</div>
 
 		<div class="col-sm-12 col-md-12 col-lg-12 mt-4 mb-5">
