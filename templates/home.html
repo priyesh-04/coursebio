@@ -105,17 +105,19 @@
 {# Courses Slider Section Starts #}
 
 <div class="container">
-    <nav>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        {% for category in course_category_list %}
-            <a class="nav-item nav-link active" id="nav-{{category}}-tab" data-toggle="tab" data-endpoint="{% url 'course:tabs' slug=category.slug %}" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
-                {{category}}
-            </a>
-        {% endfor %}
-      </div>
-    </nav>
-    <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="row">
+        <div class="col-12">
+            <div class="tab-div">
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link border-bottom active" data-toggle="tab">Popular Courses</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12 mt-2 mb-5">
+            
             <div class="container related-courses course-container">
                 <div class="swiper-container">
                     <div class="swiper-wrapper" >
@@ -189,59 +191,6 @@
         </div>
     </div>
 </div>
-
-<script>
-$(document).ready(function(){
-// window.onload = function() {
-//     var tab = document.querySelector('#nav-tab .nav-item:first-child');
-//     var endpoint = tab.getAttribute('data-endpoint');
-//     showCategoryCourses(endpoint)
-// }
-
-var tabs = document.querySelectorAll('#nav-tab .nav-item');
-
-tabs.forEach(function(tab) {
-  tab.addEventListener('click', function() {
-    var endpoint = this.getAttribute('data-endpoint');
-    showCategoryCourses(endpoint);
-  });
-});
-
-// AJAX for posting
-function showCategoryCourses(endpoint) {
-    $.ajax({
-        url : endpoint, // the endpoint
-        type : "GET", // http method
-        success : function(data) {
-            var course_list = data.qs
-            console.log(course_list,'course_list')
-            var swiperElem = $(".swiper-wrapper .course-item:first-child").clone();
-            document.querySelector('.swiper-wrapper').innerHTML = '';
-
-            for (var i = course_list.length - 1; i >= 0; i--) {
-                var course = course_list[i]
-                var swiperItem = swiperElem[0]
-                console.log(swiperElem,'swiperElem')
-                swiperItem.querySelector('.course-image').src = course.image_url;
-                swiperItem.querySelector('.provider-img-wrapper img').src = course.provider.image_url
-                swiperItem.querySelector('.provider-img-wrapper span').src = course.provider.title
-                swiperItem.querySelector('.card-course-title-div h3').innerText = course.title;
-                $('.swiper-wrapper').append(swiperItem);
-            }
-        },
-
-        // handle a non-successful response
-        error : function(xhr,errmsg,err) {
-
-            console.log(err,'err')
-            // console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
-        }
-    });
-};
-
-});
-
-</script>
 
 {# Courses Slider Section Ends #}
 
