@@ -48,25 +48,21 @@ def all_courses_list(request):
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
+from django.http import JsonResponse
 from rest_framework import authentication, permissions
 from .serializers import CourseModelSerializer, CategoryModelSerializer
 
-class HomePageAPIView(ListAPIView):
-	serializer_class = CourseModelSerializer
 
-	def get_queryset(self, slug=None, *args, **kwargs):
-		slug = self.kwargs.get("slug")
+def category_tabs_courses(request, slug=None, *args, **kwargs):
+	if request.method == "GET" and request.is_ajax():
 		print(slug,'slug')
 		category = get_object_or_404(Category, slug=slug)
-		print(category,'category')
-		url_ = category.get_absolute_url()
-		print(url_,'url_')
-		qs = Course.objects.filter(category=category)
+		qs = Course.objects.filter(category=category)[:12]
 		data = {
-		    "qs": qs,
+		    "qs": list(qs.values()),
 		}
-		print(qs[0].provider.image_url,'qs')
-		return qs
+		print(qs,'qs')
+		return JsonResponse(data)
 
 
 
@@ -82,7 +78,7 @@ class HomePageView(ListView):
 	def get_context_data(self, *args, **kwargs):
 		context = super(HomePageView, self).get_context_data(*args, **kwargs)
 		context['category_list'] = Category.objects.all()
-		context['popular_course_list'] = Course.objects.filter(is_popular=True).order_by("?")[:10]
+		context['popular_course_list'] = Course.objects.filter(is_popular=True).order_by("?")[:12]
 		# print(context,'con')
 		return context
 
