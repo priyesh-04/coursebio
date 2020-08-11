@@ -10,6 +10,7 @@ email.py*
 
 media/
 static/
+!coursebio/static/
 secret_keys/
 myprojectenv/
 coursebioenv/
