@@ -150,9 +150,11 @@
             <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                 <a href="{{subcategory.get_absolute_url}}">
                     <div class="subcategory-wrapper">
-                        <div class="subcategory-img-wrapper">
-                            <img class="subcategory-img" src="{{subcategory.image_url}}" alt="">
-                        </div>
+                        {% comment "subcategory.image_url is none" %}
+                            <div class="subcategory-img-wrapper">
+                                <img class="subcategory-img" src="{{subcategory.image_url}}" alt="">
+                            </div>
+                        {% endcomment %}
                         <div>
                             <p style="margin-top: 8px;">{{subcategory}}</p>
                         </div>
