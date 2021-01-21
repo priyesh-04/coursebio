@@ -60,8 +60,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'markdown_deux',
     'pagedown',
-    'django_celery_beat',
-    'django_celery_results',
+    # 'django_celery_beat',
+    # 'django_celery_results',
 
     #local apps
     'accounts',
@@ -126,7 +126,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'coursebio',
         'USER': 'postgres',
-        'PASSWORD': 'snap',
+        'PASSWORD': 'postgres',
         'HOST': 'localhost',
         'PORT': '',
     }
