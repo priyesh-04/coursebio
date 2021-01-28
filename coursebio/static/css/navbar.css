@@ -1,4 +1,4 @@
-<style>
+
 html,
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
@@ -122,6 +122,3 @@ body {
     display: none;
   }
 }
-
-
-</style>

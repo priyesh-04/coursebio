@@ -1,0 +1,16 @@
+.wmd-panel {
+	margin: auto 0;
+}
+
+.wmd-input,
+.wmd-button-bar {
+	background-color: #fff;
+}
+form .wmd-wrapper .wmd-preview {
+	display: none;
+}
+
+#preview-title {
+	width: 100%;
+	word-wrap: break-word;
+}

@@ -1,0 +1,16 @@
+.form-group {
+    margin-bottom: 0.5rem;
+}
+
+.login-container{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 100px;
+}
+.content-section {
+    width: 380px;
+    max-width: 380px;
+    border: 1px solid #dae0e5;
+    padding: 25px;
+    /*background: white;*/
+}

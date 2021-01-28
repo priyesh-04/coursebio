@@ -1,6 +1,9 @@
 {% extends "blog_base.html" %}
+{% load static %}
 
 {% block content %}
+
+<link rel="stylesheet" href="{% static 'css/blog_search_list.css' %}">
 
 <div class="container">
     <div class='row  mb-3'>
@@ -32,25 +35,7 @@
     </div>
 
     {% if post_list %}
-        <style>
-            .blog_search_list:hover {
-                background-color: lightblue;
-                transition-duration: 0.2s;
-            }
-            .search_post_title {
-                /*height: 54px;*/
-                max-width: 500px;
-                font-size: 0.9rem;
-                font-weight: 700;
-                overflow: hidden;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-            }
-            .timestamp-div {
-                font-size: 0.6rem;
-            }
-        </style>
+        
     {% for post in post_list %}
         <div class="border-bottom p-3 blog_search_list">
             <a href="{{post.get_absolute_url}}" style="text-decoration: none;color: #333;">

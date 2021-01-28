@@ -7,67 +7,7 @@
 
 {% block content %}
 
-<style>
-    .nav-search-form-div-mobile {
-        display: none;
-    }
-
-    .nav-search-form-div {
-        display: none;
-    }
-
-    .header-section {
-        height: 400px;
-        background-image: url('{{category.image_url}}');
-        background-size: cover;
-        background-position: center;
-        border-bottom: 1px solid #6c757d;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .header-container {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .header-info {
-        background: #fff;
-        width: 440px;
-        color: #343a40;
-        padding: 25px;
-    }
-
-    .header-info h1 {
-        font-weight: 700;
-        line-height: 1.2;
-        letter-spacing: -.02rem;
-        font-size: 2rem;
-    }
-    .header-info h3 {
-        font-size: 1rem;
-        font-weight: 400;
-    }
-    @media only screen and (max-width: 600px) {
-        .header-info h1 {
-            font-size: 1.6rem;
-        }
-        .header-info h3 {
-            font-size: 0.8rem;
-        }
-    }
-    @media only screen and (max-width: 350px) {
-        .header-info h1 {
-            font-size: 1.4rem;
-        }
-        .header-info h3 {
-            font-size: 0.7rem;
-        }
-    }
-</style>
+<link rel="stylesheet" href="{% static 'css/subcat_list.css' %}">
 
 <section class="header-section">
     <div class="container header-container">
@@ -82,60 +22,6 @@
     </div>
 </section>
 
-<style>
-
-    .subcategory-container .row .subcategory-wrapper {
-        min-height: 65px;
-        background: #fff;
-        border: 1px solid #dee2e6;
-        padding: 12px;
-        cursor: pointer;
-        display: flex;
-    }
-
-    .subcategory-container .subcategory-wrapper:hover,
-    .subcategory-container .subcategory-wrapper:active,
-    .subcategory-container .subcategory-wrapper:focus {
-        border: none;
-        box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
-    }
-
-    .subcategory-header-div {
-        font-size: 1.5rem;
-        font-weight: 700;
-        text-align: center;
-        margin-top: 25px;
-    }
-
-    h2::after {
-        display: block;
-        height: 2px;
-        background-color: #ffd700;
-        content: " ";
-        width: 100px;
-        margin: 20px auto;
-    }
-
-    .subcategory-container a {
-        text-decoration: none;
-        color: #343a40;
-    }
-
-    .subcategory-img-wrapper {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
-    }
-    .subcategory-img-wrapper img {
-        width: 100%;
-        height: 100%;
-    }
-    .nav-tabs .nav-link.active {
-        color: #fff;
-        background-color: var(--primary);
-        box-shadow: 0 0 8px 1px rgba(0,0,0,.05), 0 0px 7px 0 rgba(0,0,0,.10);
-    }
-</style>
 
 <div class="container subcategory-container">
     <div class="tab-div mt-3">

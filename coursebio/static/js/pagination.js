@@ -1,4 +1,4 @@
-<script>
+
     $(document).ready(function() {
         $(".page-num-btn").last().addClass('last-page-btn');
         $(".page-num-btn").first().addClass('first-page-btn');
@@ -33,4 +33,3 @@
             
         });
     });
-</script>

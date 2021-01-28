@@ -1,4 +1,4 @@
-<style>
+
     .pagination {
         align-items: center;
     }
@@ -38,4 +38,3 @@
         background: var(--danger);
         color: #fff;
     }
-</style>
