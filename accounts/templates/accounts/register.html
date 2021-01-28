@@ -8,7 +8,7 @@
         margin-bottom: 0.5rem;
     }
 
-    .login-container{
+    .register-container{
         display: flex;
         justify-content: center;
         padding-bottom: 100px;
@@ -23,7 +23,7 @@
 </style>
 
 <section class="main-section">
-    <div class="container login-container pt-5">
+    <div class="container register-container pt-5">
         <div class="content-section">
             <form method="POST">
                 {% csrf_token %}
@@ -37,7 +37,7 @@
             </form>
             <div class="border-top pt-3">
                 <small class="text-muted">
-                    Already have an account? <a class="ml-1" href="{% url 'login' %}">Log In</a>
+                    Already have an account? <a class="ml-1" href="{% url 'register' %}">Log In</a>
                 </small>
             </div>
         </div>
