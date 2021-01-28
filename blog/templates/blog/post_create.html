@@ -1,4 +1,6 @@
 {% extends "blog_base.html" %}
+{% load static %}
+
 {% load crispy_forms_tags %}
 
 {% block head_extra %} 
@@ -6,28 +8,9 @@
 
 {% endblock head_extra %}
 
-
-
 {% block content %}
-<style>
 
-	.wmd-panel {
-		margin: auto 0;
-	}
-	
-	.wmd-input,
-	.wmd-button-bar {
-		background-color: #fff;
-	}
-	form .wmd-wrapper .wmd-preview {
-		display: none;
-	}
-
-	#preview-title {
-		width: 100%;
-		word-wrap: break-word;
-	}
-</style>
+<link rel="stylesheet" href="{% static 'css/blog_post_create.css' %}">
 
 <div class="container-fluid">
 	<div class="row">

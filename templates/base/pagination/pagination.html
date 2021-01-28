@@ -1,3 +1,7 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/pagination.css' %}">
+
 <div class="pagination mt-5 mb-5">
     <span class="step-links">
         {% if page_obj.has_previous %}
@@ -24,3 +28,5 @@
         Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
     </span>
 </div>
+
+<script src="{% static 'js/pagination.js' %}"></script>

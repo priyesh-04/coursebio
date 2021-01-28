@@ -1,3 +1,7 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
 
 {% url 'course:home' as home_url %}
 {% url "course:all-courses" as allcourse_url %}
@@ -85,5 +89,4 @@
   </div>
 </nav>
 
-{% include './nav-css.html' %}
 {% include './nav-js.html' %}

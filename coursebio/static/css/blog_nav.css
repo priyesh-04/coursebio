@@ -1,4 +1,4 @@
-<style>
+
 html,
 body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
@@ -288,6 +288,3 @@ i.nav-link {
   -webkit-appearance:none;
   box-shadow: none !important;
 }
-
-
-</style>

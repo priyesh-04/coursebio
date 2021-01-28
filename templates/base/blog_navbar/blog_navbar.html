@@ -1,3 +1,6 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/blog_nav.css' %}">
 
 <nav class="blog-navbar navbar navbar-expand-md fixed-top navbar-dark bg-dark">
   <div class="container-fluid">
@@ -53,6 +56,4 @@
   </div>
 </div>
 
-
-{% include './blog_nav-css.html' %}
 {% include './blog_nav-js.html' %}
