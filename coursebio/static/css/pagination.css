@@ -8,7 +8,7 @@
     }
 
     .pagination span.current {
-        color: grey;
+        color: gray;
         font-size: 0.8rem;
     }
 
@@ -33,6 +33,12 @@
         background: var(--dark);
         color: #fff;
     }
+    .page-change-btn.after-dots:hover,
+    .page-change-btn.before-dots:hover {
+        background: none;
+        color: #666;
+    }
+
     .page-change-btn.active {
         border: 1px solid var(--danger);
         background: var(--danger);
