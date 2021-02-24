@@ -1,8 +1,8 @@
 from django.core.management.base import BaseCommand, CommandError
-from courses.tasks import udemy
+from courses.udacity_tasks import udacity
 
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        udemy()
+        udacity()
         return 'success'
