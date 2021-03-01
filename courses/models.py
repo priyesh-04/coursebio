@@ -39,7 +39,7 @@ pre_save.connect(category_pre_save_receiver, sender=Category)
 
 
 class SubCategory(models.Model):
-	category			= models.ForeignKey(Category, on_delete=models.CASCADE,)
+	category 			= models.ManyToManyField(Category,)
 	title				= models.CharField(max_length=255, unique=True)
 	image_url 			= models.URLField(null=True, blank=True)
 	slug       			= models.SlugField(max_length = 255, null=True, unique=True, blank=True)
@@ -63,7 +63,7 @@ pre_save.connect(subcategory_pre_save_receiver, sender=SubCategory)
 
 class Topic(models.Model):
 	title				= models.CharField(max_length=255, unique=True)
-	category			= models.ForeignKey(Category, on_delete=models.CASCADE,)
+	category 			= models.ManyToManyField(Category,)
 	subcategory 		= models.ManyToManyField(SubCategory, blank=True,)
 	slug       			= models.SlugField(max_length = 255, null=True, unique=True, blank=True)
 	updated     		= models.DateTimeField(auto_now=True)
@@ -108,8 +108,7 @@ pre_save.connect(provider_pre_save_receiver, sender=Provider)
 
 
 class Course(models.Model):
-	user			= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,)
-	category 		= models.ForeignKey(Category, on_delete=models.CASCADE,)
+	category 		= models.ManyToManyField(Category, blank=True,)
 	subcategory 	= models.ManyToManyField(SubCategory, blank=True,)
 	topic 			= models.ManyToManyField(Topic, blank=True,)
 	provider 		= models.ForeignKey(Provider, on_delete=models.CASCADE,)
