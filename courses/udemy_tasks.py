@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 
 # @task(name="coursebio.tasks.udemy")
 def udemy():
-	user = MyUser.objects.get(email='priyesh.shukla070@gmail.com')
+	# user = MyUser.objects.get(email='priyesh.shukla070@gmail.com')
 	provider = Provider.objects.get(title='Udemy')
 	present_courses_count = Course.objects.filter(provider__title='Udemy').count()
 
