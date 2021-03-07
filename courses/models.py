@@ -39,7 +39,7 @@ pre_save.connect(category_pre_save_receiver, sender=Category)
 
 
 class SubCategory(models.Model):
-	category 			= models.ManyToManyField(Category,)
+	category 			= models.ForeignKey(Category, on_delete=models.CASCADE,)
 	title				= models.CharField(max_length=255, unique=True)
 	image_url 			= models.URLField(null=True, blank=True)
 	slug       			= models.SlugField(max_length = 255, null=True, unique=True, blank=True)

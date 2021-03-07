@@ -66,8 +66,7 @@ class Command(BaseCommand):
             for item in subcategories:
                 sub_cat = SubCategory.objects.filter(title=item)
                 if not sub_cat:
-                    subcategory_obj = SubCategory.objects.create(title=item)
-                    subcategory_obj.category.add(category_obj)
+                    subcategory_obj = SubCategory.objects.create(category=category_obj, title=item)
                     subcategory_obj.save()
                 else:
                     print("Sub category with this Title already exists.")
