@@ -10,17 +10,17 @@ class Command(BaseCommand):
             "Business", "IT & Computer Science",
             ]
 
-        print(_cats,len(_cats), 'categories_list')
 
-        # for i in range(len(_cats)):
-        #     print(_cats[i])
-        #     cat = Category.objects.filter(title=_cats[i])
-        #     print(cat,'hhh')
-        #     if cat:
-        #         courses = Course.objects.filter(category=cat[0])
-        #         for j in range(len(courses)):
-        #             sub_cat = SubCategory.objects.filter(course__title=courses[j].title)
-        #             for k in range(len(sub_cat)):
-        #                 SubCategory.objects.filter(title=sub_cat[k].title).update(category=cat[0])
+        for i in range(len(_cats)):
+            cat = Category.objects.filter(title=_cats[i])
+            # try:
+            #     category = Category.objects.create(title=_cats[i])
+            # except Exception as e:
+            #     print(e,"Category with this Title already exists.",'Exception line 21')
+            if not cat:
+                category_obj = Category.objects.create(title=_cats[i])
+                category_obj.save()
+            else:
+                print("Category with this Title already exists.")
 
         return 'success'

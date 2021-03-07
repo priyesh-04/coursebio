@@ -60,18 +60,16 @@ class Command(BaseCommand):
                 }
 
         for key, value in my_dict.items():
-            print(key,len(value))
-
-
-    	# for i in range(len(_cats)):
-    	# 	print(_cats[i])
-    	# 	cat = Category.objects.filter(title=_cats[i])
-    	# 	print(cat,'hhh')
-    	# 	if cat:
-	    # 		courses = Course.objects.filter(category=cat[0])
-	    # 		for j in range(len(courses)):
-	    # 			sub_cat = SubCategory.objects.filter(course__title=courses[j].title)
-	    # 			for k in range(len(sub_cat)):
-	    # 				SubCategory.objects.filter(title=sub_cat[k].title).update(category=cat[0])
+            # print(key,value)
+            category_obj = Category.objects.filter(title=key).first()
+            subcategories = value
+            for item in subcategories:
+                sub_cat = SubCategory.objects.filter(title=item)
+                if not sub_cat:
+                    subcategory_obj = SubCategory.objects.create(title=item)
+                    subcategory_obj.category.add(category_obj)
+                    subcategory_obj.save()
+                else:
+                    print("Sub category with this Title already exists.")
 
         return 'success'
