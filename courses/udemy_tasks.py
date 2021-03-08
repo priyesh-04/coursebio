@@ -10,15 +10,19 @@ from django.core.mail import send_mail
 
 # @task(name="coursebio.tasks.udemy")
 def udemy():
-	user = MyUser.objects.get(email='priyesh.shukla070@gmail.com')
+	# user = MyUser.objects.get(email='priyesh.shukla070@gmail.com')
 	provider = Provider.objects.get(title='Udemy')
 	present_courses_count = Course.objects.filter(provider__title='Udemy').count()
 
 	udemy = Udemy('A3NMCg6nzLUPjTYR2bIjYeU9cUW1k3wHRQyzTX03', '9PPNGtZy0SPqcLn2mfIltOFzOkqzPQRInEmlLQAtscDkEjadVCO0wwc1Cu2qxMwt4ZlhlMcUZibyIrRx45pWeJmb7KJK4bCt6HgGAolEXDZA94VRpUmkYxWTFMbhB69f')
 
-	udemy_cats = ['Development', 'Design', 'Business', 'Finance+%26+Accounting', 'Health+%26+Fitness', 'IT+%26+Software', 'Lifestyle', 'Marketing', 'Music', 'Office Productivity', 'Personal Development', 'Photography', 'Teaching+%26+Academics',]
+	_cats = ["Professions & Hobbies", "Math, Science & Engineering", "Humanities & Social Sciences", "Languages", "Health & Fitness", "Arts & Design", 
+		"Music", "Finance & Accounting", "Personal Development", "Marketing", 
+		"Business", "IT & Computer Science",]
 
-	my_cat_dict = {'Development':'Computer Science', 'Design':'Arts & Design', 'Business':'Business', 'Finance+%26+Accounting':'Finance & Accounting', 'Health+%26+Fitness':'Health & Fitness', 'IT+%26+Software':'IT & Software', 'Lifestyle':'Lifestyle', 'Marketing':'Marketing', 'Music':'Music', 'Office Productivity':'Office Productivity', 'Personal Development':'Personal Development', 'Photography':'Photography', 'Teaching+%26+Academics':'Teaching & Academics',}
+	udemy_cats = ['Development', 'Design', 'Business', 'Finance+%26+Accounting', 'Health+%26+Fitness', 'IT+%26+Software', 'Lifestyle', 'Marketing', 'Music', 'Office Productivity', 'Personal Development', 'Photography+%26+Video', 'Teaching+%26+Academics',]
+
+	my_cat_dict = {'Development':'IT & Computer Science', 'Design':'Arts & Design', 'Business':'Business', 'Finance+%26+Accounting':'Finance & Accounting', 'Health+%26+Fitness':'Health & Fitness', 'IT+%26+Software':'IT & Computer Science', 'Lifestyle':'Professions & Hobbies', 'Marketing':'Marketing', 'Music':'Music', 'Office Productivity':'IT & Computer Science', 'Personal Development':'Personal Development', 'Photography+%26+Video':'Arts & Design', 'Teaching+%26+Academics':'Teaching & Academics',}
 
 	for k in range(1,101):
 		udemy_course_list = udemy.courses(page=k, page_size=100,category='Teaching+%26+Academics')
@@ -36,7 +40,7 @@ def udemy():
 				if course_:
 					course_obj = course_
 					category = Category.objects.get(title='Teaching & Academics')
-					course_obj.category = category
+					course_obj.category.add(category)
 					try:
 						num_subscribers = udemy_course_detail['num_subscribers']
 						course_obj.num_subscribers = num_subscribers
@@ -62,10 +66,10 @@ def udemy():
 					if not subcategory:
 						subcat_obj = SubCategory.objects.create(category=category,title=udemy_course_detail['primary_subcategory']['title'])
 						course_obj.subcategory.add(subcat_obj)
-						print(subcat_obj,'subcategory added')
+						# print(subcat_obj,'subcategory added')
 					else:
 						course_obj.subcategory.add(subcategory)
-						print(subcategory,'subcategory added')
+						# print(subcategory,'subcategory added')
 
 					d = udemy_course_detail['course_has_labels']
 					topic = ''
@@ -77,10 +81,10 @@ def udemy():
 						if not topic:
 							topic_obj = Topic.objects.create(category=category,title=d[j]['label']['title'])
 							course_obj.topic.add(topic_obj)
-							print(topic_obj,'topic added')
+							# print(topic_obj,'topic added')
 						else:
 							course_obj.topic.add(topic)
-							print(topic,'topic added')
+							# print(topic,'topic added')
 
 				
 				elif not course_:
@@ -92,7 +96,8 @@ def udemy():
 						duration = udemy_course_detail['content_info']
 						level = udemy_course_detail['instructional_level']
 						url = 'https://www.udemy.com' + udemy_course_detail['url']
-						course_obj = Course(user=user, category=category, provider=provider, image_url=image, title=udemy_course_detail['title'], description=udemy_course_detail['description'], author=author, duration=duration, level=level, course_url=url)
+						course_obj = Course(user=user, provider=provider, image_url=image, title=udemy_course_detail['title'], description=udemy_course_detail['description'], author=author, duration=duration, level=level, course_url=url)
+						course_obj.category.add(category)
 						try:
 							num_subscribers = udemy_course_detail['num_subscribers']
 							course_obj.num_subscribers = num_subscribers

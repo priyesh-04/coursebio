@@ -23,9 +23,9 @@ class CourseAdmin(admin.ModelAdmin):
 	formfield_overrides = {
         models.TextField: {'widget': AdminPagedownWidget},
     }
-	list_display = ('id', 'title', 'provider', 'category', 'user', 'timestamp', 'updated',)
-	list_display_links = ('title', 'category', 'id')
-	list_filter = ('user', 'category', 'subcategory', 'topic', 'provider', 'timestamp', 'updated')
+	list_display = ('id', 'title', 'provider', 'timestamp', 'updated',)
+	list_display_links = ('title', 'id')
+	list_filter = ('category', 'subcategory', 'topic', 'provider', 'timestamp', 'updated')
 	search_fields = ('category__title', 'subcategory__title', 'topic__title', 'title', 'description')
 	ordering = ('-timestamp',)
 
@@ -37,14 +37,14 @@ class CategoryAdmin(admin.ModelAdmin):
 	ordering = ('-timestamp',)
 
 class SubCategoryAdmin(admin.ModelAdmin):
-	list_display = ('id', 'title', 'category', 'slug', 'updated',)
+	list_display = ('id', 'title', 'slug', 'updated',)
 	list_display_links = ('title', 'id')
 	list_filter = ('category__title', 'timestamp', 'updated')
 	search_fields = ('category__title', 'title',)
 	ordering = ('-timestamp',)
 
 class TopicAdmin(admin.ModelAdmin):
-	list_display = ('id', 'title', 'category', 'slug', 'updated',)
+	list_display = ('id', 'title', 'slug', 'updated',)
 	list_display_links = ('title', 'id')
 	list_filter = ('category__title', 'subcategory__title', 'timestamp', 'updated')
 	search_fields = ('category__title', 'subcategory__title', 'title',)
