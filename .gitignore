@@ -7,7 +7,7 @@ email.py*
 *DS_Store
 
 *.idea
-
+udemy_tasks2.py*
 media/
 static/
 !coursebio/static/
