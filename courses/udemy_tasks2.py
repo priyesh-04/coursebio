@@ -16,9 +16,13 @@ def udemy():
 
 	udemy = Udemy('A3NMCg6nzLUPjTYR2bIjYeU9cUW1k3wHRQyzTX03', '9PPNGtZy0SPqcLn2mfIltOFzOkqzPQRInEmlLQAtscDkEjadVCO0wwc1Cu2qxMwt4ZlhlMcUZibyIrRx45pWeJmb7KJK4bCt6HgGAolEXDZA94VRpUmkYxWTFMbhB69f')
 
-	udemy_cats = ['Development', 'Design', 'Business', 'Finance+%26+Accounting', 'Health+%26+Fitness', 'IT+%26+Software', 'Lifestyle', 'Marketing', 'Music', 'Office Productivity', 'Personal Development', 'Photography', 'Teaching+%26+Academics',]
+	_cats = ["Professions & Hobbies", "Math, Science & Engineering", "Humanities & Social Sciences", "Languages", "Health & Fitness", "Arts & Design", 
+		"Music", "Finance & Accounting", "Personal Development", "Marketing", 
+		"Business", "IT & Computer Science",]
 
-	my_cat_dict = {'Development':'Computer Science', 'Design':'Arts & Design', 'Business':'Business', 'Finance+%26+Accounting':'Finance & Accounting', 'Health+%26+Fitness':'Health & Fitness', 'IT+%26+Software':'IT & Software', 'Lifestyle':'Lifestyle', 'Marketing':'Marketing', 'Music':'Music', 'Office Productivity':'Office Productivity', 'Personal Development':'Personal Development', 'Photography':'Photography', 'Teaching+%26+Academics':'Teaching & Academics',}
+	udemy_cats = ['Development', 'Design', 'Business', 'Finance+%26+Accounting', 'Health+%26+Fitness', 'IT+%26+Software', 'Lifestyle', 'Marketing', 'Music', 'Office Productivity', 'Personal Development', 'Photography+%26+Video', 'Teaching+%26+Academics',]
+
+	my_cat_dict = {'Development':'IT & Computer Science', 'Design':'Arts & Design', 'Business':'Business', 'Finance+%26+Accounting':'Finance & Accounting', 'Health+%26+Fitness':'Health & Fitness', 'IT+%26+Software':'IT & Computer Science', 'Lifestyle':'Professions & Hobbies', 'Marketing':'Marketing', 'Music':'Music', 'Office Productivity':'IT & Computer Science', 'Personal Development':'Personal Development', 'Photography+%26+Video':'Arts & Design', 'Teaching+%26+Academics':'Teaching & Academics',}
 
 	# for k in range(1):
 		# udemy_course_list = udemy.courses(page=k, page_size=100,category='Development')
@@ -93,7 +97,8 @@ def udemy():
 				level = udemy_course_detail['instructional_level']
 				url = 'https://www.udemy.com' + udemy_course_detail['url']
 				course_obj = Course(user=user, category=category, provider=provider, image_url=image, title=udemy_course_detail['title'], author=author, duration=duration, level=level, course_url=url)
-
+				course_obj.category.add(category)
+				
 				course_obj.description += "<h3><strong>What you'll learn:</strong></h3>"
 				wyld_text_list = udemy_course_detail['what_you_will_learn_data']['items']
 				for j in range(len(wyld_text_list)):
