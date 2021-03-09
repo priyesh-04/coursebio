@@ -98,6 +98,28 @@ def udemy():
 						url = 'https://www.udemy.com' + udemy_course_detail['url']
 						course_obj = Course(user=user, provider=provider, image_url=image, title=udemy_course_detail['title'], description=udemy_course_detail['description'], author=author, duration=duration, level=level, course_url=url)
 						course_obj.category.add(category)
+
+						course_obj.description += "<h3><strong>What you'll learn:</strong></h3>"
+						wyld_text_list = udemy_course_detail['what_you_will_learn_data']['items']
+						for j in range(len(wyld_text_list)):
+							if j<1:
+								course_obj.description += "<ol>"
+							course_obj.description += "<li>{text}</li>".format(text=wyld_text_list[j])
+							if j==len(wyld_text_list)-1:
+								course_obj.description += "</ol><hr>"
+
+						course_obj.description += "<h3><strong>About this course:</strong></h3>"		
+						course_obj.description += udemy_course_detail['description']
+
+						course_obj.description += '<h3><strong>Who this course is for:</strong></h3>'
+						wstd_text_list = udemy_course_detail['who_should_attend_data']['items']
+						for i in range(len(wstd_text_list)):
+							if i<1:
+								course_obj.description += "<ul>"
+							course_obj.description += "<li>{text}</li>".format(text=wstd_text_list[i])
+							if i==len(wstd_text_list)-1:
+								course_obj.description += "</ul>"
+
 						try:
 							num_subscribers = udemy_course_detail['num_subscribers']
 							course_obj.num_subscribers = num_subscribers
