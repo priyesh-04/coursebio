@@ -13,6 +13,7 @@ static/
 secret_keys/
 myprojectenv/
 coursebioenv/
+.env
 
 bin/
 include/
