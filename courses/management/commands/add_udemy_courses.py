@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from courses.udemy_tasks import udemy
+from courses.udemy.tasks import udemy
 
 class Command(BaseCommand):
 
