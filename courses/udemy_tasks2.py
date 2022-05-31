@@ -23,7 +23,7 @@ def udemy():
 			course_ = Course.objects.get(title=udemy_course_detail['title'])
 		except Exception as e:
 			print(e,'Exception line 35')
-		# print('Detail',udemy_course_detail,'Detail')
+
 		if course_:
 			print('Course already exists.')
 
