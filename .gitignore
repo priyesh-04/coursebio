@@ -7,7 +7,6 @@ email.py*
 *DS_Store
 
 *.idea
-
 media/
 static/
 !coursebio/static/
