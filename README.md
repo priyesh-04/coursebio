@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>Always be learning. <br /> Invest in you.</h1>
+  <h1>🎓 CourseBio</h1>
   <h3>Find and compare <strong>online courses</strong>
       from multiple e-learning platforms at one place.
   </h3>
